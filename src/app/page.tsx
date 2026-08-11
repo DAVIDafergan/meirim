@@ -1,10 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import TiltCard from "@/components/TiltCard";
 import FloatingEmbers from "@/components/FloatingEmbers";
+import RevealText from "@/components/RevealText";
+import AnimatedCounter from "@/components/AnimatedCounter";
+import Divider from "@/components/Divider";
+import { BookIcon, CandleIcon, CapIcon, CommunityIcon } from "@/components/icons";
 
 const EASE_LUX = [0.16, 1, 0.3, 1] as const;
 
@@ -33,25 +37,31 @@ const donationTiers = [
 
 const activities = [
   {
-    icon: "📖",
+    Icon: BookIcon,
     title: "ישיבה לחוזרים בתשובה",
     desc: "מסגרת תורנית חמה לבחורים המבקשים לשוב אל שורשיהם ולבנות בית נאמן בישראל.",
   },
   {
-    icon: "🕯️",
+    Icon: CandleIcon,
     title: "בית מדרש לנשים חוזרות בתשובה",
     desc: "לימוד וליווי אישי לנשים בתהליך התקרבות ליהדות, בסביבה תומכת ומכילה.",
   },
   {
-    icon: "🎓",
+    Icon: CapIcon,
     title: "כולל אברכים",
     desc: "החזקת תלמידי חכמים נשואים הלומדים תורה ברציפות, ומקבלים מלגת קיום למשפחותיהם.",
   },
   {
-    icon: "🎨",
+    Icon: CommunityIcon,
     title: "חינוך בלתי פורמלי לילדי הקהילה",
     desc: "חוגים, קייטנות ופעילויות תרבות קהילתיות המעניקות לילדי צפת עוגן ותחושת שייכות.",
   },
+];
+
+const stats = [
+  { to: 400, prefix: "כ-", suffix: "+", label: "משפחות בקהילה" },
+  { to: 3, prefix: "", suffix: "", label: "שנות פעילות רצופות" },
+  { to: 0, prefix: "", suffix: " ₪", label: "תמיכה ממשלתית" },
 ];
 
 const logoVariants = {
@@ -93,16 +103,6 @@ const fadeUp = {
   },
 };
 
-const headingFlip = {
-  hidden: { opacity: 0, rotateX: -80, y: 20 },
-  visible: {
-    opacity: 1,
-    rotateX: 0,
-    y: 0,
-    transition: { duration: 0.9, ease: EASE_LUX },
-  },
-};
-
 const cardsContainer = {
   hidden: {},
   visible: {
@@ -121,7 +121,11 @@ const cardItem = {
 };
 
 const goldButton =
-  "rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 font-bold text-black shadow-[0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[0_0_35px_rgba(253,224,71,0.7)]";
+  "rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
+
+function Kicker({ children }: { children: ReactNode }) {
+  return <span className="kicker">{children}</span>;
+}
 
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
@@ -139,7 +143,7 @@ export default function Home() {
       <section
         id="hero"
         ref={heroRef}
-        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
+        className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
       >
         <motion.div style={{ y: heroBgY }} className="hero-glow absolute inset-0 -z-10" />
         <FloatingEmbers />
@@ -160,7 +164,7 @@ export default function Home() {
                   width={400}
                   height={200}
                   unoptimized
-                  className="h-auto w-[280px] object-contain drop-shadow-[0_0_40px_rgba(253,224,71,0.45)] sm:w-[340px] md:w-[420px]"
+                  className="h-auto w-[280px] object-contain sm:w-[340px] md:w-[420px]"
                   priority
                 />
               </motion.div>
@@ -188,21 +192,36 @@ export default function Home() {
             לתרומה דחופה
           </motion.a>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-8 flex flex-col items-center gap-2 text-gray-500"
+        >
+          <span className="text-xs tracking-widest">גללו למטה</span>
+          <motion.span
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="h-6 w-px bg-gradient-to-b from-gold to-transparent"
+          />
+        </motion.div>
       </section>
 
       {/* Section B: The Story */}
-      <section id="story" className="ambient-glow px-6 py-24 sm:py-32">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
-          <motion.h2
+      <section id="story" className="ambient-glow scroll-mt-20 px-6 py-24 sm:py-32">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+          <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={headingFlip}
-            style={{ transformPerspective: 800 }}
-            className="text-3xl font-bold text-gold sm:text-4xl"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={fadeUp}
           >
-            הילדים של צפת תחת אש 💔
-          </motion.h2>
+            <Kicker>המצב בשטח</Kicker>
+          </motion.div>
+          <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+            <RevealText>הילדים של צפת תחת אש 💔</RevealText>
+          </h2>
           <motion.p
             initial="hidden"
             whileInView="visible"
@@ -222,19 +241,24 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="py-2">
+        <Divider />
+      </div>
+
       {/* Section: About the institution */}
-      <section id="about" className="px-6 py-24 sm:py-32">
+      <section id="about" className="scroll-mt-20 px-6 py-24 sm:py-32">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-          <motion.h2
+          <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={headingFlip}
-            style={{ transformPerspective: 800 }}
-            className="text-3xl font-bold text-gold sm:text-4xl"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={fadeUp}
           >
-            מי אנחנו – קהילת ברסלב בצפת
-          </motion.h2>
+            <Kicker>מי עומד מאחורי הקמפיין</Kicker>
+          </motion.div>
+          <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+            <RevealText>מי אנחנו – קהילת ברסלב בצפת</RevealText>
+          </h2>
           <motion.p
             initial="hidden"
             whileInView="visible"
@@ -253,22 +277,42 @@ export default function Home() {
             &apos;מאירים את הגליל&apos; נולד כדי לחלוק את הנטל ולהבטיח את
             המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.
           </motion.p>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={cardsContainer}
+            className="mt-8 grid w-full grid-cols-3 gap-4 sm:gap-8"
+          >
+            {stats.map((s) => (
+              <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
+                <span className="text-3xl font-black text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-5xl">
+                  <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
+                </span>
+                <span className="mt-2 text-xs text-gray-400 sm:text-sm">{s.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Section: Activities */}
-      <section id="activities" className="ambient-glow px-6 py-24 sm:py-32">
+      <section id="activities" className="ambient-glow scroll-mt-20 px-6 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={headingFlip}
-            style={{ transformPerspective: 800 }}
-            className="mb-16 text-center text-3xl font-bold text-gold sm:text-4xl"
-          >
-            הפעילויות שלנו
-          </motion.h2>
+          <div className="mb-16 flex flex-col items-center gap-6 text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              variants={fadeUp}
+            >
+              <Kicker>מה אנחנו עושים</Kicker>
+            </motion.div>
+            <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+              <RevealText>הפעילויות שלנו</RevealText>
+            </h2>
+          </div>
 
           <motion.div
             initial="hidden"
@@ -280,7 +324,9 @@ export default function Home() {
             {activities.map((item) => (
               <motion.div key={item.title} variants={cardItem} style={{ perspective: 1000 }}>
                 <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/50 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
-                  <span className="text-4xl">{item.icon}</span>
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
+                    <item.Icon className="h-8 w-8" />
+                  </span>
                   <h3 className="text-lg font-bold text-white">{item.title}</h3>
                   <p className="text-sm leading-relaxed text-gray-400">{item.desc}</p>
                 </TiltCard>
@@ -291,18 +337,21 @@ export default function Home() {
       </section>
 
       {/* Section C: Donation Tiers */}
-      <section id="donate" className="px-6 py-24 sm:py-32">
+      <section id="donate" className="scroll-mt-20 px-6 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={headingFlip}
-            style={{ transformPerspective: 800 }}
-            className="mb-16 text-center text-3xl font-bold text-gold sm:text-4xl"
-          >
-            בחרו כיצד לתרום
-          </motion.h2>
+          <div className="mb-16 flex flex-col items-center gap-6 text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              variants={fadeUp}
+            >
+              <Kicker>הצטרפו למגן</Kicker>
+            </motion.div>
+            <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+              <RevealText>בחרו כיצד לתרום</RevealText>
+            </h2>
+          </div>
 
           <motion.div
             initial="hidden"

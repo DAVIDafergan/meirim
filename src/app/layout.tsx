@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -22,6 +24,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${heebo.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
+        <div className="grain-overlay" />
+        <ScrollProgress />
+        <Navbar />
         {children}
       </body>
     </html>
