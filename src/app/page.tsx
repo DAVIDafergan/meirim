@@ -5,6 +5,8 @@ import { useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import TiltCard from "@/components/TiltCard";
 import FloatingEmbers from "@/components/FloatingEmbers";
+import FloatingOrbs from "@/components/FloatingOrbs";
+import MarqueeTicker from "@/components/MarqueeTicker";
 import RevealText from "@/components/RevealText";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
@@ -175,7 +177,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={subtitleVariants}
-            className="mt-8 max-w-2xl text-lg leading-relaxed text-gray-300 sm:text-xl"
+            className="mt-8 max-w-2xl text-xl leading-relaxed text-gray-300 sm:text-2xl"
           >
             דווקא עכשיו, תחת אש – שומרים על הילדים והמשפחות בצפת!
           </motion.p>
@@ -208,8 +210,14 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <MarqueeTicker />
+
       {/* Section B: The Story */}
-      <section id="story" className="ambient-glow scroll-mt-20 px-6 py-24 sm:py-32">
+      <section
+        id="story"
+        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
+      >
+        <FloatingOrbs />
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
           <motion.div
             initial="hidden"
@@ -219,7 +227,7 @@ export default function Home() {
           >
             <Kicker>המצב בשטח</Kicker>
           </motion.div>
-          <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
             <RevealText>הילדים של צפת תחת אש 💔</RevealText>
           </h2>
           <motion.p
@@ -246,7 +254,8 @@ export default function Home() {
       </div>
 
       {/* Section: About the institution */}
-      <section id="about" className="scroll-mt-20 px-6 py-24 sm:py-32">
+      <section id="about" className="relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
+        <FloatingOrbs />
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
           <motion.div
             initial="hidden"
@@ -256,7 +265,7 @@ export default function Home() {
           >
             <Kicker>מי עומד מאחורי הקמפיין</Kicker>
           </motion.div>
-          <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
             <RevealText>מי אנחנו – קהילת ברסלב בצפת</RevealText>
           </h2>
           <motion.p
@@ -287,7 +296,7 @@ export default function Home() {
           >
             {stats.map((s) => (
               <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
-                <span className="text-3xl font-black text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-5xl">
+                <span className="text-4xl font-black text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
                   <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
                 </span>
                 <span className="mt-2 text-xs text-gray-400 sm:text-sm">{s.label}</span>
@@ -298,7 +307,11 @@ export default function Home() {
       </section>
 
       {/* Section: Activities */}
-      <section id="activities" className="ambient-glow scroll-mt-20 px-6 py-24 sm:py-32">
+      <section
+        id="activities"
+        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
+      >
+        <FloatingOrbs />
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 flex flex-col items-center gap-6 text-center">
             <motion.div
@@ -309,7 +322,7 @@ export default function Home() {
             >
               <Kicker>מה אנחנו עושים</Kicker>
             </motion.div>
-            <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+            <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
               <RevealText>הפעילויות שלנו</RevealText>
             </h2>
           </div>
@@ -324,7 +337,12 @@ export default function Home() {
             {activities.map((item) => (
               <motion.div key={item.title} variants={cardItem} style={{ perspective: 1000 }}>
                 <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/50 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
+                  <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
+                    <motion.span
+                      className="absolute inset-0 rounded-full border border-gold/50"
+                      animate={{ scale: [1, 1.4], opacity: [0.6, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+                    />
                     <item.Icon className="h-8 w-8" />
                   </span>
                   <h3 className="text-lg font-bold text-white">{item.title}</h3>
@@ -336,8 +354,13 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="py-2">
+        <Divider />
+      </div>
+
       {/* Section C: Donation Tiers */}
-      <section id="donate" className="scroll-mt-20 px-6 py-24 sm:py-32">
+      <section id="donate" className="relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
+        <FloatingOrbs />
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 flex flex-col items-center gap-6 text-center">
             <motion.div
@@ -348,7 +371,7 @@ export default function Home() {
             >
               <Kicker>הצטרפו למגן</Kicker>
             </motion.div>
-            <h2 className="text-3xl font-bold text-gold sm:text-4xl">
+            <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
               <RevealText>בחרו כיצד לתרום</RevealText>
             </h2>
           </div>
@@ -363,9 +386,19 @@ export default function Home() {
             {donationTiers.map((tier) => (
               <motion.div key={tier.title} variants={cardItem} style={{ perspective: 1000 }}>
                 <TiltCard className="flex h-full flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/50 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
-                  <span className="text-4xl font-black text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)]">
+                  <motion.span
+                    animate={{
+                      textShadow: [
+                        "0 0 10px rgba(253,224,71,0.35)",
+                        "0 0 22px rgba(253,224,71,0.6)",
+                        "0 0 10px rgba(253,224,71,0.35)",
+                      ],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="text-5xl font-black text-gold"
+                  >
                     {tier.amount}
-                  </span>
+                  </motion.span>
                   <h3 className="text-xl font-bold text-white">{tier.title}</h3>
                   <p className="text-gray-400">{tier.desc}</p>
                   <motion.a

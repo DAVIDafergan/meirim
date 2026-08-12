@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
 
 export default function RevealText({
   children,
@@ -12,13 +12,15 @@ export default function RevealText({
   className?: string;
   delay?: number;
 }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.4 });
+
   return (
-    <span className={`block overflow-hidden ${className}`}>
+    <span ref={ref} className={`block overflow-hidden ${className}`}>
       <motion.span
         className="block"
         initial={{ y: "110%" }}
-        whileInView={{ y: "0%" }}
-        viewport={{ once: true, amount: 0.4 }}
+        animate={isInView ? { y: "0%" } : { y: "110%" }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay }}
       >
         {children}
