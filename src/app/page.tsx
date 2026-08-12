@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import TiltCard from "@/components/TiltCard";
 import FloatingEmbers from "@/components/FloatingEmbers";
 import FloatingOrbs from "@/components/FloatingOrbs";
@@ -59,6 +59,8 @@ const activities = [
     desc: "חוגים, קייטנות ופעילויות תרבות קהילתיות המעניקות לילדי צפת עוגן ותחושת שייכות.",
   },
 ];
+
+const banners = ["/banner1.jpg", "/banner2.jpg"];
 
 const stats = [
   { to: 400, prefix: "כ-", suffix: "+", label: "משפחות בקהילה" },
@@ -139,6 +141,15 @@ export default function Home() {
   const heroContentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const heroContentY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev === 0 ? 1 : 0));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="flex flex-col flex-1">
       {/* Section A: Hero */}
@@ -209,6 +220,37 @@ export default function Home() {
           />
         </motion.div>
       </section>
+
+      {/* Banner Carousel */}
+      <div className="relative mt-8 mb-12 aspect-[16/9] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-black/50 shadow-[0_0_30px_rgba(253,224,71,0.15)] sm:aspect-[21/9] mx-auto">
+        <AnimatePresence>
+          <motion.div
+            key={currentBanner}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={banners[currentBanner]}
+              alt="באנר קמפיין"
+              fill
+              className="object-cover"
+              priority={currentBanner === 0}
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        <motion.a
+          href="#donate"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`animate-pulse-gold absolute bottom-6 left-1/2 z-10 -translate-x-1/2 px-8 py-3 ${goldButton}`}
+        >
+          לתרומה דחופה
+        </motion.a>
+      </div>
 
       <MarqueeTicker />
 
