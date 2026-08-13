@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
+  --background: #1a1025;
+  --background-deep: #0f0a17;
   --foreground: #ffffff;
   --color-gold: #fde047;
   --color-gold-deep: #d4a017;
-  --color-purple-box: #2d1b4e;
-  --color-purple-deep: #1a0f2e;
+  --color-purple-box: #3c2566;
+  --color-purple-deep: #241536;
 }
 
 @theme inline {
@@ -21,7 +22,10 @@
 
 html,
 body {
-  background: var(--background);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(253, 224, 71, 0.08) 0%, rgba(0, 0, 0, 0) 60%),
+    linear-gradient(180deg, var(--background) 0%, var(--background-deep) 100%);
+  background-attachment: fixed;
   color: var(--foreground);
 }
 
@@ -29,32 +33,32 @@ body {
 .hero-glow {
   background:
     radial-gradient(
-      ellipse 60% 50% at 50% 32%,
-      rgba(253, 224, 71, 0.16) 0%,
-      rgba(212, 84, 17, 0.1) 32%,
-      rgba(0, 0, 0, 0) 65%
+      ellipse 70% 60% at 50% 28%,
+      rgba(253, 224, 71, 0.32) 0%,
+      rgba(212, 84, 17, 0.22) 32%,
+      rgba(0, 0, 0, 0) 70%
     ),
     radial-gradient(
-      ellipse 80% 60% at 50% 85%,
-      rgba(45, 27, 78, 0.4) 0%,
-      rgba(0, 0, 0, 0) 60%
+      ellipse 90% 70% at 50% 90%,
+      rgba(120, 70, 200, 0.5) 0%,
+      rgba(0, 0, 0, 0) 65%
     ),
-    #000000;
+    linear-gradient(180deg, var(--background) 0%, var(--background-deep) 100%);
 }
 
 .ambient-glow {
   background:
     radial-gradient(
-      ellipse 60% 45% at 50% 0%,
-      rgba(212, 84, 17, 0.08) 0%,
-      rgba(0, 0, 0, 0) 65%
+      ellipse 70% 55% at 50% 0%,
+      rgba(212, 84, 17, 0.2) 0%,
+      rgba(0, 0, 0, 0) 70%
     ),
     radial-gradient(
-      ellipse 70% 50% at 50% 100%,
-      rgba(45, 27, 78, 0.25) 0%,
-      rgba(0, 0, 0, 0) 60%
+      ellipse 80% 60% at 50% 100%,
+      rgba(120, 70, 200, 0.35) 0%,
+      rgba(0, 0, 0, 0) 65%
     ),
-    #000000;
+    linear-gradient(180deg, var(--background) 0%, var(--background-deep) 100%);
 }
 
 @keyframes pulse-gold {
@@ -81,7 +85,7 @@ body {
   inset: 0;
   z-index: 55;
   pointer-events: none;
-  opacity: 0.045;
+  opacity: 0.06;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }

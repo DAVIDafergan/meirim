@@ -165,23 +165,38 @@ export default function Home() {
           style={{ opacity: heroContentOpacity, y: heroContentY }}
           className="flex flex-col items-center"
         >
-          <div style={{ perspective: "1400px" }}>
-            <motion.div initial="hidden" animate="visible" variants={logoVariants}>
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Image
-                  src="/logo.png"
-                  alt="מאירים את הגליל"
-                  width={400}
-                  height={200}
-                  unoptimized
-                  className="h-auto w-[280px] object-contain sm:w-[340px] md:w-[420px]"
-                  priority
-                />
+          <div className="relative flex items-center justify-center">
+            {/* Ambient glow behind the medallion */}
+            <div className="absolute h-[320px] w-[320px] rounded-full bg-gradient-to-br from-gold/25 via-purple-box/40 to-transparent blur-3xl sm:h-[380px] sm:w-[380px] md:h-[460px] md:w-[460px]" />
+
+            {/* Slow-rotating dashed ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+              className="absolute h-[300px] w-[300px] rounded-full border border-dashed border-gold/40 sm:h-[360px] sm:w-[360px] md:h-[440px] md:w-[440px]"
+            />
+
+            {/* Solid medallion ring with gradient fill */}
+            <div className="absolute h-[260px] w-[260px] rounded-full border-2 border-gold/60 bg-gradient-to-b from-purple-box/60 via-purple-deep/50 to-black/50 shadow-[0_0_60px_rgba(253,224,71,0.35)] sm:h-[310px] sm:w-[310px] md:h-[380px] md:w-[380px]" />
+
+            <div style={{ perspective: "1400px" }} className="relative z-10">
+              <motion.div initial="hidden" animate="visible" variants={logoVariants}>
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="מאירים את הגליל"
+                    width={400}
+                    height={200}
+                    unoptimized
+                    className="h-auto w-[220px] object-contain sm:w-[270px] md:w-[330px]"
+                    priority
+                  />
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           </div>
 
           <motion.p
@@ -222,8 +237,11 @@ export default function Home() {
       </section>
 
       {/* Banner Carousel */}
-      <div className="mt-8 mb-12 flex flex-col items-center gap-8">
-        <div className="relative aspect-[16/9] w-full overflow-hidden border-y border-white/10 bg-black/50 shadow-[0_0_40px_rgba(253,224,71,0.15)] sm:aspect-[21/9]">
+      <div className="mt-8 mb-12 flex w-full flex-col items-center gap-8">
+        <div className="mb-2">
+          <Kicker>הקמפיין שלנו</Kicker>
+        </div>
+        <div className="relative aspect-[2.7/1] w-full overflow-hidden border-y-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#1a1025] to-purple-deep shadow-[0_0_50px_rgba(253,224,71,0.25)]">
           <AnimatePresence>
             <motion.div
               key={currentBanner}
@@ -237,7 +255,7 @@ export default function Home() {
                 src={banners[currentBanner]}
                 alt="באנר קמפיין"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority={currentBanner === 0}
               />
             </motion.div>
@@ -298,7 +316,10 @@ export default function Home() {
       </div>
 
       {/* Section: About the institution */}
-      <section id="about" className="relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
+      <section
+        id="about"
+        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
+      >
         <FloatingOrbs />
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
           <motion.div
@@ -380,7 +401,7 @@ export default function Home() {
           >
             {activities.map((item) => (
               <motion.div key={item.title} variants={cardItem} style={{ perspective: 1000 }}>
-                <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/50 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
+                <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
                   <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
                     <motion.span
                       className="absolute inset-0 rounded-full border border-gold/50"
@@ -403,7 +424,10 @@ export default function Home() {
       </div>
 
       {/* Section C: Donation Tiers */}
-      <section id="donate" className="relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
+      <section
+        id="donate"
+        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
+      >
         <FloatingOrbs />
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 flex flex-col items-center gap-6 text-center">
@@ -429,7 +453,7 @@ export default function Home() {
           >
             {donationTiers.map((tier) => (
               <motion.div key={tier.title} variants={cardItem} style={{ perspective: 1000 }}>
-                <TiltCard className="flex h-full flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/50 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
+                <TiltCard className="flex h-full flex-col items-center gap-4 rounded-2xl border border-white/15 bg-white/[0.08] p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
                   <motion.span
                     animate={{
                       textShadow: [
