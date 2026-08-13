@@ -222,31 +222,33 @@ export default function Home() {
       </section>
 
       {/* Banner Carousel */}
-      <div className="relative mt-8 mb-12 aspect-[16/9] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-black/50 shadow-[0_0_30px_rgba(253,224,71,0.15)] sm:aspect-[21/9] mx-auto">
-        <AnimatePresence>
-          <motion.div
-            key={currentBanner}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={banners[currentBanner]}
-              alt="באנר קמפיין"
-              fill
-              className="object-cover"
-              priority={currentBanner === 0}
-            />
-          </motion.div>
-        </AnimatePresence>
+      <div className="mt-8 mb-12 flex flex-col items-center gap-8">
+        <div className="relative aspect-[16/9] w-full overflow-hidden border-y border-white/10 bg-black/50 shadow-[0_0_40px_rgba(253,224,71,0.15)] sm:aspect-[21/9]">
+          <AnimatePresence>
+            <motion.div
+              key={currentBanner}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={banners[currentBanner]}
+                alt="באנר קמפיין"
+                fill
+                className="object-cover"
+                priority={currentBanner === 0}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         <motion.a
           href="#donate"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`animate-pulse-gold absolute bottom-6 left-1/2 z-10 -translate-x-1/2 px-8 py-3 ${goldButton}`}
+          className={`animate-pulse-gold inline-block px-10 py-4 text-lg ${goldButton}`}
         >
           לתרומה דחופה
         </motion.a>
