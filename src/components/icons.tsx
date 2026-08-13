@@ -68,3 +68,39 @@ export function FlameIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function StarIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M12 3.5 14.3 9.3 20.5 9.8 15.8 13.8 17.3 20 12 16.6 6.7 20 8.2 13.8 3.5 9.8 9.7 9.3Z" />
+    </svg>
+  );
+}
+
+export function RingIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <circle cx="12" cy="14.5" r="6" />
+      <path d="M9.5 8.5 12 3l2.5 5.5" />
+      <path d="M9.7 6.6h4.6" />
+    </svg>
+  );
+}
+
+export function CoinIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M9.3 15c0 1.1 1.2 2 2.7 2s2.7-.7 2.7-1.7c0-2.6-5.4-1-5.4-3.6 0-1 1.2-1.7 2.7-1.7s2.7.9 2.7 2" />
+      <path d="M12 7.3v1.2M12 15.5v1.2" />
+    </svg>
+  );
+}
+
+export function HeartIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M12 20.2s-7.8-4.7-9.7-9.3C.8 7.4 2.9 4 6.3 4c2 0 3.5 1.1 4.2 2.5.4.9 1.6.9 2 0C13.2 5.1 14.7 4 16.7 4c3.4 0 5.5 3.4 4 6.9-1.9 4.6-9.7 9.3-9.7 9.3Z" />
+    </svg>
+  );
+}

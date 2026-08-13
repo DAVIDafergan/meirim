@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const links = [
   { href: "#story", label: "הסיפור" },
   { href: "#about", label: "מי אנחנו" },
   { href: "#activities", label: "הפעילויות" },
+  { href: "#blessing", label: "שם לברכה" },
   { href: "#donate", label: "תרומה" },
 ];
 
@@ -17,11 +19,23 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
       className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-md"
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-        <a href="#hero" className="text-sm font-bold tracking-wide text-gold">
-          מאירים את הגליל
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
+        <a href="#hero" className="block">
+          <motion.div
+            whileHover={{ scale: 1.05, rotate: -8 }}
+            style={{ rotate: -6 }}
+            className="drop-shadow-[0_4px_18px_rgba(253,224,71,0.35)]"
+          >
+            <Image
+              src="/logo-nav.png"
+              alt="מאירים את הגליל"
+              width={200}
+              height={200}
+              className="h-16 w-auto sm:h-20"
+            />
+          </motion.div>
         </a>
-        <ul className="hidden items-center gap-8 text-sm text-gray-300 sm:flex">
+        <ul className="hidden items-center gap-7 text-sm text-gray-300 lg:flex">
           {links.map((link) => (
             <li key={link.href}>
               <a
