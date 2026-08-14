@@ -204,12 +204,12 @@ export default function Home() {
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <Image
-                    src="/logo.png"
+                    src="/logo-hero.png"
                     alt="מאירים את הגליל"
-                    width={400}
-                    height={200}
+                    width={900}
+                    height={526}
                     unoptimized
-                    className="h-auto w-[220px] object-contain sm:w-[270px] md:w-[330px]"
+                    className="h-auto w-[200px] object-contain sm:w-[240px] md:w-[300px]"
                     priority
                   />
                 </motion.div>
@@ -253,6 +253,73 @@ export default function Home() {
           />
         </motion.div>
       </section>
+
+      {/* Section: Names for Blessing at the Rashbi's tomb */}
+      <section
+        id="blessing"
+        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
+      >
+        <FloatingOrbs />
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={fadeUp}
+          >
+            <Kicker>מתנה רוחנית מהרב נתן ישראל שליט&quot;א</Kicker>
+          </motion.div>
+          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
+            <RevealText>השאירו שם לברכה בציון הרשב&quot;י</RevealText>
+          </h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            className="text-lg leading-loose text-gray-300 sm:text-xl"
+          >
+            מידי חודש עולה הרב נתן ישראל שליט&quot;א, ראש מוסדות נחלי התורה,
+            להשתטח על ציונו הקדוש של התנא האלוקי רבי שמעון בר יוחאי במירון.
+            שם, בהתרגשות ובדמעות, הוא נושא עמו את שמותיכם ובקשותיכם.
+            <br />
+            <br />
+            השאירו את פרטיכם, ותפילתכם תעלה יחד עם תפילתו במקום הקדוש ביותר
+            &ndash; לישועה, לזיווג, לפרנסה ולרפואה.
+          </motion.p>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={cardsContainer}
+            className="mt-2 grid grid-cols-2 gap-6 sm:grid-cols-4"
+          >
+            {blessingCategories.map((c) => (
+              <motion.div key={c.title} variants={cardItem} className="flex flex-col items-center gap-2">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_15px_rgba(253,224,71,0.15)]">
+                  <c.Icon className="h-7 w-7" />
+                </span>
+                <span className="text-sm text-gray-300">{c.title}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.button
+            type="button"
+            onClick={() => setBlessingOpen(true)}
+            whileHover={{ scale: 1.05, y: -4 }}
+            whileTap={{ scale: 0.95 }}
+            className={`animate-pulse-gold mt-6 inline-block px-12 py-5 text-xl ${goldButton}`}
+          >
+            השאירו שם לברכה עכשיו
+          </motion.button>
+        </div>
+      </section>
+
+      <div className="py-2">
+        <Divider />
+      </div>
 
       {/* Banner Carousel */}
       <div className="mt-8 mb-12 flex w-full flex-col items-center gap-8">
@@ -434,73 +501,6 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      <div className="py-2">
-        <Divider />
-      </div>
-
-      {/* Section: Names for Blessing at the Rashbi's tomb */}
-      <section
-        id="blessing"
-        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
-      >
-        <FloatingOrbs />
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.6 }}
-            variants={fadeUp}
-          >
-            <Kicker>מתנה רוחנית מהרב נתן ישראל שליט&quot;א</Kicker>
-          </motion.div>
-          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
-            <RevealText>השאירו שם לברכה בציון הרשב&quot;י</RevealText>
-          </h2>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            className="text-lg leading-loose text-gray-300 sm:text-xl"
-          >
-            מידי חודש עולה הרב נתן ישראל שליט&quot;א, ראש מוסדות נחלי התורה,
-            להשתטח על ציונו הקדוש של התנא האלוקי רבי שמעון בר יוחאי במירון.
-            שם, בהתרגשות ובדמעות, הוא נושא עמו את שמותיכם ובקשותיכם.
-            <br />
-            <br />
-            השאירו את פרטיכם, ותפילתכם תעלה יחד עם תפילתו במקום הקדוש ביותר
-            &ndash; לישועה, לזיווג, לפרנסה ולרפואה.
-          </motion.p>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={cardsContainer}
-            className="mt-2 grid grid-cols-2 gap-6 sm:grid-cols-4"
-          >
-            {blessingCategories.map((c) => (
-              <motion.div key={c.title} variants={cardItem} className="flex flex-col items-center gap-2">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_15px_rgba(253,224,71,0.15)]">
-                  <c.Icon className="h-7 w-7" />
-                </span>
-                <span className="text-sm text-gray-300">{c.title}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.button
-            type="button"
-            onClick={() => setBlessingOpen(true)}
-            whileHover={{ scale: 1.05, y: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className={`animate-pulse-gold mt-6 inline-block px-12 py-5 text-xl ${goldButton}`}
-          >
-            השאירו שם לברכה עכשיו
-          </motion.button>
         </div>
       </section>
 
