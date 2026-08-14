@@ -379,6 +379,7 @@ export default function Home() {
                 src={banners[currentBanner]}
                 alt="באנר קמפיין"
                 fill
+                sizes="100vw"
                 className="object-contain"
                 priority={currentBanner === 0}
               />

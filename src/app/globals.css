@@ -26,8 +26,11 @@ body {
   background:
     radial-gradient(ellipse 90% 60% at 50% 0%, rgba(253, 224, 71, 0.08) 0%, rgba(0, 0, 0, 0) 60%),
     linear-gradient(180deg, var(--background) 0%, var(--background-deep) 100%);
-  background-attachment: fixed;
   color: var(--foreground);
+}
+
+body {
+  position: relative;
 }
 
 /* Central warm radial glow layered over a deep regal purple/gold premium gradient */
@@ -82,7 +85,7 @@ body {
 
 /* Subtle film-grain texture for a richer, less flat dark surface */
 .grain-overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 55;
   pointer-events: none;

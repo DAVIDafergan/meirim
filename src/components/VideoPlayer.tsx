@@ -39,6 +39,7 @@ export default function VideoPlayer({
         src={poster}
         alt="לצפייה בסרטון"
         fill
+        sizes="380px"
         className="object-cover"
       />
       <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/10" />

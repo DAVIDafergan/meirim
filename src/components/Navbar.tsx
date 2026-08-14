@@ -23,8 +23,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
         <a href="#hero" className="block">
           <motion.div
-            whileHover={{ scale: 1.05, rotate: -8 }}
-            style={{ rotate: -6 }}
+            whileHover={{ scale: 1.05 }}
             className="drop-shadow-[0_4px_18px_rgba(253,224,71,0.35)]"
           >
             <Image
