@@ -81,7 +81,8 @@ const blessingCategories = [
 
 const stats = [
   { to: 400, prefix: "כ-", suffix: "+", label: "משפחות בקהילה" },
-  { to: 3, prefix: "", suffix: "", label: "שנות פעילות רצופות" },
+  { to: 8, prefix: "", suffix: "", label: "שנות פעילות רצופות" },
+  { to: 3000, prefix: "", suffix: "+", label: "מנות מחולקות מדי חודש" },
   { to: 0, prefix: "", suffix: " ₪", label: "תמיכה ממשלתית" },
 ];
 
@@ -142,7 +143,7 @@ const cardItem = {
 };
 
 const goldButton =
-  "rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
+  "font-display rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
 
 function Kicker({ children }: { children: ReactNode }) {
   return <span className="kicker">{children}</span>;
@@ -181,62 +182,65 @@ export default function Home() {
 
         <motion.div
           style={{ opacity: heroContentOpacity, y: heroContentY }}
-          className="flex flex-col items-center"
+          className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
         >
-          <div className="relative flex items-center justify-center">
-            {/* Ambient glow behind the medallion */}
-            <div className="absolute h-[320px] w-[320px] rounded-full bg-gradient-to-br from-gold/25 via-purple-box/40 to-transparent blur-3xl sm:h-[380px] sm:w-[380px] md:h-[460px] md:w-[460px]" />
-
-            {/* Slow-rotating dashed ring */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-              className="absolute h-[300px] w-[300px] rounded-full border border-dashed border-gold/40 sm:h-[360px] sm:w-[360px] md:h-[440px] md:w-[440px]"
-            />
-
-            {/* Solid medallion ring with gradient fill */}
-            <div className="absolute h-[260px] w-[260px] rounded-full border-2 border-gold/60 bg-gradient-to-b from-purple-box/60 via-purple-deep/50 to-black/50 shadow-[0_0_60px_rgba(253,224,71,0.35)] sm:h-[310px] sm:w-[310px] md:h-[380px] md:w-[380px]" />
-
-            <div style={{ perspective: "1400px" }} className="relative z-10">
-              <motion.div initial="hidden" animate="visible" variants={logoVariants}>
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Image
-                    src="/logo-hero.png"
-                    alt="מאירים את הגליל"
-                    width={900}
-                    height={526}
-                    unoptimized
-                    className="h-auto w-[200px] object-contain sm:w-[240px] md:w-[300px]"
-                    priority
-                  />
-                </motion.div>
+          {/* Logo - right side on desktop, tilted, no frame */}
+          <div className="flex justify-center lg:order-2 lg:flex-1">
+            <motion.div initial="hidden" animate="visible" variants={logoVariants} style={{ rotate: -6 }}>
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Image
+                  src="/logo-hero.png"
+                  alt="מאירים את הגליל"
+                  width={900}
+                  height={526}
+                  unoptimized
+                  className="h-auto w-[260px] object-contain drop-shadow-[0_15px_45px_rgba(253,224,71,0.35)] sm:w-[340px] md:w-[400px] lg:w-[420px]"
+                  priority
+                />
               </motion.div>
-            </div>
+            </motion.div>
           </div>
 
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={subtitleVariants}
-            className="mt-8 max-w-2xl text-xl leading-relaxed text-gray-300 sm:text-2xl"
-          >
-            דווקא עכשיו, תחת אש – שומרים על הילדים והמשפחות בצפת!
-          </motion.p>
+          {/* Explanation + CTAs - left side on desktop */}
+          <div className="flex flex-col items-center gap-8 text-center lg:order-1 lg:flex-1 lg:items-start lg:text-right">
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={subtitleVariants}
+              className="max-w-xl text-xl leading-relaxed text-gray-300 sm:text-2xl"
+            >
+              דווקא עכשיו, תחת אש – שומרים על הילדים והמשפחות בצפת! מוסדות
+              &quot;נחלי התורה&quot; צפת מלווים משפחות שלמות בעת הזו, ואתם
+              יכולים להיות חלק מזה &ndash; בתרומה, ובתפילה.
+            </motion.p>
 
-          <motion.a
-            href="#donate"
-            initial="hidden"
-            animate="visible"
-            variants={ctaVariants}
-            whileHover={{ scale: 1.05, y: -4 }}
-            whileTap={{ scale: 0.95 }}
-            className={`animate-pulse-gold mt-12 inline-block px-12 py-5 text-xl ${goldButton}`}
-          >
-            לתרומה דחופה
-          </motion.a>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={ctaVariants}
+              className="flex flex-col gap-4 sm:flex-row"
+            >
+              <motion.a
+                href="#blessing"
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                className={`inline-block px-8 py-4 text-lg ${goldButton}`}
+              >
+                השאירו שם לברכה
+              </motion.a>
+              <motion.a
+                href="#donate"
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                className={`animate-pulse-gold inline-block px-8 py-4 text-lg ${goldButton}`}
+              >
+                לתמיכה
+              </motion.a>
+            </motion.div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -269,7 +273,7 @@ export default function Home() {
           >
             <Kicker>מתנה רוחנית מהרב נתן ישראל שליט&quot;א</Kicker>
           </motion.div>
-          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
             <RevealText>השאירו שם לברכה בציון הרשב&quot;י</RevealText>
           </h2>
           <motion.p
@@ -353,7 +357,7 @@ export default function Home() {
           whileTap={{ scale: 0.95 }}
           className={`animate-pulse-gold inline-block px-10 py-4 text-lg ${goldButton}`}
         >
-          לתרומה דחופה
+          לתמיכה
         </motion.a>
       </div>
 
@@ -374,7 +378,7 @@ export default function Home() {
           >
             <Kicker>המצב בשטח</Kicker>
           </motion.div>
-          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
             <RevealText>הילדים של צפת תחת אש 💔</RevealText>
           </h2>
           <motion.p
@@ -415,7 +419,7 @@ export default function Home() {
           >
             <Kicker>מי עומד מאחורי הקמפיין</Kicker>
           </motion.div>
-          <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
             <RevealText>מי אנחנו – קהילת ברסלב בצפת</RevealText>
           </h2>
           <motion.p
@@ -431,7 +435,7 @@ export default function Home() {
             לאברכים נשואים, וישיבה לבחורים צעירים.
             <br />
             <br />
-            לאחר כשלוש שנות פעילות ומאות תלמידים – ללא כל תמיכה ממשלתית –
+            לאחר כשמונה שנות פעילות ומאות תלמידים – ללא כל תמיכה ממשלתית –
             האחריות הכספית נופלת כולה על כתפי עומדי המוסדות. קמפיין
             &apos;מאירים את הגליל&apos; נולד כדי לחלוק את הנטל ולהבטיח את
             המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.
@@ -442,11 +446,11 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={cardsContainer}
-            className="mt-8 grid w-full grid-cols-3 gap-4 sm:gap-8"
+            className="mt-8 grid w-full grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
           >
             {stats.map((s) => (
               <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
-                <span className="text-4xl font-black text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
+                <span className="font-display text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
                   <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
                 </span>
                 <span className="mt-2 text-xs text-gray-400 sm:text-sm">{s.label}</span>
@@ -472,7 +476,7 @@ export default function Home() {
             >
               <Kicker>מה אנחנו עושים</Kicker>
             </motion.div>
-            <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
+            <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
               <RevealText>הפעילויות שלנו</RevealText>
             </h2>
           </div>
@@ -526,7 +530,7 @@ export default function Home() {
             >
               <Kicker>הצטרפו למגן</Kicker>
             </motion.div>
-            <h2 className="text-4xl font-black text-gold sm:text-5xl md:text-6xl">
+            <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
               <RevealText>בחרו כיצד לתרום</RevealText>
             </h2>
           </div>
@@ -550,7 +554,7 @@ export default function Home() {
                       ],
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="text-5xl font-black text-gold"
+                    className="font-display text-5xl text-gold"
                   >
                     {tier.amount}
                   </motion.span>
