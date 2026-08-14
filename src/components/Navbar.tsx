@@ -27,10 +27,10 @@ export default function Navbar() {
             className="drop-shadow-[0_4px_18px_rgba(253,224,71,0.35)]"
           >
             <Image
-              src="/logo-nav.png"
-              alt="מאירים את הגליל"
-              width={200}
-              height={200}
+              src="/logo2-nav.png"
+              alt="מוסדות ברסלב צפת - נחלי התורה"
+              width={400}
+              height={393}
               className="h-16 w-auto sm:h-20"
             />
           </motion.div>
