@@ -258,6 +258,44 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Section: Video */}
+      <section
+        id="video"
+        className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-16 sm:py-24"
+      >
+        <FloatingOrbs />
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.6 }}
+            variants={fadeUp}
+          >
+            <Kicker>לצפייה</Kicker>
+          </motion.div>
+          <h2 className="font-display text-3xl text-gold sm:text-4xl">
+            <RevealText>הכירו את הסיפור מקרוב</RevealText>
+          </h2>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.9, ease: EASE_LUX }}
+            className="relative mt-2 w-full max-w-[380px] overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#1a1025] to-purple-deep shadow-[0_0_50px_rgba(253,224,71,0.25)]"
+          >
+            <video
+              src="/video.mp4"
+              poster="/video-poster.jpg"
+              controls
+              preload="metadata"
+              playsInline
+              className="aspect-[9/16] w-full bg-black object-contain"
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Section: Names for Blessing at the Rashbi's tomb */}
       <section
         id="blessing"

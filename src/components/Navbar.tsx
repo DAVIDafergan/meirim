@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const links = [
+  { href: "#video", label: "סרטון" },
   { href: "#blessing", label: "שם לברכה" },
   { href: "#story", label: "הסיפור" },
   { href: "#about", label: "מי אנחנו" },
