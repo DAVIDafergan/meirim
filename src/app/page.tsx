@@ -11,6 +11,7 @@ import RevealText from "@/components/RevealText";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
+import VideoPlayer from "@/components/VideoPlayer";
 import {
   BookIcon,
   CandleIcon,
@@ -196,7 +197,6 @@ export default function Home() {
                   alt="מאירים את הגליל"
                   width={900}
                   height={526}
-                  unoptimized
                   className="h-auto w-[260px] object-contain drop-shadow-[0_15px_45px_rgba(253,224,71,0.35)] sm:w-[340px] md:w-[400px] lg:w-[420px]"
                   priority
                 />
@@ -284,13 +284,10 @@ export default function Home() {
             transition={{ duration: 0.9, ease: EASE_LUX }}
             className="relative mt-2 w-full max-w-[380px] overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#1a1025] to-purple-deep shadow-[0_0_50px_rgba(253,224,71,0.25)]"
           >
-            <video
-              src="/video.mp4"
+            <VideoPlayer
+              src="/video-opt.mp4"
               poster="/video-poster.jpg"
-              controls
-              preload="metadata"
-              playsInline
-              className="aspect-[9/16] w-full bg-black object-contain"
+              className="aspect-[9/16] w-full bg-black"
             />
           </motion.div>
         </div>

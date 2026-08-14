@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const orbs = [
-  { size: 420, color: "rgba(253,224,71,0.16)", top: "5%", left: "-8%", dur: 19 },
-  { size: 360, color: "rgba(77,46,133,0.55)", top: "45%", left: "78%", dur: 23 },
-  { size: 300, color: "rgba(212,84,17,0.2)", top: "78%", left: "5%", dur: 21 },
+  { size: 380, color: "rgba(253,224,71,0.16)", top: "5%", left: "-8%", dur: 19, mobile: true },
+  { size: 340, color: "rgba(77,46,133,0.55)", top: "45%", left: "78%", dur: 23, mobile: false },
+  { size: 280, color: "rgba(212,84,17,0.2)", top: "78%", left: "5%", dur: 21, mobile: false },
 ];
 
 export default function FloatingOrbs() {
@@ -14,7 +14,7 @@ export default function FloatingOrbs() {
       {orbs.map((o, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full blur-3xl"
+          className={`absolute rounded-full blur-2xl ${o.mobile ? "" : "hidden sm:block"}`}
           style={{
             width: o.size,
             height: o.size,
