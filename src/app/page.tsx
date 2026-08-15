@@ -21,6 +21,12 @@ import {
   RingIcon,
   CoinIcon,
   HeartIcon,
+  SynagogueIcon,
+  ScrollIcon,
+  BlockIcon,
+  BowlIcon,
+  ChalkboardIcon,
+  PrinterIcon,
 } from "@/components/icons";
 
 const EASE_LUX = [0.16, 1, 0.3, 1] as const;
@@ -49,26 +55,16 @@ const donationTiers = [
 ];
 
 const activities = [
-  {
-    Icon: BookIcon,
-    title: "ישיבה לחוזרים בתשובה",
-    desc: "מסגרת תורנית חמה לבחורים המבקשים לשוב אל שורשיהם ולבנות בית נאמן בישראל.",
-  },
-  {
-    Icon: CandleIcon,
-    title: "בית מדרש לנשים חוזרות בתשובה",
-    desc: "לימוד וליווי אישי לנשים בתהליך התקרבות ליהדות, בסביבה תומכת ומכילה.",
-  },
-  {
-    Icon: CapIcon,
-    title: "כולל אברכים",
-    desc: "החזקת תלמידי חכמים נשואים הלומדים תורה ברציפות, ומקבלים מלגת קיום למשפחותיהם.",
-  },
-  {
-    Icon: CommunityIcon,
-    title: "חינוך בלתי פורמלי לילדי הקהילה",
-    desc: "חוגים, קייטנות ופעילויות תרבות קהילתיות המעניקות לילדי צפת עוגן ותחושת שייכות.",
-  },
+  { Icon: SynagogueIcon, title: "בית כנסת" },
+  { Icon: CapIcon, title: "כולל אברכים" },
+  { Icon: BlockIcon, title: "גן בנים" },
+  { Icon: BookIcon, title: "תלמוד תורה" },
+  { Icon: ScrollIcon, title: "ישיבה" },
+  { Icon: BowlIcon, title: "בית התבשיל" },
+  { Icon: CandleIcon, title: "בית חינוך וגן לבנות" },
+  { Icon: CommunityIcon, title: "מדרשיה" },
+  { Icon: ChalkboardIcon, title: "שיעורי ערב לקרוב רחוקים" },
+  { Icon: PrinterIcon, title: "מכון להדפסת ספרים" },
 ];
 
 const banners = ["/banner1.jpg", "/banner2.jpg"];
@@ -84,7 +80,6 @@ const stats = [
   { to: 400, prefix: "כ-", suffix: "+", label: "משפחות בקהילה" },
   { to: 8, prefix: "", suffix: "", label: "שנות פעילות רצופות" },
   { to: 3000, prefix: "", suffix: "+", label: "מנות מחולקות מדי חודש" },
-  { to: 0, prefix: "", suffix: " ₪", label: "תמיכה ממשלתית" },
 ];
 
 const logoVariants = {
@@ -306,10 +301,10 @@ export default function Home() {
             viewport={{ once: true, amount: 0.6 }}
             variants={fadeUp}
           >
-            <Kicker>מתנה רוחנית מהרב נתן ישראל שליט&quot;א</Kicker>
+            <Kicker>מתנה רוחנית מהגאון הרב נתן מרדכי ישראל שליט&quot;א</Kicker>
           </motion.div>
-          <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
-            <RevealText>השאירו שם לברכה בציון הרשב&quot;י</RevealText>
+          <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+            <RevealText>השאירו שם לברכה בציון האריז&quot;ל</RevealText>
           </h2>
           <motion.p
             initial="hidden"
@@ -318,8 +313,8 @@ export default function Home() {
             variants={fadeUp}
             className="text-lg leading-loose text-gray-300 sm:text-xl"
           >
-            מידי חודש עולה הרב נתן ישראל שליט&quot;א, ראש מוסדות נחלי התורה,
-            להשתטח על ציונו הקדוש של התנא האלוקי רבי שמעון בר יוחאי במירון.
+            עולה הגאון הרב נתן מרדכי ישראל שליט&quot;א, ראש מוסדות נחלי
+            התורה, לציונו הקדוש של האריז&quot;ל הקדוש, השוכן בסמוך למוסדות.
             שם, בהתרגשות ובדמעות, הוא נושא עמו את שמותיכם ובקשותיכם.
             <br />
             <br />
@@ -414,7 +409,7 @@ export default function Home() {
           >
             <Kicker>המצב בשטח</Kicker>
           </motion.div>
-          <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
             <RevealText>הילדים של צפת תחת אש 💔</RevealText>
           </h2>
           <motion.p
@@ -455,7 +450,7 @@ export default function Home() {
           >
             <Kicker>מי עומד מאחורי הקמפיין</Kicker>
           </motion.div>
-          <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
             <RevealText>מי אנחנו – קהילת ברסלב בצפת</RevealText>
           </h2>
           <motion.p
@@ -482,7 +477,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={cardsContainer}
-            className="mt-8 grid w-full grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
+            className="mt-8 grid w-full grid-cols-3 gap-4 sm:gap-8"
           >
             {stats.map((s) => (
               <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
@@ -512,7 +507,7 @@ export default function Home() {
             >
               <Kicker>מה אנחנו עושים</Kicker>
             </motion.div>
-            <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
+            <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
               <RevealText>הפעילויות שלנו</RevealText>
             </h2>
           </div>
@@ -522,21 +517,20 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardsContainer}
-            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5"
           >
             {activities.map((item) => (
               <motion.div key={item.title} variants={cardItem} style={{ perspective: 1000 }}>
-                <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
-                  <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
+                <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] p-6 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
+                  <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
                     <motion.span
                       className="absolute inset-0 rounded-full border border-gold/50"
                       animate={{ scale: [1, 1.4], opacity: [0.6, 0] }}
                       transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
                     />
-                    <item.Icon className="h-8 w-8" />
+                    <item.Icon className="h-7 w-7" />
                   </span>
-                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
-                  <p className="text-sm leading-relaxed text-gray-400">{item.desc}</p>
+                  <h3 className="text-sm font-bold text-white sm:text-base">{item.title}</h3>
                 </TiltCard>
               </motion.div>
             ))}
@@ -566,7 +560,7 @@ export default function Home() {
             >
               <Kicker>הצטרפו למגן</Kicker>
             </motion.div>
-            <h2 className="font-display text-4xl text-gold sm:text-5xl md:text-6xl">
+            <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
               <RevealText>בחרו כיצד לתרום</RevealText>
             </h2>
           </div>

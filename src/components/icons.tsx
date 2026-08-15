@@ -104,3 +104,62 @@ export function HeartIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function SynagogueIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 21V11L12 4l8 7v10" />
+      <path d="M9 21v-6a3 3 0 0 1 6 0v6" />
+      <path d="M12 4V2" />
+    </svg>
+  );
+}
+
+export function ScrollIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="5" y="4" width="3" height="16" rx="1.5" />
+      <rect x="16" y="4" width="3" height="16" rx="1.5" />
+      <path d="M8 7h8M8 12h8M8 17h8" />
+    </svg>
+  );
+}
+
+export function BlockIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="3" y="13" width="7" height="7" rx="1" />
+      <rect x="14" y="13" width="7" height="7" rx="1" />
+      <rect x="8.5" y="4" width="7" height="7" rx="1" />
+    </svg>
+  );
+}
+
+export function BowlIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 12h16a8 8 0 0 1-16 0Z" />
+      <path d="M9 12V9M12 12V7M15 12V9" />
+    </svg>
+  );
+}
+
+export function ChalkboardIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="3" y="4" width="18" height="12" rx="1" />
+      <path d="M7 9h6" />
+      <path d="M8 20h8M12 16v4" />
+    </svg>
+  );
+}
+
+export function PrinterIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="5" y="9" width="14" height="7" rx="1" />
+      <path d="M7 9V4h10v5" />
+      <path d="M7 16v4h10v-4" />
+    </svg>
+  );
+}

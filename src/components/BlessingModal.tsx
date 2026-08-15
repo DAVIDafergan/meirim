@@ -39,7 +39,7 @@ export default function BlessingModal({
     e.preventDefault();
 
     const lines = [
-      "בקשה לשם לברכה בציון הרשב\"י - מאירים את הגליל",
+      "בקשה לשם לברכה בציון האריז\"ל - מאירים את הגליל",
       `שם: ${name}${motherName ? ` בן/בת ${motherName}` : ""}`,
       `טלפון: ${phone}`,
       selected.length ? `בקשה עבור: ${selected.join(", ")}` : "",
@@ -88,8 +88,8 @@ export default function BlessingModal({
               השאירו שם לברכה
             </h3>
             <p className="mt-2 text-sm text-gray-300">
-              מלאו את הפרטים, וההודעה תישלח בוואטסאפ ישירות לרב נתן ישראל
-              שליט&quot;א לפני נסיעתו לציון הרשב&quot;י.
+              מלאו את הפרטים, וההודעה תישלח בוואטסאפ ישירות לרב נתן מרדכי
+              ישראל שליט&quot;א לפני עלייתו לציון האריז&quot;ל.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
