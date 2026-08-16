@@ -84,7 +84,7 @@ export default function LandingPopup() {
                   השם שלכם נקלט בהצלחה
                 </h3>
                 <p className="mt-2 text-sm text-gray-300">
-                  תפילתכם תעלה במקום הקדוש. תודה!
+                  תפילתכם תעלה בציון הרשב&quot;י במירון. תודה!
                 </p>
               </div>
             ) : (
@@ -93,7 +93,8 @@ export default function LandingPopup() {
                   השאירו שם לתפילה
                 </h3>
                 <p className="mt-2 text-sm text-gray-300">
-                  השאירו שם ומספר טלפון, והשם שלכם יעלה בתפילה במקום הקדוש.
+                  השאירו שם ומספר טלפון, והשם שלכם יעלה בתפילה בציון הרשב&quot;י
+                  במירון.
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
