@@ -607,7 +607,16 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-gray-500">
-        קהילת ברסלב &quot;נחלי התורה&quot; צפת &middot; קמפיין מאירים את הגליל
+        <p>
+          קהילת ברסלב &quot;נחלי התורה&quot; צפת &middot; קמפיין מאירים את
+          הגליל
+        </p>
+        <a
+          href="/admin"
+          className="mt-4 inline-block text-xs text-gray-600 transition-colors hover:text-gray-400"
+        >
+          ניהול
+        </a>
       </footer>
     </main>
   );

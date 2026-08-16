@@ -13,6 +13,7 @@ export async function GET() {
   const rows = leads.map((lead) => ({
     שם: lead.name,
     טלפון: lead.phone,
+    הערות: lead.note ?? "",
     "תאריך השארה": lead.createdAt.toLocaleString("he-IL"),
   }));
 

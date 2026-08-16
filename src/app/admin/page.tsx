@@ -41,6 +41,7 @@ export default async function AdminPage() {
               <tr className="border-b border-white/10 bg-white/5 text-sm text-gray-400">
                 <th className="px-4 py-3 font-medium">שם</th>
                 <th className="px-4 py-3 font-medium">טלפון</th>
+                <th className="px-4 py-3 font-medium">הערות</th>
                 <th className="px-4 py-3 font-medium">תאריך</th>
               </tr>
             </thead>
@@ -52,13 +53,16 @@ export default async function AdminPage() {
                     {lead.phone}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-400">
+                    {lead.note || "—"}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-400">
                     {lead.createdAt.toLocaleString("he-IL")}
                   </td>
                 </tr>
               ))}
               {leads.length === 0 && (
                 <tr>
-                  <td colSpan={3} className="px-4 py-8 text-center text-gray-500">
+                  <td colSpan={4} className="px-4 py-8 text-center text-gray-500">
                     עדיין אין רשומות
                   </td>
                 </tr>

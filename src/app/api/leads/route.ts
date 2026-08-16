@@ -9,7 +9,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "בקשה לא תקינה" }, { status: 400 });
   }
 
-  const { name, phone } = (body ?? {}) as { name?: unknown; phone?: unknown };
+  const { name, phone, note } = (body ?? {}) as {
+    name?: unknown;
+    phone?: unknown;
+    note?: unknown;
+  };
 
   if (
     typeof name !== "string" ||
@@ -24,7 +28,11 @@ export async function POST(request: Request) {
   }
 
   const lead = await prisma.lead.create({
-    data: { name: name.trim(), phone: phone.trim() },
+    data: {
+      name: name.trim(),
+      phone: phone.trim(),
+      note: typeof note === "string" && note.trim() ? note.trim() : null,
+    },
   });
 
   return NextResponse.json({ id: lead.id }, { status: 201 });

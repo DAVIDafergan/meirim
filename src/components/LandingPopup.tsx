@@ -14,6 +14,7 @@ export default function LandingPopup() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
@@ -37,7 +38,7 @@ export default function LandingPopup() {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone }),
+        body: JSON.stringify({ name, phone, note }),
       });
       if (!res.ok) throw new Error("failed");
       setStatus("sent");
@@ -111,6 +112,13 @@ export default function LandingPopup() {
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="טלפון ליצירת קשר"
                     className={`${inputClass} text-right`}
+                  />
+                  <textarea
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    placeholder="הערות (לא חובה)"
+                    rows={2}
+                    className={`${inputClass} resize-none`}
                   />
 
                   {status === "error" && (
