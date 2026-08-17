@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HeartIcon } from "@/components/icons";
+import { useLanguage } from "@/components/LanguageProvider";
 
-type Recent = { name: string; amount: number; createdAt: string };
+type Recent = { name: string | null; amount: number; createdAt: string };
 
 const cardAccents = [
   "border-gold/30 text-gold",
@@ -14,6 +15,7 @@ const cardAccents = [
 ];
 
 export default function RecentDonations() {
+  const { t, language } = useLanguage();
   const [items, setItems] = useState<Recent[]>([]);
 
   useEffect(() => {
@@ -48,9 +50,11 @@ export default function RecentDonations() {
           className={`flex flex-col items-center gap-1.5 rounded-2xl border bg-white/[0.05] px-4 py-4 text-center backdrop-blur-md ${cardAccents[i % cardAccents.length]}`}
         >
           <HeartIcon className="h-4 w-4" />
-          <p className="w-full truncate text-sm font-semibold text-white">{item.name}</p>
+          <p className="w-full truncate text-sm font-semibold text-white">
+            {item.name ?? t.recentDonations.anonymous}
+          </p>
           <p className="font-display font-black text-lg">
-            ₪{item.amount.toLocaleString("he-IL")}
+            ₪{item.amount.toLocaleString(language === "he" ? "he-IL" : "en-US")}
           </p>
         </motion.div>
       ))}

@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, animate, useInView } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function LiveDonationCounter() {
+  const { t, language } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.4 });
   const [total, setTotal] = useState<number | null>(null);
@@ -55,10 +57,10 @@ export default function LiveDonationCounter() {
         </span>
         <div>
           <p className="text-[11px] tracking-wide text-gray-300">
-            נתרם עד כה &middot; מתעדכן בלייב
+            {t.liveCounter.label}
           </p>
           <p className="font-display font-black text-2xl text-gold drop-shadow-[0_0_12px_rgba(253,224,71,0.5)] sm:text-3xl">
-            ₪{displayed.toLocaleString("he-IL")}
+            ₪{displayed.toLocaleString(language === "he" ? "he-IL" : "en-US")}
           </p>
         </div>
       </motion.div>

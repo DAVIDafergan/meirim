@@ -15,6 +15,7 @@ import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
 import VideoPlayer from "@/components/VideoPlayer";
 import { nedarimPlusUrl } from "@/lib/nedarim";
+import { useLanguage } from "@/components/LanguageProvider";
 import {
   BookIcon,
   CandleIcon,
@@ -34,59 +35,33 @@ import {
 
 const EASE_LUX = [0.16, 1, 0.3, 1] as const;
 
-const donationTiers = [
-  {
-    amount: "180 ₪",
-    value: 180,
-    title: "מחזירים את החיוך",
-    desc: "מימון טיפול רגשי לילד",
-  },
-  {
-    amount: "360 ₪",
-    value: 360,
-    title: "עוגן למשפחה",
-    desc: "סל תמיכה בסיסי",
-  },
-  {
-    amount: "500 ₪",
-    value: 500,
-    title: "שומרים על הנוער",
-    desc: "תמיכה במסגרות מוגנות",
-  },
-  {
-    amount: "1,000 ₪",
-    value: 1000,
-    title: "חזית של חסד",
-    desc: "החזקת המוסדות",
-  },
-];
+// Sent to Nedarim Plus for their internal reporting - kept in Hebrew
+// regardless of site language so it matches their own category naming.
+const DONATION_GROUPE = "קמפיין מאירים את הגליל";
 
-const activities = [
-  { Icon: SynagogueIcon, title: "בית כנסת" },
-  { Icon: CapIcon, title: "כולל אברכים" },
-  { Icon: BlockIcon, title: "גן בנים" },
-  { Icon: BookIcon, title: "תלמוד תורה" },
-  { Icon: ScrollIcon, title: "ישיבה" },
-  { Icon: BowlIcon, title: "בית התבשיל" },
-  { Icon: CandleIcon, title: "בית חינוך וגן לבנות" },
-  { Icon: CommunityIcon, title: "מדרשיה" },
-  { Icon: ChalkboardIcon, title: "שיעורי ערב לקרוב רחוקים" },
-  { Icon: PrinterIcon, title: "מכון להדפסת ספרים" },
+const donationTierValues = [180, 360, 500, 1000];
+
+const activityIcons = [
+  SynagogueIcon,
+  CapIcon,
+  BlockIcon,
+  BookIcon,
+  ScrollIcon,
+  BowlIcon,
+  CandleIcon,
+  CommunityIcon,
+  ChalkboardIcon,
+  PrinterIcon,
 ];
 
 const banners = ["/banner1.jpg", "/banner2.jpg"];
 
-const blessingCategories = [
-  { Icon: StarIcon, title: "ישועה" },
-  { Icon: RingIcon, title: "זיווג הגון" },
-  { Icon: CoinIcon, title: "פרנסה טובה" },
-  { Icon: HeartIcon, title: "רפואה שלמה" },
-];
+const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
 
-const stats = [
-  { to: 400, prefix: "כ-", suffix: "+", label: "משפחות בקהילה" },
-  { to: 8, prefix: "", suffix: "", label: "שנות פעילות רצופות" },
-  { to: 3000, prefix: "", suffix: "+", label: "מנות מחולקות מדי חודש" },
+const statValues = [
+  { to: 400, prefix: "~", suffix: "+" },
+  { to: 8, prefix: "", suffix: "" },
+  { to: 3000, prefix: "", suffix: "+" },
 ];
 
 const logoVariants = {
@@ -176,6 +151,25 @@ function Kicker({ children }: { children: ReactNode }) {
 }
 
 export default function Home() {
+  const { t, language } = useLanguage();
+  const isRtl = language === "he";
+  const locale = isRtl ? "he-IL" : "en-US";
+  const donationTiers = donationTierValues.map((value, i) => ({
+    value,
+    amount: `₪${value.toLocaleString(locale)}`,
+    title: t.donationTiers[i].title,
+    desc: t.donationTiers[i].desc,
+  }));
+  const activities = activityIcons.map((Icon, i) => ({
+    Icon,
+    title: t.activityTitles[i],
+  }));
+  const blessingCategories = blessingIcons.map((Icon, i) => ({
+    Icon,
+    title: t.blessingCategories[i],
+  }));
+  const stats = statValues.map((s, i) => ({ ...s, label: t.statsLabels[i] }));
+
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -219,7 +213,7 @@ export default function Home() {
               >
                 <Image
                   src="/logo-hero.png"
-                  alt="מאירים את הגליל"
+                  alt={isRtl ? "מאירים את הגליל" : "Lighting the Galilee"}
                   width={900}
                   height={526}
                   className="h-auto w-[260px] object-contain drop-shadow-[0_15px_45px_rgba(253,224,71,0.35)] sm:w-[340px] md:w-[400px] lg:w-[420px]"
@@ -242,7 +236,7 @@ export default function Home() {
                     href={nedarimPlusUrl({
                       amount: tier.value,
                       lock: true,
-                      groupe: "קמפיין מאירים את הגליל",
+                      groupe: DONATION_GROUPE,
                       analytic: `hero-quick-${tier.value}`,
                       redirectPath: "/thanks",
                     })}
@@ -260,8 +254,8 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Explanation + CTAs - right side on desktop */}
-          <div className="flex flex-col items-center gap-8 text-center lg:order-1 lg:flex-1 lg:items-start lg:text-right">
+          {/* Explanation + CTAs - opposite side of the logo, reading-direction aware */}
+          <div className="flex flex-col items-center gap-8 text-center lg:order-1 lg:flex-1 lg:items-start lg:text-start">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -270,9 +264,7 @@ export default function Home() {
               className="flex flex-col items-center gap-3 lg:items-start"
             >
               <h1 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
-                <TypewriterText delay={0.4}>
-                  כל תרומה מדליקה אור נוסף בגליל
-                </TypewriterText>
+                <TypewriterText delay={0.4}>{t.hero.heading}</TypewriterText>
               </h1>
               <LiveDonationCounter />
             </motion.div>
@@ -283,9 +275,7 @@ export default function Home() {
               variants={subtitleVariants}
               className="max-w-xl text-xl leading-relaxed text-gray-200 sm:text-2xl"
             >
-              דווקא עכשיו, תחת אש – שומרים על הילדים והמשפחות בצפת! מוסדות
-              &quot;נחלי התורה&quot; צפת מלווים משפחות שלמות בעת הזו, ואתם
-              יכולים להיות חלק מזה &ndash; בתרומה, ובתפילה.
+              {t.hero.paragraph}
             </motion.p>
 
             <motion.div
@@ -300,7 +290,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className={`inline-block px-8 py-4 text-lg ${goldButton}`}
               >
-                השאירו שם לברכה
+                {t.hero.blessingCta}
               </motion.a>
               <motion.a
                 href="#donate"
@@ -308,7 +298,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className={`animate-pulse-gold inline-block px-8 py-4 text-lg ${goldButton}`}
               >
-                לתמיכה
+                {t.hero.supportCta}
               </motion.a>
             </motion.div>
           </div>
@@ -320,7 +310,7 @@ export default function Home() {
           transition={{ delay: 2, duration: 1 }}
           className="absolute bottom-8 flex flex-col items-center gap-2 text-gray-400"
         >
-          <span className="text-xs tracking-widest">גללו למטה</span>
+          <span className="text-xs tracking-widest">{t.hero.scrollDown}</span>
           <motion.span
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
@@ -342,10 +332,10 @@ export default function Home() {
             viewport={{ once: true, amount: 0.6 }}
             variants={fadeUp}
           >
-            <Kicker>לצפייה</Kicker>
+            <Kicker>{t.video.kicker}</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-3xl text-gold sm:text-4xl">
-            <TypewriterText>הכירו את הסיפור מקרוב</TypewriterText>
+            <TypewriterText>{t.video.heading}</TypewriterText>
           </h2>
 
           <motion.div
@@ -359,6 +349,7 @@ export default function Home() {
               src="/video-opt.mp4"
               poster="/video-poster.jpg"
               className="aspect-[9/16] w-full bg-black"
+              label={t.video.kicker}
             />
           </motion.div>
         </div>
@@ -377,10 +368,10 @@ export default function Home() {
             viewport={{ once: true, amount: 0.6 }}
             variants={fadeUp}
           >
-            <Kicker>מתנה רוחנית מהגאון הרב נתן מרדכי ישראל שליט&quot;א</Kicker>
+            <Kicker>{t.blessing.kicker}</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-            <TypewriterText>השאירו שם לברכה בציון הרשב&quot;י</TypewriterText>
+            <TypewriterText>{t.blessing.heading}</TypewriterText>
           </h2>
           <motion.p
             initial="hidden"
@@ -389,20 +380,13 @@ export default function Home() {
             variants={fadeUp}
             className="text-lg leading-loose text-gray-200 sm:text-xl"
           >
-            מידי חודש עולה הגאון הרב נתן מרדכי ישראל שליט&quot;א, ראש מוסדות
-            נחלי התורה, להשתטח על ציונו הקדוש של התנא האלוקי רבי שמעון בר
-            יוחאי במירון. שם, בהתרגשות ובדמעות, הוא נושא עמו את שמותיכם
-            ובקשותיכם, ומתפלל עליכם אישית בציון הקדוש.
+            {t.blessing.paragraph1}
             <br />
             <br />
-            רבי שמעון בר יוחאי, מחבר ספר הזוהר הקדוש, ציונו במירון נחשב מדורי
-            דורות לאחד המקומות המקודשים ביותר בעם ישראל לתפילה ולישועה. תפילה
-            הנישאת במקום הקדוש הזה, מתוך אמונה ותמימות, מלווה בסגולה מיוחדת
-            שנמסרה מדור לדור.
+            {t.blessing.paragraph2}
             <br />
             <br />
-            השאירו את פרטיכם, ותפילתכם תעלה יחד עם תפילתו במקום הקדוש ביותר
-            &ndash; לישועה, לזיווג, לפרנסה ולרפואה.
+            {t.blessing.paragraph3}
           </motion.p>
 
           <motion.div
@@ -429,7 +413,7 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             className={`animate-pulse-gold mt-6 inline-block px-12 py-5 text-xl ${goldButton}`}
           >
-            השאירו שם לברכה עכשיו
+            {t.blessing.ctaButton}
           </motion.button>
         </div>
       </section>
@@ -441,7 +425,7 @@ export default function Home() {
       {/* Banner Carousel */}
       <div className="mt-8 mb-12 flex w-full flex-col items-center gap-8">
         <div className="mb-2">
-          <Kicker>הקמפיין שלנו</Kicker>
+          <Kicker>{t.banner.kicker}</Kicker>
         </div>
         <div className="relative aspect-[2.7/1] w-full overflow-hidden border-y-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#1a1025] to-purple-deep shadow-[0_0_50px_rgba(253,224,71,0.25)]">
           <AnimatePresence>
@@ -455,7 +439,7 @@ export default function Home() {
             >
               <Image
                 src={banners[currentBanner]}
-                alt="באנר קמפיין"
+                alt={t.banner.alt}
                 fill
                 sizes="100vw"
                 className="object-contain"
@@ -471,7 +455,7 @@ export default function Home() {
           whileTap={{ scale: 0.95 }}
           className={`animate-pulse-gold inline-block px-10 py-4 text-lg ${goldButton}`}
         >
-          לתמיכה
+          {t.banner.cta}
         </motion.a>
       </div>
 
@@ -490,10 +474,10 @@ export default function Home() {
             viewport={{ once: true, amount: 0.6 }}
             variants={fadeUp}
           >
-            <Kicker>המצב בשטח</Kicker>
+            <Kicker>{t.story.kicker}</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-            <TypewriterText>הילדים של צפת תחת אש 💔</TypewriterText>
+            <TypewriterText>{t.story.heading}</TypewriterText>
           </h2>
           <motion.p
             initial="hidden"
@@ -503,13 +487,10 @@ export default function Home() {
             transition={{ delay: 0.15 }}
             className="text-lg leading-loose text-gray-200 sm:text-xl"
           >
-            חרדות, מסגרות קורסות ומשפחות במצוקה כלכלית. מוסדות &quot;נחלי
-            התורה צפת&quot; הם העוגן של הקהילה, אבל המשאבים שלנו להמשך הסיוע
-            פשוט אזלו.
+            {t.story.paragraph1}
             <br />
             <br />
-            קמפיין &apos;מאירים את הגליל&apos; קורא לכם: אל תשאירו את ילדי
-            הצפון לבד במערכה! תרומה אחת שלכם משנה חיים של משפחה שלמה.
+            {t.story.paragraph2}
           </motion.p>
         </div>
       </section>
@@ -531,10 +512,10 @@ export default function Home() {
             viewport={{ once: true, amount: 0.6 }}
             variants={fadeUp}
           >
-            <Kicker>מי עומד מאחורי הקמפיין</Kicker>
+            <Kicker>{t.about.kicker}</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-            <TypewriterText>מי אנחנו – קהילת ברסלב בצפת</TypewriterText>
+            <TypewriterText>{t.about.heading}</TypewriterText>
           </h2>
           <motion.p
             initial="hidden"
@@ -543,16 +524,10 @@ export default function Home() {
             variants={fadeUp}
             className="text-lg leading-loose text-gray-200 sm:text-xl"
           >
-            בלב העיר העתיקה של צפת פועלת קהילת חסידי ברסלב &quot;נחלי
-            התורה&quot; – קהילה של כ-400 משפחות הממשיכה את דרכם של גדולי
-            החסידות. מוסדות הקהילה כוללים בית כנסת, מקוואות, ישיבה וכולל
-            לאברכים נשואים, וישיבה לבחורים צעירים.
+            {t.about.paragraph1}
             <br />
             <br />
-            לאחר כשמונה שנות פעילות ומאות תלמידים – ללא כל תמיכה ממשלתית –
-            האחריות הכספית נופלת כולה על כתפי עומדי המוסדות. קמפיין
-            &apos;מאירים את הגליל&apos; נולד כדי לחלוק את הנטל ולהבטיח את
-            המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.
+            {t.about.paragraph2}
           </motion.p>
 
           <motion.div
@@ -588,10 +563,10 @@ export default function Home() {
               viewport={{ once: true, amount: 0.6 }}
               variants={fadeUp}
             >
-              <Kicker>מה אנחנו עושים</Kicker>
+              <Kicker>{t.activitiesSection.kicker}</Kicker>
             </motion.div>
             <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-              <TypewriterText>הפעילויות שלנו</TypewriterText>
+              <TypewriterText>{t.activitiesSection.heading}</TypewriterText>
             </h2>
           </div>
 
@@ -641,10 +616,10 @@ export default function Home() {
               viewport={{ once: true, amount: 0.6 }}
               variants={fadeUp}
             >
-              <Kicker>הצטרפו למגן</Kicker>
+              <Kicker>{t.donateSection.kicker}</Kicker>
             </motion.div>
             <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-              <TypewriterText>בחרו כיצד לתרום</TypewriterText>
+              <TypewriterText>{t.donateSection.heading}</TypewriterText>
             </h2>
           </div>
 
@@ -677,7 +652,7 @@ export default function Home() {
                     href={nedarimPlusUrl({
                       amount: tier.value,
                       lock: true,
-                      groupe: "קמפיין מאירים את הגליל",
+                      groupe: DONATION_GROUPE,
                       analytic: `landing-page-${tier.value}`,
                       redirectPath: "/thanks",
                     })}
@@ -685,7 +660,7 @@ export default function Home() {
                     whileTap={{ scale: 0.95 }}
                     className={`mt-auto w-full px-6 py-3 ${goldButton}`}
                   >
-                    תרמו עכשיו
+                    {t.donateSection.donateNow}
                   </motion.a>
                 </TiltCard>
               </motion.div>
@@ -695,7 +670,7 @@ export default function Home() {
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <motion.a
               href={nedarimPlusUrl({
-                groupe: "קמפיין מאירים את הגליל",
+                groupe: DONATION_GROUPE,
                 analytic: "landing-page-free-amount",
                 redirectPath: "/thanks",
               })}
@@ -703,11 +678,11 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="rounded-full border border-gold/40 px-6 py-3 text-sm font-bold text-gold transition-colors hover:bg-gold/10"
             >
-              תרומה בסכום אחר
+              {t.donateSection.otherAmount}
             </motion.a>
             <motion.a
               href={nedarimPlusUrl({
-                groupe: "קמפיין מאירים את הגליל",
+                groupe: DONATION_GROUPE,
                 analytic: "landing-page-monthly",
                 redirectPath: "/thanks",
                 onlyKeva: true,
@@ -716,7 +691,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className="rounded-full border border-gold/40 px-6 py-3 text-sm font-bold text-gold transition-colors hover:bg-gold/10"
             >
-              הוראת קבע חודשית
+              {t.donateSection.monthly}
             </motion.a>
           </div>
         </div>
@@ -732,10 +707,10 @@ export default function Home() {
               viewport={{ once: true, amount: 0.6 }}
               variants={fadeUp}
             >
-              <Kicker>ביחד מאירים</Kicker>
+              <Kicker>{t.recentDonations.kicker}</Kicker>
             </motion.div>
             <h2 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
-              <TypewriterText>תרומות אחרונות</TypewriterText>
+              <TypewriterText>{t.recentDonations.heading}</TypewriterText>
             </h2>
           </div>
           <RecentDonations />
@@ -744,15 +719,12 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-gray-400">
-        <p>
-          קהילת ברסלב &quot;נחלי התורה&quot; צפת &middot; קמפיין מאירים את
-          הגליל
-        </p>
+        <p>{t.footer.text}</p>
         <a
           href="/admin"
           className="mt-4 inline-block text-xs text-gray-500 transition-colors hover:text-gray-300"
         >
-          ניהול
+          {t.footer.admin}
         </a>
       </footer>
     </main>

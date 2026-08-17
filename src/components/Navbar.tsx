@@ -3,19 +3,21 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-
-const links = [
-  { href: "#video", label: "סרטון" },
-  { href: "#blessing", label: "שם לברכה" },
-  { href: "#story", label: "הסיפור" },
-  { href: "#about", label: "מי אנחנו" },
-  { href: "#activities", label: "הפעילויות" },
-  { href: "#donate", label: "תרומה" },
-];
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { t, toggleLanguage } = useLanguage();
   if (pathname?.startsWith("/admin")) return null;
+
+  const links = [
+    { href: "#video", label: t.nav.video },
+    { href: "#blessing", label: t.nav.blessing },
+    { href: "#story", label: t.nav.story },
+    { href: "#about", label: t.nav.about },
+    { href: "#activities", label: t.nav.activities },
+    { href: "#donate", label: t.nav.donate },
+  ];
 
   return (
     <motion.header
@@ -51,14 +53,23 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <motion.a
-          href="#donate"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-5 py-2 text-sm font-bold text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_16px_rgba(253,224,71,0.35)]"
-        >
-          תרמו עכשיו
-        </motion.a>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="rounded-full border border-gold/30 px-3 py-1.5 text-xs font-bold text-gold transition-colors hover:bg-gold/10"
+          >
+            {t.languageToggle}
+          </button>
+          <motion.a
+            href="#donate"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-5 py-2 text-sm font-bold text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_16px_rgba(253,224,71,0.35)]"
+          >
+            {t.nav.donateNow}
+          </motion.a>
+        </div>
       </nav>
     </motion.header>
   );

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import LandingPopup from "@/components/LandingPopup";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -26,11 +27,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${heebo.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
-        <div className="grain-overlay" />
-        <ScrollProgress />
-        <Navbar />
-        <LandingPopup />
-        {children}
+        <LanguageProvider>
+          <div className="grain-overlay" />
+          <ScrollProgress />
+          <Navbar />
+          <LandingPopup />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

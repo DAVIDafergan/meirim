@@ -8,10 +8,12 @@ export default function VideoPlayer({
   src,
   poster,
   className = "",
+  label = "Watch the video",
 }: {
   src: string;
   poster: string;
   className?: string;
+  label?: string;
 }) {
   const [playing, setPlaying] = useState(false);
 
@@ -32,12 +34,12 @@ export default function VideoPlayer({
     <button
       type="button"
       onClick={() => setPlaying(true)}
-      aria-label="לצפייה בסרטון"
+      aria-label={label}
       className={`group relative ${className}`}
     >
       <Image
         src={poster}
-        alt="לצפייה בסרטון"
+        alt={label}
         fill
         sizes="380px"
         className="object-cover"

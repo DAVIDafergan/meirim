@@ -2,16 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // TODO: replace with the real WhatsApp number (international format, no "+"), e.g. "972501234567"
 const WHATSAPP_NUMBER = "972500000000";
 
-const categories = [
-  { id: "ישועה", label: "ישועה" },
-  { id: "זיווג", label: "זיווג הגון" },
-  { id: "פרנסה", label: "פרנסה טובה" },
-  { id: "רפואה", label: "רפואה שלמה" },
-];
+// The WhatsApp message itself always goes out in Hebrew, since it's read by
+// the Rabbi - only the form UI is translated.
+const categoryIds = ["ישועה", "זיווג", "פרנסה", "רפואה"];
 
 const inputClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition-colors focus:border-gold/60 focus:bg-white/10";
@@ -23,6 +21,11 @@ export default function BlessingModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const { t, dir } = useLanguage();
+  const categories = categoryIds.map((id, i) => ({
+    id,
+    label: t.blessingCategories[i],
+  }));
   const [name, setName] = useState("");
   const [motherName, setMotherName] = useState("");
   const [phone, setPhone] = useState("");
@@ -78,19 +81,16 @@ export default function BlessingModal({
             <button
               type="button"
               onClick={onClose}
-              aria-label="סגירה"
+              aria-label={t.blessingModal.close}
               className="absolute left-4 top-4 text-2xl leading-none text-gray-400 transition-colors hover:text-gold"
             >
               ×
             </button>
 
             <h3 className="text-2xl font-black text-gold sm:text-3xl">
-              השאירו שם לברכה
+              {t.blessingModal.title}
             </h3>
-            <p className="mt-2 text-sm text-gray-300">
-              מלאו את הפרטים, וההודעה תישלח בוואטסאפ ישירות לרב נתן מרדכי
-              ישראל שליט&quot;א לפני עלייתו לציון הרשב&quot;י במירון.
-            </p>
+            <p className="mt-2 text-sm text-gray-300">{t.blessingModal.body}</p>
 
             <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
               <div className="grid grid-cols-2 gap-3">
@@ -98,13 +98,13 @@ export default function BlessingModal({
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="שם פרטי"
+                  placeholder={t.blessingModal.firstName}
                   className={inputClass}
                 />
                 <input
                   value={motherName}
                   onChange={(e) => setMotherName(e.target.value)}
-                  placeholder="שם האם"
+                  placeholder={t.blessingModal.motherName}
                   className={inputClass}
                 />
               </div>
@@ -115,12 +115,12 @@ export default function BlessingModal({
                 dir="ltr"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="טלפון ליצירת קשר"
-                className={`${inputClass} text-right`}
+                placeholder={t.blessingModal.phone}
+                className={`${inputClass} ${dir === "rtl" ? "text-right" : "text-left"}`}
               />
 
               <div>
-                <p className="mb-2 text-sm text-gray-400">הבקשה עבור:</p>
+                <p className="mb-2 text-sm text-gray-400">{t.blessingModal.requestFor}</p>
                 <div className="flex flex-wrap gap-2">
                   {categories.map((c) => (
                     <button
@@ -142,7 +142,7 @@ export default function BlessingModal({
               <textarea
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder="הערה נוספת (לא חובה)"
+                placeholder={t.blessingModal.notePlaceholder}
                 rows={2}
                 className={`${inputClass} resize-none`}
               />
@@ -153,7 +153,7 @@ export default function BlessingModal({
                 whileTap={{ scale: 0.97 }}
                 className="mt-2 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-8 py-3 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]"
               >
-                שליחה לרב בוואטסאפ
+                {t.blessingModal.submit}
               </motion.button>
             </form>
           </motion.div>

@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const STORAGE_KEY = "meirim_landing_popup_shown";
 
@@ -10,6 +11,7 @@ const inputClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition-colors focus:border-gold/60 focus:bg-white/10";
 
 export default function LandingPopup() {
+  const { t, dir } = useLanguage();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -71,7 +73,7 @@ export default function LandingPopup() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              aria-label="סגירה"
+              aria-label={t.popup.close}
               className="absolute left-4 top-4 text-2xl leading-none text-gray-400 transition-colors hover:text-gold"
             >
               ×
@@ -81,28 +83,23 @@ export default function LandingPopup() {
               <div className="py-6">
                 <p className="text-2xl">🙏</p>
                 <h3 className="mt-3 font-display font-black text-xl text-gold">
-                  השם שלכם נקלט בהצלחה
+                  {t.popup.successTitle}
                 </h3>
-                <p className="mt-2 text-sm text-gray-300">
-                  תפילתכם תעלה בציון הרשב&quot;י במירון. תודה!
-                </p>
+                <p className="mt-2 text-sm text-gray-300">{t.popup.successBody}</p>
               </div>
             ) : (
               <>
                 <h3 className="font-display font-black text-2xl text-gold sm:text-3xl">
-                  השאירו שם לתפילה
+                  {t.popup.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-300">
-                  השאירו שם ומספר טלפון, והשם שלכם יעלה בתפילה בציון הרשב&quot;י
-                  במירון.
-                </p>
+                <p className="mt-2 text-sm text-gray-300">{t.popup.body}</p>
 
                 <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
                   <input
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="שם פרטי (ושם האם אם ידוע)"
+                    placeholder={t.popup.namePlaceholder}
                     className={inputClass}
                   />
                   <input
@@ -111,21 +108,19 @@ export default function LandingPopup() {
                     dir="ltr"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="טלפון ליצירת קשר"
-                    className={`${inputClass} text-right`}
+                    placeholder={t.popup.phonePlaceholder}
+                    className={`${inputClass} ${dir === "rtl" ? "text-right" : "text-left"}`}
                   />
                   <textarea
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
-                    placeholder="הערות (לא חובה)"
+                    placeholder={t.popup.notePlaceholder}
                     rows={2}
                     className={`${inputClass} resize-none`}
                   />
 
                   {status === "error" && (
-                    <p className="text-sm text-red-400">
-                      אירעה שגיאה, נסו שוב.
-                    </p>
+                    <p className="text-sm text-red-400">{t.popup.error}</p>
                   )}
 
                   <motion.button
@@ -135,7 +130,7 @@ export default function LandingPopup() {
                     whileTap={{ scale: 0.97 }}
                     className="mt-2 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-8 py-3 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)] disabled:opacity-60"
                   >
-                    {status === "sending" ? "שולח..." : "השאירו שם"}
+                    {status === "sending" ? t.popup.sending : t.popup.submit}
                   </motion.button>
                 </form>
               </>

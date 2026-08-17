@@ -18,7 +18,7 @@ export async function GET() {
     total: Number(agg._sum.amount ?? 0),
     count: agg._count,
     recent: recent.map((d) => ({
-      name: d.anonymous || !d.clientName ? "תורם/ת אנונימי/ת" : d.clientName,
+      name: d.anonymous || !d.clientName ? null : d.clientName,
       amount: Number(d.amount),
       createdAt: d.createdAt,
     })),

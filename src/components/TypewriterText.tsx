@@ -22,18 +22,28 @@ export default function TypewriterText({
 
   useEffect(() => {
     if (!isInView) return;
-    let i = 0;
+    // Resets the typed-character count so a language switch (which changes
+    // `children`) retypes cleanly instead of showing a stale, truncated slice.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCount(0);
+    let cancelled = false;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
     const startTimeout = setTimeout(() => {
-      const interval = setInterval(() => {
+      if (cancelled) return;
+      let i = 0;
+      intervalId = setInterval(() => {
         i += 1;
         setCount(i);
-        if (i >= chars.length) clearInterval(interval);
+        if (i >= chars.length && intervalId) clearInterval(intervalId);
       }, speed);
-      return () => clearInterval(interval);
     }, delay * 1000);
-    return () => clearTimeout(startTimeout);
+    return () => {
+      cancelled = true;
+      clearTimeout(startTimeout);
+      if (intervalId) clearInterval(intervalId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isInView]);
+  }, [isInView, children]);
 
   const done = count >= chars.length;
 
