@@ -269,7 +269,6 @@ export default function Home() {
               transition={{ duration: 1, ease: EASE_LUX, delay: 0.5 }}
               className="flex flex-col items-center gap-3 lg:items-start"
             >
-              <Kicker>קמפיין דחוף</Kicker>
               <h1 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
                 <TypewriterText delay={0.4}>
                   כל תרומה מדליקה אור נוסף בגליל
