@@ -146,6 +146,29 @@ const cardItem = {
 const goldButton =
   "gold-shimmer font-display font-bold rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
 
+const donateAccents = [
+  {
+    text: "text-gold",
+    ring: "border-gold/40",
+    glow: "hover:shadow-[0_0_24px_rgba(253,224,71,0.35)]",
+  },
+  {
+    text: "text-violet-200",
+    ring: "border-violet-300/40",
+    glow: "hover:shadow-[0_0_24px_rgba(196,132,252,0.3)]",
+  },
+  {
+    text: "text-amber-200",
+    ring: "border-amber-300/40",
+    glow: "hover:shadow-[0_0_24px_rgba(252,211,77,0.3)]",
+  },
+  {
+    text: "text-rose-200",
+    ring: "border-rose-300/40",
+    glow: "hover:shadow-[0_0_24px_rgba(253,164,175,0.3)]",
+  },
+];
+
 function Kicker({ children }: { children: ReactNode }) {
   return <span className="kicker">{children}</span>;
 }
@@ -172,6 +195,40 @@ export default function Home() {
 
   return (
     <main className="flex flex-col flex-1">
+      {/* Quick-donate band - full width, right below the fixed header */}
+      <section className="relative w-full px-4 pt-24 pb-2 sm:px-6 sm:pt-28">
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: EASE_LUX, delay: 0.6 }}
+          className="mx-auto grid w-full max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4"
+        >
+          {donationTiers.map((tier, i) => {
+            const accent = donateAccents[i % donateAccents.length];
+            return (
+              <motion.a
+                key={tier.value}
+                href={nedarimPlusUrl({
+                  amount: tier.value,
+                  lock: true,
+                  groupe: "קמפיין מאירים את הגליל",
+                  analytic: `hero-quick-${tier.value}`,
+                  redirectPath: "/thanks",
+                })}
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.96 }}
+                className={`flex items-center justify-center gap-2 rounded-2xl border ${accent.ring} bg-white/[0.06] px-4 py-3.5 backdrop-blur-md transition-shadow duration-300 ${accent.glow} hover:bg-white/[0.1]`}
+              >
+                <HeartIcon className={`h-4 w-4 ${accent.text}`} />
+                <span className={`font-display font-black text-lg ${accent.text}`}>
+                  {tier.amount}
+                </span>
+              </motion.a>
+            );
+          })}
+        </motion.div>
+      </section>
+
       {/* Section A: Hero */}
       <section
         id="hero"
@@ -186,7 +243,7 @@ export default function Home() {
           className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
         >
           {/* Logo - right side on desktop, tilted, no frame */}
-          <div className="flex flex-col items-center gap-6 lg:order-2 lg:flex-1">
+          <div className="flex justify-center lg:order-2 lg:flex-1">
             <motion.div initial="hidden" animate="visible" variants={logoVariants} style={{ rotate: -6 }}>
               <motion.div
                 animate={{ y: [0, -10, 0] }}
@@ -201,35 +258,6 @@ export default function Home() {
                   priority
                 />
               </motion.div>
-            </motion.div>
-
-            {/* Quick-donate buttons, right under the logo */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={ctaVariants}
-              className="grid w-full max-w-xs grid-cols-4 gap-2.5 sm:max-w-sm sm:gap-3"
-            >
-              {donationTiers.map((tier) => (
-                <motion.a
-                  key={tier.value}
-                  href={nedarimPlusUrl({
-                    amount: tier.value,
-                    lock: true,
-                    groupe: "קמפיין מאירים את הגליל",
-                    analytic: `hero-quick-${tier.value}`,
-                    redirectPath: "/thanks",
-                  })}
-                  whileHover={{ scale: 1.08, y: -4 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="gold-shimmer flex flex-col items-center gap-1 rounded-2xl bg-gradient-to-br from-yellow-300 via-gold to-yellow-500 px-2 py-3 text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_18px_rgba(253,224,71,0.5)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_0_30px_rgba(253,224,71,0.85)]"
-                >
-                  <HeartIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-                  <span className="font-display font-black text-sm sm:text-lg">
-                    {tier.amount}
-                  </span>
-                </motion.a>
-              ))}
             </motion.div>
           </div>
 
