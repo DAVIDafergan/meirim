@@ -135,7 +135,7 @@ export const translations: Record<Language, Translations> = {
       paragraph1:
         'בלב העיר העתיקה של צפת פועלת קהילת חסידי ברסלב "נחלי התורה" – קהילה של כ-400 משפחות הממשיכה את דרכם של גדולי החסידות. מוסדות הקהילה כוללים בית כנסת, מקוואות, ישיבה וכולל לאברכים נשואים, וישיבה לבחורים צעירים.',
       paragraph2:
-        "לאחר כשמונה שנות פעילות ומאות תלמידים – ללא כל תמיכה ממשלתית – האחריות הכספית נופלת כולה על כתפי עומדי המוסדות. קמפיין 'מאירים את הגליל' נולד כדי לחלוק את הנטל ולהבטיח את המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.",
+        "לאחר כשמונה שנות פעילות ומאות תלמידים, האחריות הכספית נופלת כולה על כתפי עומדי המוסדות. קמפיין 'מאירים את הגליל' נולד כדי לחלוק את הנטל ולהבטיח את המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.",
     },
     statsLabels: ["משפחות בקהילה", "שנות פעילות רצופות", "מנות מחולקות מדי חודש"],
     activitiesSection: { kicker: "מה אנחנו עושים", heading: "הפעילויות שלנו" },
@@ -251,7 +251,7 @@ export const translations: Record<Language, Translations> = {
       paragraph1:
         "In the heart of the Old City of Tzfat, the Breslov Hasidic community \"Nachalei HaTorah\" operates - a community of about 400 families continuing the path of the great Hasidic masters. The community's institutions include a synagogue, mikvahs, a kollel for married men, and a yeshiva for young men.",
       paragraph2:
-        "After about eight years of activity and hundreds of students - with no government support whatsoever - the full financial responsibility falls on the shoulders of those running the institutions. The 'Lighting the Galilee' campaign was born to share the burden and ensure the continuation of Torah and community activity for the children and families of Tzfat.",
+        "After about eight years of activity and hundreds of students, the full financial responsibility falls on the shoulders of those running the institutions. The 'Lighting the Galilee' campaign was born to share the burden and ensure the continuation of Torah and community activity for the children and families of Tzfat.",
     },
     statsLabels: ["Families in the Community", "Years of Continuous Activity", "Meals Distributed Monthly"],
     activitiesSection: { kicker: "What We Do", heading: "Our Activities" },
