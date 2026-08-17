@@ -7,7 +7,7 @@ import TiltCard from "@/components/TiltCard";
 import FloatingEmbers from "@/components/FloatingEmbers";
 import FloatingOrbs from "@/components/FloatingOrbs";
 import MarqueeTicker from "@/components/MarqueeTicker";
-import RevealText from "@/components/RevealText";
+import TypewriterText from "@/components/TypewriterText";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
@@ -275,7 +275,7 @@ export default function Home() {
             <Kicker>לצפייה</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-3xl text-gold sm:text-4xl">
-            <RevealText>הכירו את הסיפור מקרוב</RevealText>
+            <TypewriterText>הכירו את הסיפור מקרוב</TypewriterText>
           </h2>
 
           <motion.div
@@ -310,7 +310,7 @@ export default function Home() {
             <Kicker>מתנה רוחנית מהגאון הרב נתן מרדכי ישראל שליט&quot;א</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-            <RevealText>השאירו שם לברכה בציון הרשב&quot;י</RevealText>
+            <TypewriterText>השאירו שם לברכה בציון הרשב&quot;י</TypewriterText>
           </h2>
           <motion.p
             initial="hidden"
@@ -423,7 +423,7 @@ export default function Home() {
             <Kicker>המצב בשטח</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-            <RevealText>הילדים של צפת תחת אש 💔</RevealText>
+            <TypewriterText>הילדים של צפת תחת אש 💔</TypewriterText>
           </h2>
           <motion.p
             initial="hidden"
@@ -464,7 +464,7 @@ export default function Home() {
             <Kicker>מי עומד מאחורי הקמפיין</Kicker>
           </motion.div>
           <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-            <RevealText>מי אנחנו – קהילת ברסלב בצפת</RevealText>
+            <TypewriterText>מי אנחנו – קהילת ברסלב בצפת</TypewriterText>
           </h2>
           <motion.p
             initial="hidden"
@@ -521,7 +521,7 @@ export default function Home() {
               <Kicker>מה אנחנו עושים</Kicker>
             </motion.div>
             <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-              <RevealText>הפעילויות שלנו</RevealText>
+              <TypewriterText>הפעילויות שלנו</TypewriterText>
             </h2>
           </div>
 
@@ -574,7 +574,7 @@ export default function Home() {
               <Kicker>הצטרפו למגן</Kicker>
             </motion.div>
             <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
-              <RevealText>בחרו כיצד לתרום</RevealText>
+              <TypewriterText>בחרו כיצד לתרום</TypewriterText>
             </h2>
           </div>
 

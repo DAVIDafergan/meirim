@@ -13,15 +13,21 @@ export function nedarimPlusUrl(
     onlyKeva?: boolean;
   } = {}
 ) {
-  const params = new URLSearchParams();
-  params.set("mosad", MOSAD_ID);
-  if (opts.amount) params.set("Amount", String(opts.amount));
-  if (opts.lock) params.set("AmountLock", "1");
-  if (opts.groupe) params.set("Groupe", opts.groupe);
-  if (opts.analytic) params.set("Analytic", opts.analytic);
+  // Built manually (not via URLSearchParams) because Nedarim Plus echoes
+  // Groupe back verbatim in webhook payloads without decoding "+" to a
+  // space, so we encode spaces as %20 instead of the x-www-form-urlencoded
+  // default of "+".
+  const pairs: [string, string][] = [["mosad", MOSAD_ID]];
+  if (opts.amount) pairs.push(["Amount", String(opts.amount)]);
+  if (opts.lock) pairs.push(["AmountLock", "1"]);
+  if (opts.groupe) pairs.push(["Groupe", opts.groupe]);
+  if (opts.analytic) pairs.push(["Analytic", opts.analytic]);
   if (opts.redirectPath) {
-    params.set("Redirect", `${SITE_DOMAIN}${opts.redirectPath}`);
+    pairs.push(["Redirect", `${SITE_DOMAIN}${opts.redirectPath}`]);
   }
-  if (opts.onlyKeva) params.set("OnlyKeva", "1");
-  return `${BASE_URL}?${params.toString()}`;
+  if (opts.onlyKeva) pairs.push(["OnlyKeva", "1"]);
+  const qs = pairs
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .join("&");
+  return `${BASE_URL}?${qs}`;
 }

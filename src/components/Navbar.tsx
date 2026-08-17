@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const links = [
@@ -13,6 +14,9 @@ const links = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
