@@ -80,7 +80,7 @@ export default function LandingPopup() {
             {status === "sent" ? (
               <div className="py-6">
                 <p className="text-2xl">🙏</p>
-                <h3 className="mt-3 font-display text-xl text-gold">
+                <h3 className="mt-3 font-display font-black text-xl text-gold">
                   השם שלכם נקלט בהצלחה
                 </h3>
                 <p className="mt-2 text-sm text-gray-300">
@@ -89,7 +89,7 @@ export default function LandingPopup() {
               </div>
             ) : (
               <>
-                <h3 className="font-display text-2xl text-gold sm:text-3xl">
+                <h3 className="font-display font-black text-2xl text-gold sm:text-3xl">
                   השאירו שם לתפילה
                 </h3>
                 <p className="mt-2 text-sm text-gray-300">

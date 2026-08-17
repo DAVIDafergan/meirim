@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { isAdminAuthed } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import AdminLogoutButton from "@/components/AdminLogoutButton";
@@ -21,7 +22,10 @@ export default async function AdminPage() {
               לידים &ndash; שם לתפילה
             </h1>
             <p className="mt-1 text-sm text-gray-400">
-              סה&quot;כ {leads.length} רשומות
+              סה&quot;כ {leads.length} רשומות &middot;{" "}
+              <Link href="/admin/donations" className="hover:text-gold">
+                דשבורד תרומות
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-3">

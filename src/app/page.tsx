@@ -12,6 +12,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
 import VideoPlayer from "@/components/VideoPlayer";
+import GoalGauge from "@/components/GoalGauge";
+import { nedarimPlusUrl } from "@/lib/nedarim";
 import {
   BookIcon,
   CandleIcon,
@@ -34,21 +36,25 @@ const EASE_LUX = [0.16, 1, 0.3, 1] as const;
 const donationTiers = [
   {
     amount: "180 ₪",
+    value: 180,
     title: "מחזירים את החיוך",
     desc: "מימון טיפול רגשי לילד",
   },
   {
     amount: "360 ₪",
+    value: 360,
     title: "עוגן למשפחה",
     desc: "סל תמיכה בסיסי",
   },
   {
     amount: "500 ₪",
+    value: 500,
     title: "שומרים על הנוער",
     desc: "תמיכה במסגרות מוגנות",
   },
   {
     amount: "1,000 ₪",
+    value: 1000,
     title: "חזית של חסד",
     desc: "החזקת המוסדות",
   },
@@ -139,7 +145,7 @@ const cardItem = {
 };
 
 const goldButton =
-  "font-display rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
+  "font-display font-bold rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
 
 function Kicker({ children }: { children: ReactNode }) {
   return <span className="kicker">{children}</span>;
@@ -268,7 +274,7 @@ export default function Home() {
           >
             <Kicker>לצפייה</Kicker>
           </motion.div>
-          <h2 className="font-display text-3xl text-gold sm:text-4xl">
+          <h2 className="font-display font-black text-3xl text-gold sm:text-4xl">
             <RevealText>הכירו את הסיפור מקרוב</RevealText>
           </h2>
 
@@ -303,7 +309,7 @@ export default function Home() {
           >
             <Kicker>מתנה רוחנית מהגאון הרב נתן מרדכי ישראל שליט&quot;א</Kicker>
           </motion.div>
-          <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
             <RevealText>השאירו שם לברכה בציון הרשב&quot;י</RevealText>
           </h2>
           <motion.p
@@ -416,7 +422,7 @@ export default function Home() {
           >
             <Kicker>המצב בשטח</Kicker>
           </motion.div>
-          <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
             <RevealText>הילדים של צפת תחת אש 💔</RevealText>
           </h2>
           <motion.p
@@ -457,7 +463,7 @@ export default function Home() {
           >
             <Kicker>מי עומד מאחורי הקמפיין</Kicker>
           </motion.div>
-          <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
             <RevealText>מי אנחנו – קהילת ברסלב בצפת</RevealText>
           </h2>
           <motion.p
@@ -488,7 +494,7 @@ export default function Home() {
           >
             {stats.map((s) => (
               <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
-                <span className="font-display text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
+                <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
                   <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
                 </span>
                 <span className="mt-2 text-xs text-gray-400 sm:text-sm">{s.label}</span>
@@ -514,7 +520,7 @@ export default function Home() {
             >
               <Kicker>מה אנחנו עושים</Kicker>
             </motion.div>
-            <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
               <RevealText>הפעילויות שלנו</RevealText>
             </h2>
           </div>
@@ -567,9 +573,13 @@ export default function Home() {
             >
               <Kicker>הצטרפו למגן</Kicker>
             </motion.div>
-            <h2 className="font-display text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
               <RevealText>בחרו כיצד לתרום</RevealText>
             </h2>
+          </div>
+
+          <div className="mx-auto mb-16 max-w-2xl">
+            <GoalGauge />
           </div>
 
           <motion.div
@@ -591,14 +601,20 @@ export default function Home() {
                       ],
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="font-display text-5xl text-gold"
+                    className="font-display font-black text-5xl text-gold"
                   >
                     {tier.amount}
                   </motion.span>
                   <h3 className="text-xl font-bold text-white">{tier.title}</h3>
                   <p className="text-gray-400">{tier.desc}</p>
                   <motion.a
-                    href="#donate"
+                    href={nedarimPlusUrl({
+                      amount: tier.value,
+                      lock: true,
+                      groupe: "קמפיין מאירים את הגליל",
+                      analytic: `landing-page-${tier.value}`,
+                      redirectPath: "/thanks",
+                    })}
                     whileHover={{ scale: 1.05, y: -3 }}
                     whileTap={{ scale: 0.95 }}
                     className={`mt-auto w-full px-6 py-3 ${goldButton}`}
@@ -609,6 +625,34 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <motion.a
+              href={nedarimPlusUrl({
+                groupe: "קמפיין מאירים את הגליל",
+                analytic: "landing-page-free-amount",
+                redirectPath: "/thanks",
+              })}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-full border border-gold/40 px-6 py-3 text-sm font-bold text-gold transition-colors hover:bg-gold/10"
+            >
+              תרומה בסכום אחר
+            </motion.a>
+            <motion.a
+              href={nedarimPlusUrl({
+                groupe: "קמפיין מאירים את הגליל",
+                analytic: "landing-page-monthly",
+                redirectPath: "/thanks",
+                onlyKeva: true,
+              })}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-full border border-gold/40 px-6 py-3 text-sm font-bold text-gold transition-colors hover:bg-gold/10"
+            >
+              הוראת קבע חודשית
+            </motion.a>
+          </div>
         </div>
       </section>
 

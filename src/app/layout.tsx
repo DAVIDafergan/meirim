@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Heebo, Suez_One } from "next/font/google";
+import { Heebo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -9,12 +9,7 @@ const heebo = Heebo({
   variable: "--font-heebo",
   subsets: ["hebrew", "latin"],
   weight: ["400", "600", "700", "900"],
-});
-
-const suezOne = Suez_One({
-  variable: "--font-suez",
-  subsets: ["hebrew", "latin"],
-  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="he"
       dir="rtl"
-      className={`${heebo.variable} ${suezOne.variable} h-full scroll-smooth antialiased`}
+      className={`${heebo.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
         <div className="grain-overlay" />
