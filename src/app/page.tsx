@@ -8,6 +8,8 @@ import FloatingEmbers from "@/components/FloatingEmbers";
 import FloatingOrbs from "@/components/FloatingOrbs";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import TypewriterText from "@/components/TypewriterText";
+import LiveDonationCounter from "@/components/LiveDonationCounter";
+import RecentDonations from "@/components/RecentDonations";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
@@ -273,6 +275,7 @@ export default function Home() {
                   כל תרומה מדליקה אור נוסף בגליל
                 </TypewriterText>
               </h1>
+              <LiveDonationCounter />
             </motion.div>
 
             <motion.p
@@ -717,6 +720,26 @@ export default function Home() {
               הוראת קבע חודשית
             </motion.a>
           </div>
+        </div>
+      </section>
+
+      {/* Section: Recent Donations */}
+      <section className="relative overflow-hidden px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 flex flex-col items-center gap-6 text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              variants={fadeUp}
+            >
+              <Kicker>ביחד מאירים</Kicker>
+            </motion.div>
+            <h2 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
+              <TypewriterText>תרומות אחרונות</TypewriterText>
+            </h2>
+          </div>
+          <RecentDonations />
         </div>
       </section>
 

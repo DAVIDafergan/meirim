@@ -21,6 +21,7 @@ model Donation {
   transactionId      String?   @unique @map("transaction_id")
   kevaId             String?   @map("keva_id")
   isRecurringSetup   Boolean   @default(false) @map("is_recurring_setup")
+  anonymous          Boolean   @default(false)
   clientName         String?   @map("client_name")
   phone              String?
   email              String?

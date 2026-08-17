@@ -34,8 +34,26 @@ function parseCurrency(payload: NedarimPayload): string {
 function parseDate(payload: NedarimPayload, key: string): Date | null {
   const v = str(payload, key);
   if (!v) return null;
+  // Nedarim Plus sends TransactionTime as "DD/MM/YYYY HH:mm:ss", which
+  // `new Date()` misreads as MM/DD/YYYY - parse it explicitly first.
+  const dmy = v.match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2}):(\d{2})$/);
+  if (dmy) {
+    const [, day, month, year, hour, minute, second] = dmy;
+    return new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second)
+    );
+  }
   const d = new Date(v);
   return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function parseAnonymous(payload: NedarimPayload): boolean {
+  return str(payload, "Anonymous") === "1";
 }
 
 function parseInstallments(payload: NedarimPayload): number | null {
@@ -82,6 +100,7 @@ export async function POST(request: Request) {
     const baseData = {
       kevaId,
       isRecurringSetup,
+      anonymous: parseAnonymous(payload),
       clientName: str(payload, "ClientName"),
       phone: str(payload, "Phone"),
       email: str(payload, "Mail"),
