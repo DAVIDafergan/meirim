@@ -195,40 +195,6 @@ export default function Home() {
 
   return (
     <main className="flex flex-col flex-1">
-      {/* Quick-donate band - full width, right below the fixed header */}
-      <section className="relative w-full px-4 pt-24 pb-2 sm:px-6 sm:pt-28">
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE_LUX, delay: 0.6 }}
-          className="mx-auto grid w-full max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4"
-        >
-          {donationTiers.map((tier, i) => {
-            const accent = donateAccents[i % donateAccents.length];
-            return (
-              <motion.a
-                key={tier.value}
-                href={nedarimPlusUrl({
-                  amount: tier.value,
-                  lock: true,
-                  groupe: "קמפיין מאירים את הגליל",
-                  analytic: `hero-quick-${tier.value}`,
-                  redirectPath: "/thanks",
-                })}
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.96 }}
-                className={`flex items-center justify-center gap-2 rounded-2xl border ${accent.ring} bg-white/[0.06] px-4 py-3.5 backdrop-blur-md transition-shadow duration-300 ${accent.glow} hover:bg-white/[0.1]`}
-              >
-                <HeartIcon className={`h-4 w-4 ${accent.text}`} />
-                <span className={`font-display font-black text-lg ${accent.text}`}>
-                  {tier.amount}
-                </span>
-              </motion.a>
-            );
-          })}
-        </motion.div>
-      </section>
-
       {/* Section A: Hero */}
       <section
         id="hero"
@@ -242,8 +208,8 @@ export default function Home() {
           style={{ opacity: heroContentOpacity, y: heroContentY }}
           className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
         >
-          {/* Logo - right side on desktop, tilted, no frame */}
-          <div className="flex justify-center lg:order-2 lg:flex-1">
+          {/* Logo - left side on desktop, tilted, no frame - with quick-donate buttons below it */}
+          <div className="flex flex-col items-center gap-6 lg:order-2 lg:flex-1">
             <motion.div initial="hidden" animate="visible" variants={logoVariants} style={{ rotate: -6 }}>
               <motion.div
                 animate={{ y: [0, -10, 0] }}
@@ -259,10 +225,56 @@ export default function Home() {
                 />
               </motion.div>
             </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={ctaVariants}
+              className="grid w-full max-w-sm grid-cols-2 gap-2.5 sm:gap-3"
+            >
+              {donationTiers.map((tier, i) => {
+                const accent = donateAccents[i % donateAccents.length];
+                return (
+                  <motion.a
+                    key={tier.value}
+                    href={nedarimPlusUrl({
+                      amount: tier.value,
+                      lock: true,
+                      groupe: "קמפיין מאירים את הגליל",
+                      analytic: `hero-quick-${tier.value}`,
+                      redirectPath: "/thanks",
+                    })}
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    whileTap={{ scale: 0.96 }}
+                    className={`flex items-center justify-center gap-2 rounded-2xl border ${accent.ring} bg-white/[0.06] px-4 py-3.5 backdrop-blur-md transition-shadow duration-300 ${accent.glow} hover:bg-white/[0.1]`}
+                  >
+                    <HeartIcon className={`h-4 w-4 ${accent.text}`} />
+                    <span className={`font-display font-black text-lg ${accent.text}`}>
+                      {tier.amount}
+                    </span>
+                  </motion.a>
+                );
+              })}
+            </motion.div>
           </div>
 
-          {/* Explanation + CTAs - left side on desktop */}
+          {/* Explanation + CTAs - right side on desktop */}
           <div className="flex flex-col items-center gap-8 text-center lg:order-1 lg:flex-1 lg:items-start lg:text-right">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={subtitleVariants}
+              transition={{ duration: 1, ease: EASE_LUX, delay: 0.5 }}
+              className="flex flex-col items-center gap-3 lg:items-start"
+            >
+              <Kicker>קמפיין דחוף</Kicker>
+              <h1 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
+                <TypewriterText delay={0.4}>
+                  כל תרומה מדליקה אור נוסף בגליל
+                </TypewriterText>
+              </h1>
+            </motion.div>
+
             <motion.p
               initial="hidden"
               animate="visible"
