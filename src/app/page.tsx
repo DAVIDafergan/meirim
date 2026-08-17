@@ -12,7 +12,6 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
 import VideoPlayer from "@/components/VideoPlayer";
-import GoalGauge from "@/components/GoalGauge";
 import { nedarimPlusUrl } from "@/lib/nedarim";
 import {
   BookIcon,
@@ -173,18 +172,6 @@ export default function Home() {
 
   return (
     <main className="flex flex-col flex-1">
-      {/* Goal gauge - right below the fixed header, first thing visitors see */}
-      <section className="relative px-6 pt-24 sm:pt-28">
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE_LUX, delay: 0.5 }}
-          className="mx-auto max-w-2xl"
-        >
-          <GoalGauge />
-        </motion.div>
-      </section>
-
       {/* Section A: Hero */}
       <section
         id="hero"
@@ -199,7 +186,7 @@ export default function Home() {
           className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
         >
           {/* Logo - right side on desktop, tilted, no frame */}
-          <div className="flex justify-center lg:order-2 lg:flex-1">
+          <div className="flex flex-col items-center gap-6 lg:order-2 lg:flex-1">
             <motion.div initial="hidden" animate="visible" variants={logoVariants} style={{ rotate: -6 }}>
               <motion.div
                 animate={{ y: [0, -10, 0] }}
@@ -214,6 +201,35 @@ export default function Home() {
                   priority
                 />
               </motion.div>
+            </motion.div>
+
+            {/* Quick-donate buttons, right under the logo */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={ctaVariants}
+              className="grid w-full max-w-xs grid-cols-4 gap-2.5 sm:max-w-sm sm:gap-3"
+            >
+              {donationTiers.map((tier) => (
+                <motion.a
+                  key={tier.value}
+                  href={nedarimPlusUrl({
+                    amount: tier.value,
+                    lock: true,
+                    groupe: "קמפיין מאירים את הגליל",
+                    analytic: `hero-quick-${tier.value}`,
+                    redirectPath: "/thanks",
+                  })}
+                  whileHover={{ scale: 1.08, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="gold-shimmer flex flex-col items-center gap-1 rounded-2xl bg-gradient-to-br from-yellow-300 via-gold to-yellow-500 px-2 py-3 text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_18px_rgba(253,224,71,0.5)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_0_30px_rgba(253,224,71,0.85)]"
+                >
+                  <HeartIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="font-display font-black text-sm sm:text-lg">
+                    {tier.amount}
+                  </span>
+                </motion.a>
+              ))}
             </motion.div>
           </div>
 
