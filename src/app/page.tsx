@@ -145,7 +145,7 @@ const cardItem = {
 };
 
 const goldButton =
-  "font-display font-bold rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
+  "gold-shimmer font-display font-bold rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
 
 function Kicker({ children }: { children: ReactNode }) {
   return <span className="kicker">{children}</span>;
@@ -173,6 +173,18 @@ export default function Home() {
 
   return (
     <main className="flex flex-col flex-1">
+      {/* Goal gauge - right below the fixed header, first thing visitors see */}
+      <section className="relative px-6 pt-24 sm:pt-28">
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: EASE_LUX, delay: 0.5 }}
+          className="mx-auto max-w-2xl"
+        >
+          <GoalGauge />
+        </motion.div>
+      </section>
+
       {/* Section A: Hero */}
       <section
         id="hero"
@@ -211,7 +223,7 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={subtitleVariants}
-              className="max-w-xl text-xl leading-relaxed text-gray-300 sm:text-2xl"
+              className="max-w-xl text-xl leading-relaxed text-gray-200 sm:text-2xl"
             >
               דווקא עכשיו, תחת אש – שומרים על הילדים והמשפחות בצפת! מוסדות
               &quot;נחלי התורה&quot; צפת מלווים משפחות שלמות בעת הזו, ואתם
@@ -248,7 +260,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 flex flex-col items-center gap-2 text-gray-500"
+          className="absolute bottom-8 flex flex-col items-center gap-2 text-gray-400"
         >
           <span className="text-xs tracking-widest">גללו למטה</span>
           <motion.span
@@ -317,7 +329,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
-            className="text-lg leading-loose text-gray-300 sm:text-xl"
+            className="text-lg leading-loose text-gray-200 sm:text-xl"
           >
             מידי חודש עולה הגאון הרב נתן מרדכי ישראל שליט&quot;א, ראש מוסדות
             נחלי התורה, להשתטח על ציונו הקדוש של התנא האלוקי רבי שמעון בר
@@ -347,7 +359,7 @@ export default function Home() {
                 <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_15px_rgba(253,224,71,0.15)]">
                   <c.Icon className="h-7 w-7" />
                 </span>
-                <span className="text-sm text-gray-300">{c.title}</span>
+                <span className="text-sm text-gray-200">{c.title}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -431,7 +443,7 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
             transition={{ delay: 0.15 }}
-            className="text-lg leading-loose text-gray-300 sm:text-xl"
+            className="text-lg leading-loose text-gray-200 sm:text-xl"
           >
             חרדות, מסגרות קורסות ומשפחות במצוקה כלכלית. מוסדות &quot;נחלי
             התורה צפת&quot; הם העוגן של הקהילה, אבל המשאבים שלנו להמשך הסיוע
@@ -471,7 +483,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
-            className="text-lg leading-loose text-gray-300 sm:text-xl"
+            className="text-lg leading-loose text-gray-200 sm:text-xl"
           >
             בלב העיר העתיקה של צפת פועלת קהילת חסידי ברסלב &quot;נחלי
             התורה&quot; – קהילה של כ-400 משפחות הממשיכה את דרכם של גדולי
@@ -497,7 +509,7 @@ export default function Home() {
                 <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
                   <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
                 </span>
-                <span className="mt-2 text-xs text-gray-400 sm:text-sm">{s.label}</span>
+                <span className="mt-2 text-xs text-gray-300 sm:text-sm">{s.label}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -578,10 +590,6 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="mx-auto mb-16 max-w-2xl">
-            <GoalGauge />
-          </div>
-
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -606,7 +614,7 @@ export default function Home() {
                     {tier.amount}
                   </motion.span>
                   <h3 className="text-xl font-bold text-white">{tier.title}</h3>
-                  <p className="text-gray-400">{tier.desc}</p>
+                  <p className="text-gray-300">{tier.desc}</p>
                   <motion.a
                     href={nedarimPlusUrl({
                       amount: tier.value,
@@ -657,14 +665,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-gray-500">
+      <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-gray-400">
         <p>
           קהילת ברסלב &quot;נחלי התורה&quot; צפת &middot; קמפיין מאירים את
           הגליל
         </p>
         <a
           href="/admin"
-          className="mt-4 inline-block text-xs text-gray-600 transition-colors hover:text-gray-400"
+          className="mt-4 inline-block text-xs text-gray-500 transition-colors hover:text-gray-300"
         >
           ניהול
         </a>
