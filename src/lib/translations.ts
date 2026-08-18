@@ -30,7 +30,7 @@ export interface Translations {
   banner: { kicker: string; alt: string; cta: string };
   story: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   about: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
-  statsLabels: [string, string, string];
+  statsLabels: [string, string, string, string];
   activitiesSection: { kicker: string; heading: string };
   activityTitles: [
     string,
@@ -133,11 +133,11 @@ export const translations: Record<Language, Translations> = {
       kicker: "מי עומד מאחורי הקמפיין",
       heading: "מי אנחנו – קהילת ברסלב בצפת",
       paragraph1:
-        'בלב העיר העתיקה של צפת פועלת קהילת חסידי ברסלב "נחלי התורה" – קהילה של כ-400 משפחות הממשיכה את דרכם של גדולי החסידות. מוסדות הקהילה כוללים בית כנסת, מקוואות, ישיבה וכולל לאברכים נשואים, וישיבה לבחורים צעירים.',
+        'בלב העיר העתיקה של צפת פועלת קהילת חסידי ברסלב "נחלי התורה" – קהילה של כ-250 משפחות הממשיכה את דרכם של גדולי החסידות. מוסדות הקהילה כוללים בית כנסת, מקוואות, ישיבה וכולל לאברכים נשואים, וישיבה לבחורים צעירים.',
       paragraph2:
         "לאחר כשמונה שנות פעילות ומאות תלמידים, האחריות הכספית נופלת כולה על כתפי עומדי המוסדות. קמפיין 'מאירים את הגליל' נולד כדי לחלוק את הנטל ולהבטיח את המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.",
     },
-    statsLabels: ["משפחות בקהילה", "שנות פעילות רצופות", "מנות מחולקות מדי חודש"],
+    statsLabels: ["משפחות בקהילה", "תלמידים", "אנשי צוות", "לב אחד גדול"],
     activitiesSection: { kicker: "מה אנחנו עושים", heading: "הפעילויות שלנו" },
     activityTitles: [
       "בית כנסת",
@@ -249,11 +249,11 @@ export const translations: Record<Language, Translations> = {
       kicker: "Who's Behind the Campaign",
       heading: "Who We Are - The Breslov Community in Tzfat",
       paragraph1:
-        "In the heart of the Old City of Tzfat, the Breslov Hasidic community \"Nachalei HaTorah\" operates - a community of about 400 families continuing the path of the great Hasidic masters. The community's institutions include a synagogue, mikvahs, a kollel for married men, and a yeshiva for young men.",
+        "In the heart of the Old City of Tzfat, the Breslov Hasidic community \"Nachalei HaTorah\" operates - a community of about 250 families continuing the path of the great Hasidic masters. The community's institutions include a synagogue, mikvahs, a kollel for married men, and a yeshiva for young men.",
       paragraph2:
         "After about eight years of activity and hundreds of students, the full financial responsibility falls on the shoulders of those running the institutions. The 'Lighting the Galilee' campaign was born to share the burden and ensure the continuation of Torah and community activity for the children and families of Tzfat.",
     },
-    statsLabels: ["Families in the Community", "Years of Continuous Activity", "Meals Distributed Monthly"],
+    statsLabels: ["Families in the Community", "Students", "Staff Members", "One Big Heart"],
     activitiesSection: { kicker: "What We Do", heading: "Our Activities" },
     activityTitles: [
       "Synagogue",

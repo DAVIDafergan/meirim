@@ -59,9 +59,9 @@ const banners = ["/banner1.jpg", "/banner2.jpg"];
 const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
 
 const statValues = [
-  { to: 400, prefix: "~", suffix: "+" },
-  { to: 8, prefix: "", suffix: "" },
-  { to: 3000, prefix: "", suffix: "+" },
+  { to: 250, prefix: "", suffix: "+" },
+  { to: 350, prefix: "", suffix: "+" },
+  { to: 60, prefix: "", suffix: "+" },
 ];
 
 const logoVariants = {
@@ -535,7 +535,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={cardsContainer}
-            className="mt-8 grid w-full grid-cols-3 gap-4 sm:gap-8"
+            className="mt-8 grid w-full grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8"
           >
             {stats.map((s) => (
               <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
@@ -545,6 +545,14 @@ export default function Home() {
                 <span className="mt-2 text-xs text-gray-300 sm:text-sm">{s.label}</span>
               </motion.div>
             ))}
+            <motion.div variants={cardItem} className="flex flex-col items-center">
+              <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
+                ❤️
+              </span>
+              <span className="mt-2 text-xs text-gray-300 sm:text-sm">
+                {t.statsLabels[3]}
+              </span>
+            </motion.div>
           </motion.div>
         </div>
       </section>
