@@ -63,19 +63,6 @@ export interface Translations {
   social: { kicker: string; heading: string; cta: string };
   liveCounter: { label: string };
   footer: { text: string; admin: string };
-  popup: {
-    successTitle: string;
-    successBody: string;
-    title: string;
-    body: string;
-    namePlaceholder: string;
-    phonePlaceholder: string;
-    notePlaceholder: string;
-    error: string;
-    sending: string;
-    submit: string;
-    close: string;
-  };
   blessingModal: {
     title: string;
     body: string;
@@ -186,19 +173,6 @@ export const translations: Record<Language, Translations> = {
     footer: {
       text: 'קהילת ברסלב "נחלי התורה" צפת · קמפיין מאירים את הגליל',
       admin: "ניהול",
-    },
-    popup: {
-      successTitle: "השם שלכם נקלט בהצלחה",
-      successBody: 'תפילתכם תעלה בציון הרשב"י במירון. תודה!',
-      title: "השאירו שם לתפילה",
-      body: 'השאירו שם ומספר טלפון, והשם שלכם יעלה בתפילה בציון הרשב"י במירון.',
-      namePlaceholder: "שם פרטי (ושם האם אם ידוע)",
-      phonePlaceholder: "טלפון ליצירת קשר",
-      notePlaceholder: "הערות (לא חובה)",
-      error: "אירעה שגיאה, נסו שוב.",
-      sending: "שולח...",
-      submit: "השאירו שם",
-      close: "סגירה",
     },
     blessingModal: {
       title: "השאירו שם לברכה",
@@ -312,19 +286,6 @@ export const translations: Record<Language, Translations> = {
     footer: {
       text: "Breslov Community \"Nachalei HaTorah\" Tzfat · Lighting the Galilee Campaign",
       admin: "Admin",
-    },
-    popup: {
-      successTitle: "Your name has been received",
-      successBody: "Your prayer will be offered at Rashbi's tomb in Meron. Thank you!",
-      title: "Leave a Name for Prayer",
-      body: "Leave your name and phone number, and your name will be offered in prayer at Rashbi's tomb in Meron.",
-      namePlaceholder: "First name (and mother's name if known)",
-      phonePlaceholder: "Phone number",
-      notePlaceholder: "Notes (optional)",
-      error: "Something went wrong, please try again.",
-      sending: "Sending...",
-      submit: "Submit Name",
-      close: "Close",
     },
     blessingModal: {
       title: "Leave a Name for Blessing",

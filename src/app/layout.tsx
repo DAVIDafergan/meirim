@@ -3,7 +3,6 @@ import { Heebo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
-import LandingPopup from "@/components/LandingPopup";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 const heebo = Heebo({
@@ -31,7 +30,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="grain-overlay" />
           <ScrollProgress />
           <Navbar />
-          <LandingPopup />
           {children}
         </LanguageProvider>
       </body>
