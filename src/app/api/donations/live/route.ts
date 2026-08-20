@@ -1,13 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { CAMPAIGN_GROUPE } from "@/lib/nedarim";
 
 export async function GET() {
-  const where = {
-    isRecurringSetup: false,
-    currency: "ILS" as const,
-    category: CAMPAIGN_GROUPE,
-  };
+  const where = { isRecurringSetup: false, currency: "ILS" as const };
 
   const [agg, recent] = await Promise.all([
     prisma.donation.aggregate({ where, _sum: { amount: true }, _count: true }),
