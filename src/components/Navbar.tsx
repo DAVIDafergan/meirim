@@ -16,6 +16,7 @@ export default function Navbar() {
     { href: "#story", label: t.nav.story },
     { href: "#about", label: t.nav.about },
     { href: "#activities", label: t.nav.activities },
+    { href: "#gallery", label: t.nav.gallery },
     { href: "#donate", label: t.nav.donate },
   ];
 

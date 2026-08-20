@@ -26,6 +26,10 @@ export default async function AdminPage() {
               <Link href="/admin/donations" className="hover:text-gold">
                 דשבורד תרומות
               </Link>
+              {" · "}
+              <Link href="/admin/gallery" className="hover:text-gold">
+                גלריה
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-3">

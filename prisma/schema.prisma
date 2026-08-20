@@ -45,6 +45,16 @@ model Donation {
   @@map("donations")
 }
 
+model GalleryItem {
+  id        Int      @id @default(autoincrement())
+  type      String
+  filename  String
+  caption   String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("gallery_items")
+}
+
 model WebhookLog {
   id        Int      @id @default(autoincrement())
   source    String   @default("nedarim_plus")

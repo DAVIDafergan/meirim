@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { isAdminAuthed } from "@/lib/adminAuth";
+import { CAMPAIGN_GROUPE } from "@/lib/nedarim";
 
 function periodStart(period: string): Date | undefined {
   const now = new Date();
@@ -38,6 +39,7 @@ export async function GET(request: Request) {
   const donations = await prisma.donation.findMany({
     where: {
       isRecurringSetup: false,
+      category: CAMPAIGN_GROUPE,
       ...(since ? { createdAt: { gte: since } } : {}),
       ...(q ? { clientName: { contains: q, mode: "insensitive" } } : {}),
     },

@@ -10,11 +10,13 @@ import MarqueeTicker from "@/components/MarqueeTicker";
 import TypewriterText from "@/components/TypewriterText";
 import LiveDonationCounter from "@/components/LiveDonationCounter";
 import RecentDonations from "@/components/RecentDonations";
+import Gallery from "@/components/Gallery";
+import SocialFollow from "@/components/SocialFollow";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import BlessingModal from "@/components/BlessingModal";
 import VideoPlayer from "@/components/VideoPlayer";
-import { nedarimPlusUrl } from "@/lib/nedarim";
+import { nedarimPlusUrl, CAMPAIGN_GROUPE } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
 import {
   BookIcon,
@@ -34,10 +36,6 @@ import {
 } from "@/components/icons";
 
 const EASE_LUX = [0.16, 1, 0.3, 1] as const;
-
-// Sent to Nedarim Plus for their internal reporting - kept in Hebrew
-// regardless of site language so it matches their own category naming.
-const DONATION_GROUPE = "קמפיין מאירים את הגליל";
 
 const donationTierValues = [180, 360, 500, 1000];
 
@@ -236,7 +234,7 @@ export default function Home() {
                     href={nedarimPlusUrl({
                       amount: tier.value,
                       lock: true,
-                      groupe: DONATION_GROUPE,
+                      groupe: CAMPAIGN_GROUPE,
                       analytic: `hero-quick-${tier.value}`,
                       redirectPath: "/thanks",
                     })}
@@ -610,6 +608,51 @@ export default function Home() {
         <Divider />
       </div>
 
+      {/* Section: Gallery */}
+      <section id="gallery" className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32">
+        <FloatingOrbs />
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 flex flex-col items-center gap-6 text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              variants={fadeUp}
+            >
+              <Kicker>{t.gallery.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+              <TypewriterText>{t.gallery.heading}</TypewriterText>
+            </h2>
+          </div>
+          <Gallery />
+        </div>
+      </section>
+
+      {/* Section: Social Follow */}
+      <section className="relative overflow-hidden px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-10 flex flex-col items-center gap-6 text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              variants={fadeUp}
+            >
+              <Kicker>{t.social.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
+              <TypewriterText>{t.social.heading}</TypewriterText>
+            </h2>
+          </div>
+          <SocialFollow />
+        </div>
+      </section>
+
+      <div className="py-2">
+        <Divider />
+      </div>
+
       {/* Section C: Donation Tiers */}
       <section
         id="donate"
@@ -660,7 +703,7 @@ export default function Home() {
                     href={nedarimPlusUrl({
                       amount: tier.value,
                       lock: true,
-                      groupe: DONATION_GROUPE,
+                      groupe: CAMPAIGN_GROUPE,
                       analytic: `landing-page-${tier.value}`,
                       redirectPath: "/thanks",
                     })}
@@ -678,7 +721,7 @@ export default function Home() {
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <motion.a
               href={nedarimPlusUrl({
-                groupe: DONATION_GROUPE,
+                groupe: CAMPAIGN_GROUPE,
                 analytic: "landing-page-free-amount",
                 redirectPath: "/thanks",
               })}
@@ -690,7 +733,7 @@ export default function Home() {
             </motion.a>
             <motion.a
               href={nedarimPlusUrl({
-                groupe: DONATION_GROUPE,
+                groupe: CAMPAIGN_GROUPE,
                 analytic: "landing-page-monthly",
                 redirectPath: "/thanks",
                 onlyKeva: true,

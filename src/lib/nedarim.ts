@@ -1,3 +1,8 @@
+// The Groupe tag sent to Nedarim Plus for every donation button on this
+// site - used to filter the dashboard/live totals to only this campaign,
+// in case the same MosadId is ever reused for other campaigns.
+export const CAMPAIGN_GROUPE = "קמפיין מאירים את הגליל";
+
 const MOSAD_ID = "7011515";
 const BASE_URL = "https://www.matara.pro/nedarimplus/online/";
 const SITE_DOMAIN =

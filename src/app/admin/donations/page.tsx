@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { isAdminAuthed } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
+import { CAMPAIGN_GROUPE } from "@/lib/nedarim";
 import AdminLogoutButton from "@/components/AdminLogoutButton";
 
 export const dynamic = "force-dynamic";
@@ -45,6 +46,7 @@ export default async function DonationsAdminPage({
 
   const where = {
     isRecurringSetup: false,
+    category: CAMPAIGN_GROUPE,
     ...(since ? { createdAt: { gte: since } } : {}),
     ...(q ? { clientName: { contains: q, mode: "insensitive" as const } } : {}),
   };
@@ -58,7 +60,9 @@ export default async function DonationsAdminPage({
       }),
       prisma.donation.findMany({ where, select: { phone: true, email: true } }),
       prisma.donation.aggregate({ where, _sum: { amount: true }, _count: true }),
-      prisma.donation.count({ where: { isRecurringSetup: true } }),
+      prisma.donation.count({
+        where: { isRecurringSetup: true, category: CAMPAIGN_GROUPE },
+      }),
       prisma.donation.groupBy({
         by: ["category"],
         where,
@@ -97,6 +101,10 @@ export default async function DonationsAdminPage({
               </Link>
               {" · "}
               דשבורד תרומות
+              {" · "}
+              <Link href="/admin/gallery" className="hover:text-gold">
+                גלריה
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-3">

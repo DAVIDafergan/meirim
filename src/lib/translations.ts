@@ -7,6 +7,7 @@ export interface Translations {
     story: string;
     about: string;
     activities: string;
+    gallery: string;
     donate: string;
     donateNow: string;
   };
@@ -58,6 +59,8 @@ export interface Translations {
     { title: string; desc: string }
   ];
   recentDonations: { kicker: string; heading: string; anonymous: string };
+  gallery: { kicker: string; heading: string };
+  social: { kicker: string; heading: string; cta: string };
   liveCounter: { label: string };
   footer: { text: string; admin: string };
   popup: {
@@ -96,6 +99,7 @@ export const translations: Record<Language, Translations> = {
       story: "הסיפור",
       about: "מי אנחנו",
       activities: "הפעילויות",
+      gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
     },
@@ -169,6 +173,15 @@ export const translations: Record<Language, Translations> = {
       heading: "תרומות אחרונות",
       anonymous: "תורם/ת אנונימי/ת",
     },
+    gallery: {
+      kicker: "תיעודים",
+      heading: "רגעים מהפעילות",
+    },
+    social: {
+      kicker: "עקבו אחרינו",
+      heading: "שיעורים ועדכונים מהרב",
+      cta: "עקבו לשיעורים ועדכונים",
+    },
     liveCounter: { label: "נתרם עד כה · מתעדכן בלייב" },
     footer: {
       text: 'קהילת ברסלב "נחלי התורה" צפת · קמפיין מאירים את הגליל',
@@ -212,6 +225,7 @@ export const translations: Record<Language, Translations> = {
       story: "Our Story",
       about: "About Us",
       activities: "Activities",
+      gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
     },
@@ -284,6 +298,15 @@ export const translations: Record<Language, Translations> = {
       kicker: "Together We Light Up",
       heading: "Recent Donations",
       anonymous: "Anonymous Donor",
+    },
+    gallery: {
+      kicker: "Documentation",
+      heading: "Moments from Our Activities",
+    },
+    social: {
+      kicker: "Follow Us",
+      heading: "Lessons & Updates from the Rabbi",
+      cta: "Follow for lessons & updates",
     },
     liveCounter: { label: "Raised so far · Live updates" },
     footer: {
