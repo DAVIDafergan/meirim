@@ -14,6 +14,18 @@ export const DISPLAY_CATEGORIES = [
   "מוסדות ברסלב נחלי התורה צפת",
 ];
 
+// Real donations under a different/no category (general donations to the
+// shared MosadId) are still shown when large enough to be worth surfacing,
+// even though they aren't tagged to this campaign or institution.
+export const GENERAL_DONATION_MIN_AMOUNT = 1000;
+
+export const donationDisplayFilter = {
+  OR: [
+    { category: { in: DISPLAY_CATEGORIES } },
+    { amount: { gt: GENERAL_DONATION_MIN_AMOUNT } },
+  ],
+};
+
 const MOSAD_ID = "7011515";
 const BASE_URL = "https://www.matara.pro/nedarimplus/online/";
 const SITE_DOMAIN =

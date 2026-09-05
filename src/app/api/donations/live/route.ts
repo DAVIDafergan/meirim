@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { DISPLAY_CATEGORIES } from "@/lib/nedarim";
+import { donationDisplayFilter } from "@/lib/nedarim";
 
 export async function GET() {
   const where = {
     isRecurringSetup: false,
     currency: "ILS" as const,
-    category: { in: DISPLAY_CATEGORIES },
+    ...donationDisplayFilter,
   };
 
   const [agg, recent] = await Promise.all([

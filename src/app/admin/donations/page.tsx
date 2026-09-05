@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { isAdminAuthed } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
-import { DISPLAY_CATEGORIES } from "@/lib/nedarim";
+import { donationDisplayFilter } from "@/lib/nedarim";
 import AdminLogoutButton from "@/components/AdminLogoutButton";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +46,7 @@ export default async function DonationsAdminPage({
 
   const where = {
     isRecurringSetup: false,
-    category: { in: DISPLAY_CATEGORIES },
+    ...donationDisplayFilter,
     ...(since ? { createdAt: { gte: since } } : {}),
     ...(q ? { clientName: { contains: q, mode: "insensitive" as const } } : {}),
   };
@@ -61,7 +61,7 @@ export default async function DonationsAdminPage({
       prisma.donation.findMany({ where, select: { phone: true, email: true } }),
       prisma.donation.aggregate({ where, _sum: { amount: true }, _count: true }),
       prisma.donation.count({
-        where: { isRecurringSetup: true, category: { in: DISPLAY_CATEGORIES } },
+        where: { isRecurringSetup: true, ...donationDisplayFilter },
       }),
       prisma.donation.groupBy({
         by: ["category"],
