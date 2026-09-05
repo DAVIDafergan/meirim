@@ -3,6 +3,17 @@
 // in case the same MosadId is ever reused for other campaigns.
 export const CAMPAIGN_GROUPE = "קמפיין מאירים את הגליל";
 
+// Donations sharing MosadId 7011515 come from several sources: this
+// campaign's own buttons (tagged with CAMPAIGN_GROUPE), plus direct
+// donations to the institution entered under its own name in Nedarim
+// Plus. All of these should count toward the totals/lists shown on the
+// site; other campaigns on the same MosadId should not.
+export const DISPLAY_CATEGORIES = [
+  CAMPAIGN_GROUPE,
+  "נחלי התורה צפת",
+  "מוסדות ברסלב נחלי התורה צפת",
+];
+
 const MOSAD_ID = "7011515";
 const BASE_URL = "https://www.matara.pro/nedarimplus/online/";
 const SITE_DOMAIN =
