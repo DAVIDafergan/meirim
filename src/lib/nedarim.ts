@@ -14,16 +14,11 @@ export const DISPLAY_CATEGORIES = [
   "מוסדות ברסלב נחלי התורה צפת",
 ];
 
-// Real donations under a different/no category (general donations to the
-// shared MosadId) are still shown when large enough to be worth surfacing,
-// even though they aren't tagged to this campaign or institution.
-export const GENERAL_DONATION_MIN_AMOUNT = 1000;
-
+// Only donations tagged to the campaign or the institution should be
+// shown - this excludes uncategorized donations and other categories on
+// the shared MosadId (e.g. Meron registrations) regardless of amount.
 export const donationDisplayFilter = {
-  OR: [
-    { category: { in: DISPLAY_CATEGORIES } },
-    { amount: { gt: GENERAL_DONATION_MIN_AMOUNT } },
-  ],
+  category: { in: DISPLAY_CATEGORIES },
 };
 
 const MOSAD_ID = "7011515";
