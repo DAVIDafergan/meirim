@@ -14,11 +14,27 @@ export const DISPLAY_CATEGORIES = [
   "מוסדות ברסלב נחלי התורה צפת",
 ];
 
-// Only donations tagged to the campaign or the institution should be
-// shown - this excludes uncategorized donations and other categories on
-// the shared MosadId (e.g. Meron registrations) regardless of amount.
+// Categories on the shared MosadId that are never real campaign/institution
+// donations (e.g. Meron pilgrimage registrations, paid services) - excluded
+// even if the amount clears GENERAL_DONATION_MIN_AMOUNT below.
+const EXCLUDED_CATEGORY_SUBSTRINGS = ["מירון", "שירות"];
+
+// A large-but-plausible amount: sizable general donations connected to the
+// campaign are shown even without an exact category match, but this stays
+// well above routine payments (Meron registrations, service fees) so those
+// don't slip in just by being pricier than a typical donation.
+export const GENERAL_DONATION_MIN_AMOUNT = 1800;
+
 export const donationDisplayFilter = {
-  category: { in: DISPLAY_CATEGORIES },
+  OR: [
+    { category: { in: DISPLAY_CATEGORIES } },
+    {
+      amount: { gte: GENERAL_DONATION_MIN_AMOUNT },
+      NOT: EXCLUDED_CATEGORY_SUBSTRINGS.map((s) => ({
+        category: { contains: s },
+      })),
+    },
+  ],
 };
 
 const MOSAD_ID = "7011515";
