@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={`${heebo.variable} ${frankRuhlLibre.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-black text-white font-sans">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <LanguageProvider>
           <div className="grain-overlay" />
           <ScrollProgress />

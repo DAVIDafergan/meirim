@@ -19,7 +19,7 @@ export default function DepartmentGallery({ images }: { images: Item[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: (i % 8) * 0.05 }}
-          className="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+          className="group relative aspect-square overflow-hidden rounded-2xl border border-line bg-white/60"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

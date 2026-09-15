@@ -7,12 +7,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 type Recent = { name: string | null; amount: number; createdAt: string };
 
-const cardAccents = [
-  "border-gold/30 text-gold",
-  "border-[#e8dcc0]/30 text-[#e8dcc0]",
-  "border-amber-300/30 text-amber-200",
-  "border-[#8a2e39]/40 text-[#d99a9f]",
-];
+const cardAccents = ["text-gold", "text-foreground", "text-gold-deep", "text-bordeaux"];
 
 export default function RecentDonations() {
   const { t, language } = useLanguage();
@@ -47,13 +42,13 @@ export default function RecentDonations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5, delay: i * 0.06 }}
-          className={`flex flex-col items-center gap-1.5 rounded-2xl border bg-white/[0.05] px-4 py-4 text-center backdrop-blur-md ${cardAccents[i % cardAccents.length]}`}
+          className="flex flex-col items-center gap-1.5 rounded-2xl border border-line bg-white/60 px-4 py-4 text-center"
         >
-          <HeartIcon className="h-4 w-4" />
-          <p className="w-full truncate text-sm font-semibold text-white">
+          <HeartIcon className={`h-4 w-4 ${cardAccents[i % cardAccents.length]}`} />
+          <p className="w-full truncate text-sm font-semibold text-foreground">
             {item.name ?? t.recentDonations.anonymous}
           </p>
-          <p className="font-display font-black text-lg">
+          <p className={`font-display font-black text-lg ${cardAccents[i % cardAccents.length]}`}>
             ₪{item.amount.toLocaleString(language === "he" ? "he-IL" : "en-US")}
           </p>
         </motion.div>

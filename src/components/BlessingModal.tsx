@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageProvider";
+import { goldButton } from "@/lib/uiConstants";
 
 // TODO: replace with the real WhatsApp number (international format, no "+"), e.g. "972501234567"
 const WHATSAPP_NUMBER = "972500000000";
@@ -12,7 +13,7 @@ const WHATSAPP_NUMBER = "972500000000";
 const categoryIds = ["ישועה", "זיווג", "פרנסה", "רפואה"];
 
 const inputClass =
-  "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 outline-none transition-colors focus:border-gold/60 focus:bg-white/10";
+  "w-full rounded-xl border border-line bg-white px-4 py-3 text-foreground placeholder:text-foreground-muted outline-none transition-colors focus:border-gold";
 
 export default function BlessingModal({
   open,
@@ -67,30 +68,30 @@ export default function BlessingModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-foreground/40 p-4"
           onClick={onClose}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg rounded-2xl border border-gold/30 bg-gradient-to-b from-purple-box/90 via-[#141620]/95 to-purple-deep/95 p-6 shadow-[0_0_60px_rgba(201,162,39,0.25)] sm:p-8"
+            className="relative w-full max-w-lg rounded-2xl border border-line bg-background p-6 shadow-xl sm:p-8"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label={t.blessingModal.close}
-              className="absolute left-4 top-4 text-2xl leading-none text-gray-400 transition-colors hover:text-gold"
+              className="absolute left-4 top-4 text-2xl leading-none text-foreground-muted transition-colors hover:text-gold"
             >
               ×
             </button>
 
-            <h3 className="text-2xl font-black text-gold sm:text-3xl">
+            <h3 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
               {t.blessingModal.title}
             </h3>
-            <p className="mt-2 text-sm text-gray-300">{t.blessingModal.body}</p>
+            <p className="mt-2 text-sm text-foreground-muted">{t.blessingModal.body}</p>
 
             <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
               <div className="grid grid-cols-2 gap-3">
@@ -120,7 +121,7 @@ export default function BlessingModal({
               />
 
               <div>
-                <p className="mb-2 text-sm text-gray-400">{t.blessingModal.requestFor}</p>
+                <p className="mb-2 text-sm text-foreground-muted">{t.blessingModal.requestFor}</p>
                 <div className="flex flex-wrap gap-2">
                   {categories.map((c) => (
                     <button
@@ -129,8 +130,8 @@ export default function BlessingModal({
                       onClick={() => toggleCategory(c.id)}
                       className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
                         selected.includes(c.id)
-                          ? "border-gold bg-gold/20 text-gold"
-                          : "border-white/15 text-gray-300 hover:border-gold/40"
+                          ? "border-gold bg-gold/10 text-gold"
+                          : "border-line text-foreground-muted hover:border-gold/50"
                       }`}
                     >
                       {c.label}
@@ -147,14 +148,9 @@ export default function BlessingModal({
                 className={`${inputClass} resize-none`}
               />
 
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="mt-2 rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] px-8 py-3 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(201,162,39,0.4)] transition-shadow hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(201,162,39,0.7)]"
-              >
+              <button type="submit" className={`mt-2 px-8 py-3 ${goldButton}`}>
                 {t.blessingModal.submit}
-              </motion.button>
+              </button>
             </form>
           </motion.div>
         </motion.div>

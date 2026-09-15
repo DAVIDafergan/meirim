@@ -32,7 +32,7 @@ export default function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: (i % 8) * 0.05 }}
-          className="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+          className="group relative aspect-square overflow-hidden rounded-2xl border border-line bg-white/60"
         >
           {item.type === "video" ? (
             <GalleryVideo src={item.url} caption={item.caption} />
@@ -81,9 +81,9 @@ function GalleryVideo({ src, caption }: { src: string; caption: string | null })
       className="relative block h-full w-full"
     >
       <video src={src} preload="metadata" muted playsInline className="h-full w-full object-cover" />
-      <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] shadow-[0_0_25px_rgba(201,162,39,0.6)]">
-          <svg viewBox="0 0 24 24" fill="black" className="h-5 w-5 -translate-x-0.5">
+      <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/10">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-background shadow-md">
+          <svg viewBox="0 0 24 24" fill="#221c14" className="h-5 w-5 -translate-x-0.5">
             <path d="M8 5v14l11-7Z" />
           </svg>
         </span>

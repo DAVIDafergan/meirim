@@ -21,34 +21,21 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-md"
-    >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-background/90 backdrop-blur-sm">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="block">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="drop-shadow-[0_4px_18px_rgba(201,162,39,0.35)]"
-          >
-            <Image
-              src="/logo2-nav.png"
-              alt="מוסדות ברסלב צפת - נחלי התורה"
-              width={400}
-              height={393}
-              className="h-16 w-auto sm:h-20"
-            />
-          </motion.div>
+          <Image
+            src="/logo2-nav.png"
+            alt="מוסדות ברסלב צפת - נחלי התורה"
+            width={400}
+            height={393}
+            className="h-14 w-auto sm:h-16"
+          />
         </Link>
-        <ul className="hidden items-center gap-7 text-sm text-gray-300 lg:flex">
+        <ul className="hidden items-center gap-8 text-sm text-foreground-muted lg:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                className="transition-colors duration-200 hover:text-gold"
-              >
+              <Link href={link.href} className="transition-colors duration-200 hover:text-gold">
                 {link.label}
               </Link>
             </li>
@@ -58,28 +45,26 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="rounded-full border border-gold/30 px-3 py-1.5 text-xs font-bold text-gold transition-colors hover:bg-gold/10"
+            className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-foreground-muted transition-colors hover:border-gold hover:text-gold"
           >
             {t.languageToggle}
           </button>
-          <motion.a
+          <Link
             href="/donate"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] px-5 py-2 text-sm font-bold text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_16px_rgba(201,162,39,0.35)] sm:inline-block"
+            className="hidden rounded-full bg-foreground px-5 py-2 text-sm font-bold text-background transition-colors hover:bg-gold-deep sm:inline-block"
           >
             {t.nav.donateNow}
-          </motion.a>
+          </Link>
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="תפריט"
             aria-expanded={mobileOpen}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-full border border-white/15 lg:hidden"
+            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-full border border-line lg:hidden"
           >
-            <span className="h-px w-4 bg-gray-200" />
-            <span className="h-px w-4 bg-gray-200" />
-            <span className="h-px w-4 bg-gray-200" />
+            <span className="h-px w-4 bg-foreground" />
+            <span className="h-px w-4 bg-foreground" />
+            <span className="h-px w-4 bg-foreground" />
           </button>
         </div>
       </nav>
@@ -91,7 +76,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="flex flex-col gap-1 overflow-hidden border-t border-white/10 px-6 py-3 text-sm text-gray-300 lg:hidden"
+            className="flex flex-col gap-1 overflow-hidden border-t border-line px-6 py-3 text-sm text-foreground-muted lg:hidden"
           >
             {links.map((link) => (
               <li key={link.href}>
@@ -116,6 +101,6 @@ export default function Navbar() {
           </motion.ul>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

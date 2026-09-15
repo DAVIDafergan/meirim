@@ -47,9 +47,8 @@ export default function SocialFollow() {
           href={p.url}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.04, y: -4 }}
-          whileTap={{ scale: 0.97 }}
-          className="flex items-center gap-4 rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-md transition-shadow duration-300 hover:border-gold/40 hover:shadow-[0_0_30px_rgba(201,162,39,0.18)]"
+          whileHover={{ y: -2 }}
+          className="flex items-center gap-4 rounded-2xl border border-line bg-white/60 p-5 transition-colors duration-300 hover:border-gold/50"
         >
           <span
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white"
@@ -58,8 +57,8 @@ export default function SocialFollow() {
             <p.Icon className="h-6 w-6" />
           </span>
           <div className="text-start">
-            <p className="font-display font-black text-lg text-white">{p.name}</p>
-            <p className="text-xs text-gray-400">{t.social.cta}</p>
+            <p className="font-display font-black text-lg text-foreground">{p.name}</p>
+            <p className="text-xs text-foreground-muted">{t.social.cta}</p>
           </div>
         </motion.a>
       ))}

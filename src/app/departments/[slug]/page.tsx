@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import FloatingOrbs from "@/components/FloatingOrbs";
 import Kicker from "@/components/Kicker";
 import DepartmentGallery from "@/components/DepartmentGallery";
 import { DEPARTMENT_ICONS, type DepartmentIconKey } from "@/components/icons";
@@ -45,27 +44,26 @@ export default async function DepartmentPage({
   const bodyParagraphs = department.body?.split("\n").filter((p) => p.trim()) ?? [];
 
   return (
-    <main className="ambient-glow relative flex-1 overflow-hidden px-6 py-28 sm:py-32">
-      <FloatingOrbs />
+    <main className="relative flex-1 px-6 py-28 sm:py-32">
       <div className="mx-auto max-w-3xl">
-        <Link href="/departments" className="text-sm text-gray-400 hover:text-gold">
+        <Link href="/departments" className="text-sm text-foreground-muted hover:text-gold">
           ← כל המחלקות
         </Link>
 
         <div className="mt-6 flex flex-col items-center gap-6 text-center">
           {Icon && (
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(201,162,39,0.2)]">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 text-gold">
               <Icon className="h-8 w-8" />
             </span>
           )}
           <Kicker>המחלקות שלנו</Kicker>
-          <h1 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl">
+          <h1 className="font-display font-black text-4xl leading-snug text-foreground sm:text-5xl">
             {department.name}
           </h1>
-          <p className="text-lg leading-loose text-gray-200 sm:text-xl">{department.summary}</p>
+          <p className="text-lg leading-loose text-foreground-muted sm:text-xl">{department.summary}</p>
 
           {bodyParagraphs.map((p, i) => (
-            <p key={i} className="text-base leading-loose text-gray-300">
+            <p key={i} className="text-base leading-loose text-foreground-muted">
               {p}
             </p>
           ))}

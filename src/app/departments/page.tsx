@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
-import FloatingOrbs from "@/components/FloatingOrbs";
 import Kicker from "@/components/Kicker";
 import DepartmentsGrid from "@/components/DepartmentsGrid";
 
@@ -18,15 +17,14 @@ export default async function DepartmentsPage() {
   });
 
   return (
-    <main className="ambient-glow relative flex-1 overflow-hidden px-6 py-28 sm:py-32">
-      <FloatingOrbs />
+    <main className="relative flex-1 px-6 py-28 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 flex flex-col items-center gap-6 text-center">
           <Kicker>מה אנחנו עושים</Kicker>
-          <h1 className="font-display font-black text-4xl leading-snug text-gold sm:text-5xl md:text-6xl">
+          <h1 className="font-display font-black text-4xl leading-snug text-foreground sm:text-5xl md:text-6xl">
             המחלקות שלנו
           </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-gray-300">
+          <p className="max-w-2xl text-lg leading-relaxed text-foreground-muted">
             שמונה מחלקות הפועלות יחד בלב העיר העתיקה בצפת, ומלוות את בני הקהילה מגיל הרך ולאורך
             כל שלבי החיים.
           </p>

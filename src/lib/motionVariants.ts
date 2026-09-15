@@ -17,11 +17,10 @@ export const cardsContainer = {
 };
 
 export const cardItem = {
-  hidden: { opacity: 0, y: 50, rotateX: -20 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    rotateX: 0,
-    transition: { duration: 0.8, ease: EASE_LUX },
+    transition: { duration: 0.7, ease: EASE_LUX },
   },
 };

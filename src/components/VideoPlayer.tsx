@@ -44,16 +44,16 @@ export default function VideoPlayer({
         sizes="380px"
         className="object-cover"
       />
-      <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/10" />
+      <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/10" />
       <motion.span
-        whileHover={{ scale: 1.08 }}
+        whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.95 }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] shadow-[0_0_35px_rgba(201,162,39,0.6)]">
+        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-background shadow-md">
           <svg
             viewBox="0 0 24 24"
-            fill="black"
+            fill="#221c14"
             className="h-8 w-8 -translate-x-0.5"
           >
             <path d="M8 5v14l11-7Z" />
