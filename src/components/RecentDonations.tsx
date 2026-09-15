@@ -9,9 +9,9 @@ type Recent = { name: string | null; amount: number; createdAt: string };
 
 const cardAccents = [
   "border-gold/30 text-gold",
-  "border-violet-300/30 text-violet-200",
+  "border-[#e8dcc0]/30 text-[#e8dcc0]",
   "border-amber-300/30 text-amber-200",
-  "border-rose-300/30 text-rose-200",
+  "border-[#8a2e39]/40 text-[#d99a9f]",
 ];
 
 export default function RecentDonations() {

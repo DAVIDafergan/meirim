@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ThanksContent from "./ThanksContent";
 
 export const metadata: Metadata = {
-  title: "תודה על תרומתכם | מאירים את הגליל",
+  title: 'תודה על תרומתכם | מוסדות ברסלב "נחלי התורה" צפת',
 };
 
 export default function ThanksPage() {

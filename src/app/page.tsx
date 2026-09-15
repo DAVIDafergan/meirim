@@ -1,65 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import TiltCard from "@/components/TiltCard";
 import FloatingEmbers from "@/components/FloatingEmbers";
 import FloatingOrbs from "@/components/FloatingOrbs";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import TypewriterText from "@/components/TypewriterText";
-import LiveDonationCounter from "@/components/LiveDonationCounter";
-import RecentDonations from "@/components/RecentDonations";
 import Gallery from "@/components/Gallery";
+import DepartmentsGridClient from "@/components/DepartmentsGridClient";
 import SocialFollow from "@/components/SocialFollow";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
+import Kicker from "@/components/Kicker";
 import BlessingModal from "@/components/BlessingModal";
 import VideoPlayer from "@/components/VideoPlayer";
-import { nedarimPlusUrl, CAMPAIGN_GROUPE } from "@/lib/nedarim";
+import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
-import {
-  BookIcon,
-  CandleIcon,
-  CapIcon,
-  CommunityIcon,
-  StarIcon,
-  RingIcon,
-  CoinIcon,
-  HeartIcon,
-  SynagogueIcon,
-  ScrollIcon,
-  BlockIcon,
-  BowlIcon,
-  ChalkboardIcon,
-  PrinterIcon,
-} from "@/components/icons";
-
-const EASE_LUX = [0.16, 1, 0.3, 1] as const;
-
-const donationTierValues = [180, 360, 500, 1000];
-
-const activityIcons = [
-  SynagogueIcon,
-  CapIcon,
-  BlockIcon,
-  BookIcon,
-  ScrollIcon,
-  BowlIcon,
-  CandleIcon,
-  CommunityIcon,
-  ChalkboardIcon,
-  PrinterIcon,
-];
-
-const banners = ["/banner1.jpg", "/banner2.jpg"];
+import { EASE_LUX, fadeUp, cardsContainer, cardItem } from "@/lib/motionVariants";
+import { goldButton, donateAccents } from "@/lib/uiConstants";
+import { StarIcon, RingIcon, CoinIcon, HeartIcon } from "@/components/icons";
 
 const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
 
 const statValues = [
   { to: 250, prefix: "", suffix: "+" },
-  { to: 350, prefix: "", suffix: "+" },
-  { to: 60, prefix: "", suffix: "+" },
+  { to: 8, prefix: "", suffix: "+" },
+  { to: 8, prefix: "", suffix: "" },
 ];
 
 const logoVariants = {
@@ -92,62 +60,6 @@ const ctaVariants = {
   },
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: EASE_LUX },
-  },
-};
-
-const cardsContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const cardItem = {
-  hidden: { opacity: 0, y: 50, rotateX: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: { duration: 0.8, ease: EASE_LUX },
-  },
-};
-
-const goldButton =
-  "gold-shimmer font-display font-bold rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow duration-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]";
-
-const donateAccents = [
-  {
-    text: "text-gold",
-    ring: "border-gold/40",
-    glow: "hover:shadow-[0_0_24px_rgba(253,224,71,0.35)]",
-  },
-  {
-    text: "text-violet-200",
-    ring: "border-violet-300/40",
-    glow: "hover:shadow-[0_0_24px_rgba(196,132,252,0.3)]",
-  },
-  {
-    text: "text-amber-200",
-    ring: "border-amber-300/40",
-    glow: "hover:shadow-[0_0_24px_rgba(252,211,77,0.3)]",
-  },
-  {
-    text: "text-rose-200",
-    ring: "border-rose-300/40",
-    glow: "hover:shadow-[0_0_24px_rgba(253,164,175,0.3)]",
-  },
-];
-
-function Kicker({ children }: { children: ReactNode }) {
-  return <span className="kicker">{children}</span>;
-}
-
 export default function Home() {
   const { t, language } = useLanguage();
   const isRtl = language === "he";
@@ -157,10 +69,6 @@ export default function Home() {
     amount: `₪${value.toLocaleString(locale)}`,
     title: t.donationTiers[i].title,
     desc: t.donationTiers[i].desc,
-  }));
-  const activities = activityIcons.map((Icon, i) => ({
-    Icon,
-    title: t.activityTitles[i],
   }));
   const blessingCategories = blessingIcons.map((Icon, i) => ({
     Icon,
@@ -177,15 +85,7 @@ export default function Home() {
   const heroContentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const heroContentY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
-  const [currentBanner, setCurrentBanner] = useState(0);
   const [blessingOpen, setBlessingOpen] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBanner((prev) => (prev === 0 ? 1 : 0));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <main className="flex flex-col flex-1">
@@ -210,11 +110,15 @@ export default function Home() {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
                 <Image
-                  src="/logo-hero.png"
-                  alt={isRtl ? "מאירים את הגליל" : "Lighting the Galilee"}
-                  width={900}
-                  height={526}
-                  className="h-auto w-[260px] object-contain drop-shadow-[0_15px_45px_rgba(253,224,71,0.35)] sm:w-[340px] md:w-[400px] lg:w-[420px]"
+                  src="/logo2.svg"
+                  alt={
+                    isRtl
+                      ? 'מוסדות ברסלב צפת - נחלי התורה'
+                      : "Nachalei HaTorah Breslov Institutions, Tzfat"
+                  }
+                  width={500}
+                  height={500}
+                  className="h-auto w-[220px] object-contain drop-shadow-[0_15px_45px_rgba(201,162,39,0.35)] sm:w-[280px] md:w-[320px] lg:w-[340px]"
                   priority
                 />
               </motion.div>
@@ -264,7 +168,6 @@ export default function Home() {
               <h1 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
                 <TypewriterText delay={0.4}>{t.hero.heading}</TypewriterText>
               </h1>
-              <LiveDonationCounter />
             </motion.div>
 
             <motion.p
@@ -341,7 +244,7 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.9, ease: EASE_LUX }}
-            className="relative mt-2 w-full max-w-[380px] overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#1a1025] to-purple-deep shadow-[0_0_50px_rgba(253,224,71,0.25)]"
+            className="relative mt-2 w-full max-w-[380px] overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#141620] to-purple-deep shadow-[0_0_50px_rgba(201,162,39,0.25)]"
           >
             <VideoPlayer
               src="/video-opt.mp4"
@@ -396,7 +299,7 @@ export default function Home() {
           >
             {blessingCategories.map((c) => (
               <motion.div key={c.title} variants={cardItem} className="flex flex-col items-center gap-2">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_15px_rgba(253,224,71,0.15)]">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_15px_rgba(201,162,39,0.15)]">
                   <c.Icon className="h-7 w-7" />
                 </span>
                 <span className="text-sm text-gray-200">{c.title}</span>
@@ -420,48 +323,15 @@ export default function Home() {
         <Divider />
       </div>
 
-      {/* Banner Carousel */}
-      <div className="mt-8 mb-12 flex w-full flex-col items-center gap-8">
-        <div className="mb-2">
-          <Kicker>{t.banner.kicker}</Kicker>
-        </div>
-        <div className="relative aspect-[2.7/1] w-full overflow-hidden border-y-2 border-gold/40 bg-gradient-to-b from-purple-deep via-[#1a1025] to-purple-deep shadow-[0_0_50px_rgba(253,224,71,0.25)]">
-          <AnimatePresence>
-            <motion.div
-              key={currentBanner}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={banners[currentBanner]}
-                alt={t.banner.alt}
-                fill
-                sizes="100vw"
-                className="object-contain"
-                priority={currentBanner === 0}
-              />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        <motion.a
-          href="#donate"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className={`animate-pulse-gold inline-block px-10 py-4 text-lg ${goldButton}`}
-        >
-          {t.banner.cta}
-        </motion.a>
+      <div className="py-2">
+        <Divider />
       </div>
 
       <MarqueeTicker />
 
-      {/* Section B: The Story */}
+      {/* Section B: The Old City */}
       <section
-        id="story"
+        id="heritage"
         className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
       >
         <FloatingOrbs />
@@ -537,14 +407,14 @@ export default function Home() {
           >
             {stats.map((s) => (
               <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
-                <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
+                <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(201,162,39,0.4)] sm:text-6xl">
                   <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
                 </span>
                 <span className="mt-2 text-xs text-gray-300 sm:text-sm">{s.label}</span>
               </motion.div>
             ))}
             <motion.div variants={cardItem} className="flex flex-col items-center">
-              <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(253,224,71,0.4)] sm:text-6xl">
+              <span className="font-display font-black text-4xl text-gold drop-shadow-[0_0_10px_rgba(201,162,39,0.4)] sm:text-6xl">
                 ❤️
               </span>
               <span className="mt-2 text-xs text-gray-300 sm:text-sm">
@@ -555,9 +425,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Activities */}
+      {/* Section: Departments */}
       <section
-        id="activities"
+        id="departments"
         className="ambient-glow relative scroll-mt-20 overflow-hidden px-6 py-24 sm:py-32"
       >
         <FloatingOrbs />
@@ -576,29 +446,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={cardsContainer}
-            className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5"
-          >
-            {activities.map((item) => (
-              <motion.div key={item.title} variants={cardItem} style={{ perspective: 1000 }}>
-                <TiltCard className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.08] p-6 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
-                  <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-gold/30 bg-gradient-to-b from-gold/10 to-transparent text-gold shadow-[0_0_20px_rgba(253,224,71,0.15)]">
-                    <motion.span
-                      className="absolute inset-0 rounded-full border border-gold/50"
-                      animate={{ scale: [1, 1.4], opacity: [0.6, 0] }}
-                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-                    />
-                    <item.Icon className="h-7 w-7" />
-                  </span>
-                  <h3 className="text-sm font-bold text-white sm:text-base">{item.title}</h3>
-                </TiltCard>
-              </motion.div>
-            ))}
-          </motion.div>
+          <DepartmentsGridClient />
         </div>
       </section>
 
@@ -683,13 +531,13 @@ export default function Home() {
           >
             {donationTiers.map((tier) => (
               <motion.div key={tier.title} variants={cardItem} style={{ perspective: 1000 }}>
-                <TiltCard className="flex h-full flex-col items-center gap-4 rounded-2xl border border-white/15 bg-white/[0.08] p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(253,224,71,0.25)]">
+                <TiltCard className="flex h-full flex-col items-center gap-4 rounded-2xl border border-white/15 bg-white/[0.08] p-8 text-center shadow-xl backdrop-blur-md transition-shadow duration-300 hover:border-gold/60 hover:shadow-[0_0_30px_rgba(201,162,39,0.25)]">
                   <motion.span
                     animate={{
                       textShadow: [
-                        "0 0 10px rgba(253,224,71,0.35)",
-                        "0 0 22px rgba(253,224,71,0.6)",
-                        "0 0 10px rgba(253,224,71,0.35)",
+                        "0 0 10px rgba(201,162,39,0.35)",
+                        "0 0 22px rgba(201,162,39,0.6)",
+                        "0 0 10px rgba(201,162,39,0.35)",
                       ],
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -745,26 +593,6 @@ export default function Home() {
               {t.donateSection.monthly}
             </motion.a>
           </div>
-        </div>
-      </section>
-
-      {/* Section: Recent Donations */}
-      <section className="relative overflow-hidden px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-10 flex flex-col items-center gap-6 text-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.6 }}
-              variants={fadeUp}
-            >
-              <Kicker>{t.recentDonations.kicker}</Kicker>
-            </motion.div>
-            <h2 className="font-display font-black text-3xl leading-snug text-gold sm:text-4xl">
-              <TypewriterText>{t.recentDonations.heading}</TypewriterText>
-            </h2>
-          </div>
-          <RecentDonations />
         </div>
       </section>
 

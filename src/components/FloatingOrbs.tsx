@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const orbs = [
-  { size: 380, color: "rgba(253,224,71,0.16)", top: "5%", left: "-8%", dur: 19, mobile: true },
-  { size: 340, color: "rgba(77,46,133,0.55)", top: "45%", left: "78%", dur: 23, mobile: false },
-  { size: 280, color: "rgba(212,84,17,0.2)", top: "78%", left: "5%", dur: 21, mobile: false },
+  { size: 380, color: "rgba(201,162,39,0.16)", top: "5%", left: "-8%", dur: 19, mobile: true },
+  { size: 340, color: "rgba(107,31,42,0.5)", top: "45%", left: "78%", dur: 23, mobile: false },
+  { size: 280, color: "rgba(154,110,20,0.22)", top: "78%", left: "5%", dur: 21, mobile: false },
 ];
 
 export default function FloatingOrbs() {

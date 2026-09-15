@@ -2,9 +2,6 @@ export type Language = "he" | "en";
 
 export interface Translations {
   nav: {
-    video: string;
-    blessing: string;
-    story: string;
     about: string;
     activities: string;
     gallery: string;
@@ -28,23 +25,10 @@ export interface Translations {
     ctaButton: string;
   };
   blessingCategories: [string, string, string, string];
-  banner: { kicker: string; alt: string; cta: string };
   story: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   about: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   statsLabels: [string, string, string, string];
   activitiesSection: { kicker: string; heading: string };
-  activityTitles: [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string
-  ];
   donateSection: {
     kicker: string;
     heading: string;
@@ -81,19 +65,16 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   he: {
     nav: {
-      video: "סרטון",
-      blessing: "שם לברכה",
-      story: "הסיפור",
       about: "מי אנחנו",
-      activities: "הפעילויות",
+      activities: "מחלקות",
       gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
     },
     hero: {
-      heading: "כל תרומה מדליקה אור נוסף בגליל",
+      heading: 'מוסדות ברסלב "נחלי התורה" — תורה, קהילה וחסד בלב צפת העתיקה',
       paragraph:
-        'דווקא עכשיו, תחת אש – שומרים על הילדים והמשפחות בצפת! מוסדות "נחלי התורה" צפת מלווים משפחות שלמות בעת הזו, ואתם יכולים להיות חלק מזה – בתרומה, ובתפילה.',
+        'קהילת ברסלב "נחלי התורה" מלווה כ-250 משפחות בעיר העתיקה בצפת, מגיל הרך ועד בית המדרש — בחינוך, בתמיכה קהילתית ובחסד יומיומי. הצטרפו אלינו בתרומה, בתפילה ובשותפות בדרך.',
       blessingCta: "השאירו שם לברכה",
       supportCta: "לתמיכה",
       scrollDown: "גללו למטה",
@@ -111,37 +92,24 @@ export const translations: Record<Language, Translations> = {
       ctaButton: "השאירו שם לברכה עכשיו",
     },
     blessingCategories: ["ישועה", "זיווג הגון", "פרנסה טובה", "רפואה שלמה"],
-    banner: { kicker: "הקמפיין שלנו", alt: "באנר קמפיין", cta: "לתמיכה" },
     story: {
-      kicker: "המצב בשטח",
-      heading: "הילדים של צפת תחת אש 💔",
+      kicker: "מקום של קדושה",
+      heading: "בלב העיר העתיקה בצפת",
       paragraph1:
-        'חרדות, מסגרות קורסות ומשפחות במצוקה כלכלית. מוסדות "נחלי התורה צפת" הם העוגן של הקהילה, אבל המשאבים שלנו להמשך הסיוע פשוט אזלו.',
+        'רבעי העיר העתיקה בצפת שזורים מאות שנות מסורת קבלית וחסידית, ובתוכם ממשיכה קהילת ברסלב "נחלי התורה" לשמור על אורח חיים של תורה, תפילה ואחווה. בין הסמטאות העתיקות והחצרות הישנות, קמים מדי יום קולות לימוד ותפילה שאינם פוסקים.',
       paragraph2:
-        "קמפיין 'מאירים את הגליל' קורא לכם: אל תשאירו את ילדי הצפון לבד במערכה! תרומה אחת שלכם משנה חיים של משפחה שלמה.",
+        "מתוך מחויבות עמוקה למקום ולמורשתו, מוסדות נחלי התורה מעניקים מסגרת חמה ויציבה לילדי הקהילה, לבני הנוער, לאברכים הצעירים ולמשפחות כולן — ומזמינים כל מי שחש קרבה למקום הקדוש הזה להיות שותף בהמשך הדרך.",
     },
     about: {
-      kicker: "מי עומד מאחורי הקמפיין",
-      heading: "מי אנחנו – קהילת ברסלב בצפת",
+      kicker: "הכירו את המוסדות",
+      heading: 'מי אנחנו — מוסדות ברסלב "נחלי התורה"',
       paragraph1:
-        'בלב העיר העתיקה של צפת פועלת קהילת חסידי ברסלב "נחלי התורה" – קהילה של כ-250 משפחות הממשיכה את דרכם של גדולי החסידות. מוסדות הקהילה כוללים בית כנסת, מקוואות, ישיבה וכולל לאברכים נשואים, וישיבה לבחורים צעירים.',
+        'מוסדות ברסלב "נחלי התורה" (ע"ר 580785392) פועלים כשמונה שנים בלב העיר העתיקה בצפת, ומלווים קהילה של כ-250 משפחות ההולכות בדרכם של גדולי חסידות ברסלב. בראש המוסדות עומד הגאון רבי נתן מרדכי ישראל שליט"א, המקדיש עצמו להנהגה רוחנית וקהילתית יום-יומית.',
       paragraph2:
-        "לאחר כשמונה שנות פעילות ומאות תלמידים, האחריות הכספית נופלת כולה על כתפי עומדי המוסדות. קמפיין 'מאירים את הגליל' נולד כדי לחלוק את הנטל ולהבטיח את המשך הפעילות התורנית והקהילתית למען ילדי ומשפחות צפת.",
+        'תחת קורת גג אחת פועלים גני ילדים, תלמוד תורה, בית חינוך ומדרשיה לבנות, כולל אברכים, בית תבשיל ומכון להוצאת ספרים — מענה מקיף לצרכים הרוחניים, החינוכיים והחומריים של הקהילה. מדי חודש עולה הרב לציון הרשב"י במירון, ונושא עמו את בקשות ותפילות התומכים במוסדות.',
     },
-    statsLabels: ["משפחות בקהילה", "תלמידים", "אנשי צוות", "לב אחד גדול"],
-    activitiesSection: { kicker: "מה אנחנו עושים", heading: "הפעילויות שלנו" },
-    activityTitles: [
-      "בית כנסת",
-      "כולל אברכים",
-      "גן בנים",
-      "תלמוד תורה",
-      "ישיבה",
-      "בית התבשיל",
-      "בית חינוך וגן לבנות",
-      "מדרשיה",
-      "שיעורי ערב לקרוב רחוקים",
-      "מכון להדפסת ספרים",
-    ],
+    statsLabels: ["משפחות בקהילה", "שנות פעילות", "מחלקות פעילות", "לב אחד גדול"],
+    activitiesSection: { kicker: "מה אנחנו עושים", heading: "המחלקות שלנו" },
     donateSection: {
       kicker: "הצטרפו למגן",
       heading: "בחרו כיצד לתרום",
@@ -171,7 +139,7 @@ export const translations: Record<Language, Translations> = {
     },
     liveCounter: { label: "נתרם עד כה · מתעדכן בלייב" },
     footer: {
-      text: 'קהילת ברסלב "נחלי התורה" צפת · קמפיין מאירים את הגליל',
+      text: 'מוסדות ברסלב "נחלי התורה" צפת · ע"ר 580785392',
       admin: "ניהול",
     },
     blessingModal: {
@@ -194,19 +162,16 @@ export const translations: Record<Language, Translations> = {
   },
   en: {
     nav: {
-      video: "Video",
-      blessing: "Blessing",
-      story: "Our Story",
       about: "About Us",
-      activities: "Activities",
+      activities: "Departments",
       gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
     },
     hero: {
-      heading: "Every donation lights another light in the Galilee",
+      heading: 'The Nachalei HaTorah Breslov Institutions — Torah, Community & Kindness in the Heart of Old Tzfat',
       paragraph:
-        "Right now, under fire, we're protecting the children and families of Tzfat! The Nachalei HaTorah Tzfat institutions are supporting entire families through this time, and you can be part of it - through donation, and through prayer.",
+        "The Nachalei HaTorah Breslov community accompanies about 250 families in the Old City of Tzfat, from early childhood through the study hall - through education, community support, and everyday kindness. Join us with a donation, a prayer, and a partnership in the journey.",
       blessingCta: "Leave a Name for Blessing",
       supportCta: "Support Us",
       scrollDown: "Scroll Down",
@@ -224,37 +189,24 @@ export const translations: Record<Language, Translations> = {
       ctaButton: "Leave a Name for Blessing Now",
     },
     blessingCategories: ["Salvation", "A Good Match", "Good Livelihood", "Complete Healing"],
-    banner: { kicker: "Our Campaign", alt: "Campaign banner", cta: "Support Us" },
     story: {
-      kicker: "The Situation on the Ground",
-      heading: "The Children of Tzfat Under Fire 💔",
+      kicker: "A Place of Holiness",
+      heading: "In the Heart of Old Tzfat",
       paragraph1:
-        'Anxiety, collapsing frameworks, and families in economic distress. The "Nachalei HaTorah Tzfat" institutions are the anchor of the community, but our resources to continue providing support have simply run out.',
+        'The alleys of Tzfat\'s Old City are woven through with centuries of Kabbalistic and Hasidic tradition, and within them the Nachalei HaTorah Breslov community continues to keep a way of life built on Torah, prayer, and fellowship. Among the ancient lanes and old courtyards, voices of study and prayer rise without pause, day after day.',
       paragraph2:
-        "The 'Lighting the Galilee' campaign calls out to you: don't leave the children of the North to face this alone! One donation from you changes the life of an entire family.",
+        "Out of a deep commitment to this place and its legacy, the Nachalei HaTorah institutions provide a warm, stable framework for the community's children, its youth, its young married scholars, and its families - and invite anyone who feels drawn to this holy place to become a partner along the way.",
     },
     about: {
-      kicker: "Who's Behind the Campaign",
-      heading: "Who We Are - The Breslov Community in Tzfat",
+      kicker: "Meet the Institutions",
+      heading: 'Who We Are — The Nachalei HaTorah Breslov Institutions',
       paragraph1:
-        "In the heart of the Old City of Tzfat, the Breslov Hasidic community \"Nachalei HaTorah\" operates - a community of about 250 families continuing the path of the great Hasidic masters. The community's institutions include a synagogue, mikvahs, a kollel for married men, and a yeshiva for young men.",
+        "The Nachalei HaTorah Breslov Institutions (Israeli nonprofit registration 580785392) have operated for about eight years in the heart of Tzfat's Old City, accompanying a community of about 250 families following in the path of the great Breslov masters. The institutions are headed by HaRav Natan Mordechai Yisrael Shlita, who devotes himself to the community's day-to-day spiritual and communal leadership.",
       paragraph2:
-        "After about eight years of activity and hundreds of students, the full financial responsibility falls on the shoulders of those running the institutions. The 'Lighting the Galilee' campaign was born to share the burden and ensure the continuation of Torah and community activity for the children and families of Tzfat.",
+        "Under one roof operate kindergartens, a Talmud Torah, a girls' school and seminary, a kollel for young married men, a soup kitchen, and a publishing institute - a comprehensive response to the community's spiritual, educational, and material needs. Each month the Rav travels to Rabbi Shimon Bar Yochai's tomb in Meron, carrying with him the requests and prayers of the institutions' supporters.",
     },
-    statsLabels: ["Families in the Community", "Students", "Staff Members", "One Big Heart"],
-    activitiesSection: { kicker: "What We Do", heading: "Our Activities" },
-    activityTitles: [
-      "Synagogue",
-      "Kollel for Married Men",
-      "Boys' Kindergarten",
-      "Talmud Torah",
-      "Yeshiva",
-      "Soup Kitchen",
-      "Girls' School & Kindergarten",
-      "Midrasha (Women's Seminary)",
-      "Evening Outreach Classes",
-      "Book Printing Institute",
-    ],
+    statsLabels: ["Families in the Community", "Years of Activity", "Active Departments", "One Big Heart"],
+    activitiesSection: { kicker: "What We Do", heading: "Our Departments" },
     donateSection: {
       kicker: "Join the Shield",
       heading: "Choose How to Donate",
@@ -284,7 +236,7 @@ export const translations: Record<Language, Translations> = {
     },
     liveCounter: { label: "Raised so far · Live updates" },
     footer: {
-      text: "Breslov Community \"Nachalei HaTorah\" Tzfat · Lighting the Galilee Campaign",
+      text: "Nachalei HaTorah Breslov Institutions, Tzfat · Nonprofit reg. 580785392",
       admin: "Admin",
     },
     blessingModal: {

@@ -50,7 +50,7 @@ export default function VideoPlayer({
         whileTap={{ scale: 0.95 }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 shadow-[0_0_35px_rgba(253,224,71,0.6)]">
+        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] shadow-[0_0_35px_rgba(201,162,39,0.6)]">
           <svg
             viewBox="0 0 24 24"
             fill="black"

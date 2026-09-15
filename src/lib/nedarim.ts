@@ -37,6 +37,8 @@ export const donationDisplayFilter = {
   ],
 };
 
+export const donationTierValues = [180, 360, 500, 1000];
+
 const MOSAD_ID = "7011515";
 const BASE_URL = "https://www.matara.pro/nedarimplus/online/";
 const SITE_DOMAIN =

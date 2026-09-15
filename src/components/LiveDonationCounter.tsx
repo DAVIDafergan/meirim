@@ -49,7 +49,7 @@ export default function LiveDonationCounter() {
         animate={{ rotateY: [-4, 4, -4], rotateX: [2, -2, 2] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         style={{ transformStyle: "preserve-3d" }}
-        className="relative flex items-center gap-3 rounded-2xl border border-gold/30 bg-gradient-to-br from-purple-box/70 via-[#1a1025]/90 to-purple-deep/80 px-5 py-3.5 shadow-[0_14px_34px_rgba(0,0,0,0.5),0_0_25px_rgba(253,224,71,0.2)] backdrop-blur-md"
+        className="relative flex items-center gap-3 rounded-2xl border border-gold/30 bg-gradient-to-br from-purple-box/70 via-[#141620]/90 to-purple-deep/80 px-5 py-3.5 shadow-[0_14px_34px_rgba(0,0,0,0.5),0_0_25px_rgba(201,162,39,0.2)] backdrop-blur-md"
       >
         <span className="relative flex h-2.5 w-2.5 shrink-0">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -59,7 +59,7 @@ export default function LiveDonationCounter() {
           <p className="text-[11px] tracking-wide text-gray-300">
             {t.liveCounter.label}
           </p>
-          <p className="font-display font-black text-2xl text-gold drop-shadow-[0_0_12px_rgba(253,224,71,0.5)] sm:text-3xl">
+          <p className="font-display font-black text-2xl text-gold drop-shadow-[0_0_12px_rgba(201,162,39,0.5)] sm:text-3xl">
             ₪{displayed.toLocaleString(language === "he" ? "he-IL" : "en-US")}
           </p>
         </div>

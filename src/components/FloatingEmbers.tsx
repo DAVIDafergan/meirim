@@ -25,7 +25,7 @@ export default function FloatingEmbers() {
             bottom: "-5%",
             width: p.size,
             height: p.size,
-            boxShadow: "0 0 8px 2px rgba(253,224,71,0.8)",
+            boxShadow: "0 0 8px 2px rgba(201,162,39,0.8)",
           }}
           animate={{
             y: ["0vh", "-115vh"],

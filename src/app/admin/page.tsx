@@ -30,6 +30,10 @@ export default async function AdminPage() {
               <Link href="/admin/gallery" className="hover:text-gold">
                 גלריה
               </Link>
+              {" · "}
+              <Link href="/admin/departments" className="hover:text-gold">
+                מחלקות
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-3">

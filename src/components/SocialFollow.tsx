@@ -49,7 +49,7 @@ export default function SocialFollow() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.04, y: -4 }}
           whileTap={{ scale: 0.97 }}
-          className="flex items-center gap-4 rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-md transition-shadow duration-300 hover:border-gold/40 hover:shadow-[0_0_30px_rgba(253,224,71,0.18)]"
+          className="flex items-center gap-4 rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-md transition-shadow duration-300 hover:border-gold/40 hover:shadow-[0_0_30px_rgba(201,162,39,0.18)]"
         >
           <span
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white"

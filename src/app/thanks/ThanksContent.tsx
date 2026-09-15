@@ -17,7 +17,7 @@ export default function ThanksContent() {
       </p>
       <Link
         href="/"
-        className="mt-10 inline-block rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-8 py-3 font-bold tracking-wide text-black shadow-[0_0_20px_rgba(253,224,71,0.4)]"
+        className="mt-10 inline-block rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] px-8 py-3 font-bold tracking-wide text-black shadow-[0_0_20px_rgba(201,162,39,0.4)]"
       >
         {t.thanks.back}
       </Link>

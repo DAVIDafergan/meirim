@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Heebo } from "next/font/google";
+import { Heebo, Frank_Ruhl_Libre } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -12,10 +12,17 @@ const heebo = Heebo({
   display: "swap",
 });
 
+const frankRuhlLibre = Frank_Ruhl_Libre({
+  variable: "--font-serif-display",
+  subsets: ["hebrew", "latin"],
+  weight: ["500", "700", "900"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "מאירים את הגליל | נחלי התורה צפת",
+  title: 'מוסדות ברסלב "נחלי התורה" | העיר העתיקה, צפת',
   description:
-    "קמפיין 'מאירים את הגליל' – תרומה דחופה לילדי ומשפחות צפת. מוסדות נחלי התורה צפת זקוקים לכם עכשיו.",
+    'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת — קהילה של כ-250 משפחות בראשות הגאון רבי נתן מרדכי ישראל שליט"א. חינוך, קהילה וחסד לאורך כל שלבי החיים.',
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="he"
       dir="rtl"
-      className={`${heebo.variable} h-full scroll-smooth antialiased`}
+      className={`${heebo.variable} ${frankRuhlLibre.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
         <LanguageProvider>

@@ -42,7 +42,7 @@ export default function BlessingModal({
     e.preventDefault();
 
     const lines = [
-      "בקשה לשם לברכה בציון הרשב\"י - מאירים את הגליל",
+      "בקשה לשם לברכה בציון הרשב\"י - אתר מוסדות נחלי התורה",
       `שם: ${name}${motherName ? ` בן/בת ${motherName}` : ""}`,
       `טלפון: ${phone}`,
       selected.length ? `בקשה עבור: ${selected.join(", ")}` : "",
@@ -76,7 +76,7 @@ export default function BlessingModal({
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg rounded-2xl border border-gold/30 bg-gradient-to-b from-purple-box/90 via-[#1a1025]/95 to-purple-deep/95 p-6 shadow-[0_0_60px_rgba(253,224,71,0.25)] sm:p-8"
+            className="relative w-full max-w-lg rounded-2xl border border-gold/30 bg-gradient-to-b from-purple-box/90 via-[#141620]/95 to-purple-deep/95 p-6 shadow-[0_0_60px_rgba(201,162,39,0.25)] sm:p-8"
           >
             <button
               type="button"
@@ -151,7 +151,7 @@ export default function BlessingModal({
                 type="submit"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="mt-2 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-8 py-3 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(253,224,71,0.4)] transition-shadow hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(253,224,71,0.7)]"
+                className="mt-2 rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] px-8 py-3 font-bold tracking-wide text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_0_20px_rgba(201,162,39,0.4)] transition-shadow hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_0_35px_rgba(201,162,39,0.7)]"
               >
                 {t.blessingModal.submit}
               </motion.button>

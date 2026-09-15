@@ -55,6 +55,35 @@ model GalleryItem {
   @@map("gallery_items")
 }
 
+model Department {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  order       Int      @default(0)
+  name        String
+  icon        String
+  summary     String
+  body        String?
+  analyticTag String   @unique @map("analytic_tag")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  images DepartmentImage[]
+
+  @@map("departments")
+}
+
+model DepartmentImage {
+  id           Int        @id @default(autoincrement())
+  departmentId Int        @map("department_id")
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  filename     String
+  caption      String?
+  order        Int        @default(0)
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  @@map("department_images")
+}
+
 model WebhookLog {
   id        Int      @id @default(autoincrement())
   source    String   @default("nedarim_plus")

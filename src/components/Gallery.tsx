@@ -82,7 +82,7 @@ function GalleryVideo({ src, caption }: { src: string; caption: string | null })
     >
       <video src={src} preload="metadata" muted playsInline className="h-full w-full object-cover" />
       <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 shadow-[0_0_25px_rgba(253,224,71,0.6)]">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#c9a227] to-[#e6c869] shadow-[0_0_25px_rgba(201,162,39,0.6)]">
           <svg viewBox="0 0 24 24" fill="black" className="h-5 w-5 -translate-x-0.5">
             <path d="M8 5v14l11-7Z" />
           </svg>

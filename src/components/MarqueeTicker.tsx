@@ -6,11 +6,11 @@ export default function MarqueeTicker() {
   const { language } = useLanguage();
   const phrases =
     language === "he"
-      ? ["מאירים את הגליל", "דווקא עכשיו, תחת אש", "נחלי התורה צפת", "כל תרומה משנה חיים"]
+      ? ['מוסדות ברסלב "נחלי התורה" צפת', "תורה, קהילה וחסד", "העיר העתיקה בצפת", "כל תרומה משנה חיים"]
       : [
-          "Lighting the Galilee",
-          "Right now, under fire",
-          "Nachalei HaTorah Tzfat",
+          "Nachalei HaTorah Breslov Institutions, Tzfat",
+          "Torah, Community & Kindness",
+          "The Old City of Tzfat",
           "Every donation changes a life",
         ];
   const line = phrases.join(" ✦ ") + " ✦ ";

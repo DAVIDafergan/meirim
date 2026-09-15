@@ -163,3 +163,30 @@ export function PrinterIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function FlowerIcon({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <circle cx="12" cy="12" r="2.3" />
+      <path d="M12 9.7a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z" />
+      <path d="M12 19.7a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z" />
+      <path d="M9.7 12a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0Z" />
+      <path d="M19.7 12a2.7 2.7 0 1 1-5.4 0 2.7 2.7 0 0 1 5.4 0Z" />
+      <path d="M12 19.7V22" />
+    </svg>
+  );
+}
+
+/** Registry mapping a Department's stored `icon` key to its component. */
+export const DEPARTMENT_ICONS = {
+  block: BlockIcon,
+  flower: FlowerIcon,
+  scroll: ScrollIcon,
+  cap: CapIcon,
+  chalkboard: ChalkboardIcon,
+  book: BookIcon,
+  bowl: BowlIcon,
+  printer: PrinterIcon,
+};
+
+export type DepartmentIconKey = keyof typeof DEPARTMENT_ICONS;

@@ -32,6 +32,10 @@ export default async function GalleryAdminPage() {
               </Link>
               {" · "}
               גלריה
+              {" · "}
+              <Link href="/admin/departments" className="hover:text-gold">
+                מחלקות
+              </Link>
             </p>
           </div>
           <AdminLogoutButton />
