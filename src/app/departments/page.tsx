@@ -21,7 +21,7 @@ export default async function DepartmentsPage() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 flex flex-col items-center gap-6 text-center">
           <Kicker>מה אנחנו עושים</Kicker>
-          <h1 className="font-display font-black text-4xl leading-snug text-foreground sm:text-5xl md:text-6xl">
+          <h1 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
             המחלקות שלנו
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-foreground-muted">

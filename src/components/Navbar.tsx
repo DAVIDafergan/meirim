@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageProvider";
+import { goldButton } from "@/lib/uiConstants";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-background/90 backdrop-blur-sm">
+    <header className="fixed inset-x-0 top-0 z-50 border-b-2 border-gold/70 bg-background/95 backdrop-blur-sm">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="block">
           <Image
@@ -49,10 +50,7 @@ export default function Navbar() {
           >
             {t.languageToggle}
           </button>
-          <Link
-            href="/donate"
-            className="hidden rounded-full bg-foreground px-5 py-2 text-sm font-bold text-background transition-colors hover:bg-gold-deep sm:inline-block"
-          >
+          <Link href="/donate" className={`hidden px-5 py-2 text-sm sm:inline-block ${goldButton}`}>
             {t.nav.donateNow}
           </Link>
           <button

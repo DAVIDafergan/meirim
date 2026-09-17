@@ -52,12 +52,12 @@ export default async function DepartmentPage({
 
         <div className="mt-6 flex flex-col items-center gap-6 text-center">
           {Icon && (
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 text-gold">
+            <span className="arch-niche flex h-20 w-16 items-center justify-center border-2 border-gold/60 text-gold">
               <Icon className="h-8 w-8" />
             </span>
           )}
           <Kicker>המחלקות שלנו</Kicker>
-          <h1 className="font-display font-black text-4xl leading-snug text-foreground sm:text-5xl">
+          <h1 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl">
             {department.name}
           </h1>
           <p className="text-lg leading-loose text-foreground-muted sm:text-xl">{department.summary}</p>

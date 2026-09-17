@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/:path(logo.*|banner.*|video-opt\\.mp4|video-poster\\.jpg)",
+        source: "/:path(logo.*)",
         headers: [
           {
             key: "Cache-Control",

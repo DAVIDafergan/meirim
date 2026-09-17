@@ -1,12 +1,13 @@
 export const goldButton =
-  "font-display font-bold rounded-full bg-foreground text-background tracking-wide transition-colors duration-300 hover:bg-gold-deep";
+  "font-display font-bold rounded-full bg-gold text-ink tracking-wide transition-colors duration-300 hover:bg-gold-deep";
 
 export const outlineButton =
-  "font-display font-bold rounded-full border border-foreground/30 text-foreground tracking-wide transition-colors duration-300 hover:border-gold hover:text-gold";
+  "font-display font-bold rounded-full border border-current tracking-wide transition-opacity duration-300 hover:opacity-70";
 
-export const donateAccents = [
-  { text: "text-gold" },
-  { text: "text-foreground" },
-  { text: "text-gold-deep" },
-  { text: "text-bordeaux" },
+/** Rotating jewel-tone backgrounds for tiered/multi-card layouts, cream text. */
+export const jewelTones = [
+  "bg-jewel-purple",
+  "bg-jewel-green",
+  "bg-jewel-wine",
+  "bg-jewel-purple-deep",
 ];

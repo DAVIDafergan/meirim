@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf6ee;
-  --background-alt: #f1ead9;
-  --foreground: #221c14;
-  --foreground-muted: #6b6153;
-  --color-gold: #96722c;
-  --color-gold-deep: #745821;
-  --color-bordeaux: #6b1f2a;
-  --color-line: #ddd2bb;
+  --background: #f7f0de;
+  --background-alt: #efe4c8;
+  --foreground: #241a12;
+  --foreground-muted: #6b5c47;
+  --color-gold: #c79a34;
+  --color-gold-deep: #9a771f;
+  --color-cream: #f7f0de;
+  --color-ink: #241a12;
+  --color-jewel-purple: #3d1642;
+  --color-jewel-purple-deep: #26092b;
+  --color-jewel-green: #17402f;
+  --color-jewel-wine: #5c1626;
+  --color-line: #ddd0ac;
 }
 
 @theme inline {
@@ -18,7 +23,12 @@
   --color-foreground-muted: var(--foreground-muted);
   --color-gold: var(--color-gold);
   --color-gold-deep: var(--color-gold-deep);
-  --color-bordeaux: var(--color-bordeaux);
+  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-jewel-purple: var(--color-jewel-purple);
+  --color-jewel-purple-deep: var(--color-jewel-purple-deep);
+  --color-jewel-green: var(--color-jewel-green);
+  --color-jewel-wine: var(--color-jewel-wine);
   --color-line: var(--color-line);
   --font-sans: var(--font-heebo);
   --font-display: var(--font-serif-display);
@@ -52,18 +62,24 @@ body {
 .kicker {
   display: inline-block;
   border-radius: 9999px;
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--color-gold);
   background: transparent;
-  padding: 0.3rem 1rem;
+  padding: 0.3rem 1.1rem;
   font-family: var(--font-heebo);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
-  color: var(--color-gold);
   font-weight: 600;
+  color: var(--color-gold);
 }
 
-hr.rule,
 .rule {
   border: none;
   border-top: 1px solid var(--color-line);
+}
+
+/* A shallow decorative arch, echoing the ark/niche motif of beit-midrash
+   architecture - used for icon badges and card tops instead of photography
+   we don't have. */
+.arch-niche {
+  border-radius: 999px 999px 8px 8px;
 }

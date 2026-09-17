@@ -7,7 +7,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 type Recent = { name: string | null; amount: number; createdAt: string };
 
-const cardAccents = ["text-gold", "text-foreground", "text-gold-deep", "text-bordeaux"];
+const cardAccents = ["text-gold", "text-jewel-purple", "text-jewel-green", "text-jewel-wine"];
 
 export default function RecentDonations() {
   const { t, language } = useLanguage();

@@ -15,7 +15,6 @@ export interface Translations {
     supportCta: string;
     scrollDown: string;
   };
-  video: { kicker: string; heading: string };
   blessing: {
     kicker: string;
     heading: string;
@@ -79,7 +78,6 @@ export const translations: Record<Language, Translations> = {
       supportCta: "לתמיכה",
       scrollDown: "גללו למטה",
     },
-    video: { kicker: "לצפייה", heading: "הכירו את הסיפור מקרוב" },
     blessing: {
       kicker: 'מתנה רוחנית מהגאון הרב נתן מרדכי ישראל שליט"א',
       heading: 'השאירו שם לברכה בציון הרשב"י',
@@ -176,7 +174,6 @@ export const translations: Record<Language, Translations> = {
       supportCta: "Support Us",
       scrollDown: "Scroll Down",
     },
-    video: { kicker: "Watch", heading: "See the Story Up Close" },
     blessing: {
       kicker: "A Spiritual Gift from HaRav Natan Mordechai Yisrael Shlita",
       heading: "Leave a Name for Blessing at Rashbi's Tomb",
