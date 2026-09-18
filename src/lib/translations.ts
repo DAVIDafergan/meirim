@@ -7,6 +7,7 @@ export interface Translations {
     gallery: string;
     donate: string;
     donateNow: string;
+    menu: string;
   };
   hero: {
     heading: string;
@@ -28,6 +29,9 @@ export interface Translations {
   about: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   statsLabels: [string, string, string, string];
   activitiesSection: { kicker: string; heading: string };
+  departmentsGrid: { details: string; support: string };
+  departmentsPage: { kicker: string; heading: string; intro: string };
+  departmentDetail: { back: string; kicker: string; support: string };
   donateSection: {
     kicker: string;
     heading: string;
@@ -69,6 +73,7 @@ export const translations: Record<Language, Translations> = {
       gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
+      menu: "תפריט",
     },
     hero: {
       heading: 'מוסדות ברסלב "נחלי התורה" — תורה, קהילה וחסד בלב צפת העתיקה',
@@ -108,6 +113,18 @@ export const translations: Record<Language, Translations> = {
     },
     statsLabels: ["משפחות בקהילה", "שנות פעילות", "מחלקות פעילות", "לב אחד גדול"],
     activitiesSection: { kicker: "מה אנחנו עושים", heading: "המחלקות שלנו" },
+    departmentsGrid: { details: "לפרטים", support: "תמכו בפעילות זו" },
+    departmentsPage: {
+      kicker: "מה אנחנו עושים",
+      heading: "המחלקות שלנו",
+      intro:
+        "שמונה מחלקות הפועלות יחד בלב העיר העתיקה בצפת, ומלוות את בני הקהילה מגיל הרך ולאורך כל שלבי החיים.",
+    },
+    departmentDetail: {
+      back: "← כל המחלקות",
+      kicker: "המחלקות שלנו",
+      support: "תמכו בפעילות זו",
+    },
     donateSection: {
       kicker: "הצטרפו למגן",
       heading: "בחרו כיצד לתרום",
@@ -165,6 +182,7 @@ export const translations: Record<Language, Translations> = {
       gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
+      menu: "Menu",
     },
     hero: {
       heading: 'The Nachalei HaTorah Breslov Institutions — Torah, Community & Kindness in the Heart of Old Tzfat',
@@ -204,6 +222,18 @@ export const translations: Record<Language, Translations> = {
     },
     statsLabels: ["Families in the Community", "Years of Activity", "Active Departments", "One Big Heart"],
     activitiesSection: { kicker: "What We Do", heading: "Our Departments" },
+    departmentsGrid: { details: "Learn More", support: "Support This Department" },
+    departmentsPage: {
+      kicker: "What We Do",
+      heading: "Our Departments",
+      intro:
+        "Eight departments working together in the heart of Tzfat's Old City, accompanying the community from early childhood through every stage of life.",
+    },
+    departmentDetail: {
+      back: "← All Departments",
+      kicker: "Our Departments",
+      support: "Support This Department",
+    },
     donateSection: {
       kicker: "Join the Shield",
       heading: "Choose How to Donate",

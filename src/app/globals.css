@@ -83,3 +83,67 @@ body {
 .arch-niche {
   border-radius: 999px 999px 8px 8px;
 }
+
+/* Very slow, low-amplitude drift of a soft radial highlight - ambient life
+   on the jewel-tone sections without reading as a "glow" effect. */
+@keyframes ambient-drift {
+  0%,
+  100% {
+    background-position: 20% 15%;
+  }
+  50% {
+    background-position: 80% 40%;
+  }
+}
+
+.ambient-surface {
+  position: relative;
+}
+
+.ambient-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    ellipse 60% 50% at 50% 50%,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  background-size: 160% 160%;
+  animation: ambient-drift 28s ease-in-out infinite;
+}
+
+.ambient-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-surface::before {
+    animation: none;
+  }
+}
+
+/* Underline that draws in on hover, used for the primary nav links. */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}

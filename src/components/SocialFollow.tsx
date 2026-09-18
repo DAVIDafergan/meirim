@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageProvider";
+import { cardHover } from "@/lib/uiConstants";
 
 const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61552477960447";
 const TIKTOK_URL = "https://www.tiktok.com/@haravnatan";
@@ -47,8 +48,7 @@ export default function SocialFollow() {
           href={p.url}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ y: -2 }}
-          className="flex items-center gap-4 rounded-2xl border border-line bg-white/60 p-5 transition-colors duration-300 hover:border-gold/50"
+          className={`flex items-center gap-4 rounded-2xl border border-cream/20 bg-white/5 p-5 hover:border-gold/50 ${cardHover}`}
         >
           <span
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white"
@@ -57,8 +57,8 @@ export default function SocialFollow() {
             <p.Icon className="h-6 w-6" />
           </span>
           <div className="text-start">
-            <p className="font-display font-black text-lg text-foreground">{p.name}</p>
-            <p className="text-xs text-foreground-muted">{t.social.cta}</p>
+            <p className="font-display font-black text-lg text-cream">{p.name}</p>
+            <p className="text-xs text-cream/70">{t.social.cta}</p>
           </div>
         </motion.a>
       ))}

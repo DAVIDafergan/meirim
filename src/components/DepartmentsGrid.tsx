@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { DEPARTMENT_ICONS, type DepartmentIconKey } from "@/components/icons";
 import { cardsContainer, cardItem } from "@/lib/motionVariants";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE } from "@/lib/nedarim";
-import { goldButton, outlineButton } from "@/lib/uiConstants";
+import { goldButton, outlineButton, cardHover } from "@/lib/uiConstants";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export type DepartmentSummary = {
   slug: string;
@@ -20,6 +21,7 @@ export default function DepartmentsGrid({
 }: {
   departments: DepartmentSummary[];
 }) {
+  const { t } = useLanguage();
   if (departments.length === 0) return null;
 
   return (
@@ -36,21 +38,23 @@ export default function DepartmentsGrid({
           <motion.div
             key={dept.slug}
             variants={cardItem}
-            className="flex h-full flex-col items-center gap-3 rounded-2xl border-2 border-jewel-purple/15 bg-background p-7 text-center"
+            className={`flex h-full flex-col items-center gap-3 rounded-2xl border-2 border-jewel-purple/15 bg-background p-7 text-center hover:border-gold/50 ${cardHover}`}
           >
             {Icon && (
               <span className="arch-niche flex h-14 w-12 items-center justify-center border-2 border-gold/60 text-gold">
                 <Icon className="h-6 w-6" />
               </span>
             )}
-            <h3 className="font-display text-base font-bold text-jewel-purple">{dept.name}</h3>
+            <h3 className="font-display text-base font-bold tracking-tight text-jewel-purple">
+              {dept.name}
+            </h3>
             <p className="line-clamp-3 flex-1 text-sm text-foreground-muted">{dept.summary}</p>
             <div className="mt-2 flex w-full flex-col gap-2">
               <Link
                 href={`/departments/${dept.slug}`}
                 className={`px-4 py-2 text-sm text-jewel-purple ${outlineButton}`}
               >
-                לפרטים
+                {t.departmentsGrid.details}
               </Link>
               <a
                 href={nedarimPlusUrl({
@@ -60,7 +64,7 @@ export default function DepartmentsGrid({
                 })}
                 className={`px-4 py-2 text-sm ${goldButton}`}
               >
-                תמכו בפעילות זו
+                {t.departmentsGrid.support}
               </a>
             </div>
           </motion.div>

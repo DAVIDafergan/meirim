@@ -10,7 +10,7 @@ import { goldButton } from "@/lib/uiConstants";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { t, toggleLanguage } = useLanguage();
+  const { t, language, toggleLanguage } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
   if (pathname?.startsWith("/admin")) return null;
 
@@ -22,12 +22,20 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b-2 border-gold/70 bg-background/95 backdrop-blur-sm">
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed inset-x-0 top-0 z-50 border-b-2 border-gold/70 bg-background/95 backdrop-blur-sm">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="block">
           <Image
             src="/logo2-nav.png"
-            alt="מוסדות ברסלב צפת - נחלי התורה"
+            alt={
+              language === "he"
+                ? "מוסדות ברסלב צפת - נחלי התורה"
+                : "Nachalei HaTorah Breslov Institutions, Tzfat"
+            }
             width={400}
             height={393}
             className="h-14 w-auto sm:h-16"
@@ -36,7 +44,10 @@ export default function Navbar() {
         <ul className="hidden items-center gap-8 text-sm text-foreground-muted lg:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} className="transition-colors duration-200 hover:text-gold">
+              <Link
+                href={link.href}
+                className="nav-link transition-colors duration-200 hover:text-gold"
+              >
                 {link.label}
               </Link>
             </li>
@@ -56,7 +67,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            aria-label="תפריט"
+            aria-label={t.nav.menu}
             aria-expanded={mobileOpen}
             className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-full border border-line lg:hidden"
           >
@@ -99,6 +110,6 @@ export default function Navbar() {
           </motion.ul>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

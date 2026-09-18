@@ -7,7 +7,7 @@ import RecentDonations from "@/components/RecentDonations";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
 import { fadeUp, cardsContainer, cardItem } from "@/lib/motionVariants";
-import { goldButton, outlineButton, jewelTones } from "@/lib/uiConstants";
+import { goldButton, outlineButton, jewelTones, cardHover } from "@/lib/uiConstants";
 
 export default function DonatePage() {
   const { t, language } = useLanguage();
@@ -26,7 +26,7 @@ export default function DonatePage() {
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <Kicker>{t.donateSection.kicker}</Kicker>
           </motion.div>
-          <h1 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
+          <h1 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
             {t.donateSection.heading}
           </h1>
         </div>
@@ -41,7 +41,7 @@ export default function DonatePage() {
             <motion.div
               key={tier.title}
               variants={cardItem}
-              className={`arch-niche flex h-full flex-col items-center gap-4 p-8 pt-10 text-center text-cream ${jewelTones[i % jewelTones.length]}`}
+              className={`arch-niche flex h-full flex-col items-center gap-4 p-8 pt-10 text-center text-cream ${jewelTones[i % jewelTones.length]} ${cardHover}`}
             >
               <span className="font-display font-black text-5xl text-gold">{tier.amount}</span>
               <h3 className="font-display text-xl font-bold text-cream">{tier.title}</h3>

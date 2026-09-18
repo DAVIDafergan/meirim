@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Gallery from "@/components/Gallery";
 import DepartmentsGridClient from "@/components/DepartmentsGridClient";
 import SocialFollow from "@/components/SocialFollow";
@@ -13,7 +13,7 @@ import BlessingModal from "@/components/BlessingModal";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
 import { EASE_LUX, fadeUp, cardsContainer, cardItem } from "@/lib/motionVariants";
-import { goldButton, outlineButton, jewelTones } from "@/lib/uiConstants";
+import { goldButton, outlineButton, jewelTones, cardHover } from "@/lib/uiConstants";
 import { StarIcon, RingIcon, CoinIcon, HeartIcon } from "@/components/icons";
 
 const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
@@ -25,11 +25,12 @@ const statValues = [
 ];
 
 const heroFade = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: EASE_LUX },
+    filter: "blur(0px)",
+    transition: { duration: 1, ease: EASE_LUX },
   },
 };
 
@@ -51,14 +52,26 @@ export default function Home() {
 
   const [blessingOpen, setBlessingOpen] = useState(false);
 
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroContentY = useTransform(heroScroll, [0, 1], ["0%", "10%"]);
+  const heroContentOpacity = useTransform(heroScroll, [0, 0.85], [1, 0]);
+
   return (
     <main className="flex flex-col flex-1">
       {/* Section A: Hero */}
       <section
         id="hero"
-        className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center bg-jewel-purple px-6 py-32 text-center text-cream"
+        ref={heroRef}
+        className="ambient-surface relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple px-6 py-32 text-center text-cream"
       >
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-14 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+        <motion.div
+          style={{ y: heroContentY, opacity: heroContentOpacity }}
+          className="mx-auto flex w-full max-w-6xl flex-col items-center gap-14 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
+        >
           {/* Crest */}
           <motion.div
             initial="hidden"
@@ -109,7 +122,7 @@ export default function Home() {
             transition={{ delay: 0.15 }}
             className="flex flex-col items-center gap-8 text-center lg:order-1 lg:flex-1 lg:items-start lg:text-start"
           >
-            <h1 className="font-display font-black text-3xl leading-snug text-cream sm:text-4xl">
+            <h1 className="font-display font-black text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
               {t.hero.heading}
             </h1>
 
@@ -129,7 +142,7 @@ export default function Home() {
               </a>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         <div className="absolute bottom-10 flex flex-col items-center gap-2 text-cream/60">
           <span className="text-xs tracking-widest">{t.hero.scrollDown}</span>
@@ -143,7 +156,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.blessing.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
             {t.blessing.heading}
           </h2>
           <motion.p
@@ -190,12 +203,15 @@ export default function Home() {
       </section>
 
       {/* Section B: The Old City */}
-      <section id="heritage" className="relative scroll-mt-20 bg-jewel-green px-6 py-24 text-cream sm:py-32">
+      <section
+        id="heritage"
+        className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-green px-6 py-24 text-cream sm:py-32"
+      >
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.story.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-black text-4xl leading-snug text-cream sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-cream sm:text-5xl md:text-6xl">
             {t.story.heading}
           </h2>
           <motion.p
@@ -220,7 +236,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.about.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
             {t.about.heading}
           </h2>
           <motion.p
@@ -239,7 +255,7 @@ export default function Home() {
       </section>
 
       {/* Stat bar */}
-      <section className="bg-jewel-purple-deep px-6 py-10 text-cream">
+      <section className="ambient-surface relative overflow-hidden bg-jewel-purple-deep px-6 py-10 text-cream">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -269,7 +285,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.activitiesSection.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
               {t.activitiesSection.heading}
             </h2>
           </div>
@@ -287,7 +303,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.gallery.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
               {t.gallery.heading}
             </h2>
           </div>
@@ -296,13 +312,13 @@ export default function Home() {
       </section>
 
       {/* Section: Social Follow */}
-      <section className="relative bg-jewel-wine px-6 py-16 text-cream sm:py-20">
+      <section className="ambient-surface relative overflow-hidden bg-jewel-wine px-6 py-16 text-cream sm:py-20">
         <div className="mx-auto max-w-4xl">
           <div className="mb-10 flex flex-col items-center gap-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.social.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-3xl leading-snug text-cream sm:text-4xl">
+            <h2 className="font-display font-black text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
               {t.social.heading}
             </h2>
           </div>
@@ -321,7 +337,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.donateSection.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-4xl leading-snug text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
               {t.donateSection.heading}
             </h2>
           </div>
@@ -337,7 +353,7 @@ export default function Home() {
               <motion.div
                 key={tier.title}
                 variants={cardItem}
-                className={`arch-niche flex h-full flex-col items-center gap-4 p-8 pt-10 text-center text-cream ${jewelTones[i % jewelTones.length]}`}
+                className={`arch-niche flex h-full flex-col items-center gap-4 p-8 pt-10 text-center text-cream ${jewelTones[i % jewelTones.length]} ${cardHover}`}
               >
                 <span className="font-display font-black text-5xl text-gold">{tier.amount}</span>
                 <h3 className="font-display text-xl font-bold text-cream">{tier.title}</h3>
