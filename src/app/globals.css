@@ -96,15 +96,18 @@ body {
   }
 }
 
+/* `isolation` keeps the z-index:-1 drift above the section's own background but
+   behind every child - so children keep whatever positioning they declare. */
 .ambient-surface {
   position: relative;
+  isolation: isolate;
 }
 
 .ambient-surface::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   background-image: radial-gradient(
     ellipse 60% 50% at 50% 50%,
@@ -115,14 +118,26 @@ body {
   animation: ambient-drift 28s ease-in-out infinite;
 }
 
-.ambient-surface > * {
-  position: relative;
-  z-index: 1;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .ambient-surface::before {
     animation: none;
+  }
+}
+
+/* A hairline drawn just inside a bordered panel - the double-rule framing of
+   a printed plaque or certificate. */
+.plaque-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px solid rgba(199, 154, 52, 0.28);
+  border-radius: 1.25rem;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .plaque-frame::after {
+    inset: 1rem;
   }
 }
 

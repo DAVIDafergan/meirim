@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Gallery from "@/components/Gallery";
@@ -79,7 +80,7 @@ export default function Home() {
             variants={heroFade}
             className="flex flex-col items-center gap-8 lg:order-2 lg:flex-1"
           >
-            <div className="arch-niche flex h-56 w-48 items-center justify-center border-2 border-gold/50 bg-white/5 p-6 sm:h-64 sm:w-56">
+            <div className="arch-niche flex h-64 w-56 items-center justify-center border-2 border-gold/50 bg-white/5 p-6 sm:h-72 sm:w-64">
               <Image
                 src="/logo2.svg"
                 alt={
@@ -89,28 +90,9 @@ export default function Home() {
                 }
                 width={500}
                 height={500}
-                className="h-auto w-[150px] object-contain sm:w-[170px]"
+                className="h-auto w-[170px] object-contain sm:w-[195px]"
                 priority
               />
-            </div>
-
-            <div className="grid w-full max-w-sm grid-cols-2 gap-2.5 sm:gap-3">
-              {donationTiers.map((tier) => (
-                <a
-                  key={tier.value}
-                  href={nedarimPlusUrl({
-                    amount: tier.value,
-                    lock: true,
-                    groupe: CAMPAIGN_GROUPE,
-                    analytic: `hero-quick-${tier.value}`,
-                    redirectPath: "/thanks",
-                  })}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-cream/25 bg-white/5 px-4 py-3.5 transition-colors duration-200 hover:border-gold"
-                >
-                  <HeartIcon className="h-4 w-4 text-gold" />
-                  <span className="font-display font-black text-lg text-cream">{tier.amount}</span>
-                </a>
-              ))}
             </div>
           </motion.div>
 
@@ -137,9 +119,6 @@ export default function Home() {
               >
                 {t.hero.blessingCta}
               </a>
-              <a href="#donate" className={`inline-block px-8 py-4 text-lg ${goldButton}`}>
-                {t.hero.supportCta}
-              </a>
             </div>
           </motion.div>
         </motion.div>
@@ -148,6 +127,39 @@ export default function Home() {
           <span className="text-xs tracking-widest">{t.hero.scrollDown}</span>
           <span className="h-8 w-px bg-gold/50" />
         </div>
+      </section>
+
+      {/* Section: Pidyon Kaparot (seasonal, ahead of Yom Kippur) */}
+      <section id="kaparot" className="surface-alt scroll-mt-20 px-6 py-16 sm:py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={fadeUp}
+          className="mx-auto max-w-4xl"
+        >
+          <div className="plaque-frame ambient-surface relative overflow-hidden rounded-3xl border-2 border-gold/50 bg-jewel-wine px-6 py-12 text-center text-cream sm:px-12 sm:py-14">
+            <div className="flex flex-col items-center gap-5">
+              <span className="arch-niche flex h-16 w-14 items-center justify-center border-2 border-gold/60 text-gold">
+                <CoinIcon className="h-7 w-7" />
+              </span>
+
+              <Kicker>{t.kaparot.kicker}</Kicker>
+
+              <h2 className="font-display font-black text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+                {t.kaparot.heading}
+              </h2>
+
+              <p className="max-w-2xl text-base leading-loose text-cream/80 sm:text-lg">
+                {t.kaparot.body}
+              </p>
+
+              <Link href="/donate" className={`mt-2 inline-block px-10 py-4 text-lg ${goldButton}`}>
+                {t.kaparot.cta}
+              </Link>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Section: Names for Blessing at the Rashbi's tomb */}

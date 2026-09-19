@@ -13,7 +13,6 @@ export interface Translations {
     heading: string;
     paragraph: string;
     blessingCta: string;
-    supportCta: string;
     scrollDown: string;
   };
   blessing: {
@@ -25,6 +24,7 @@ export interface Translations {
     ctaButton: string;
   };
   blessingCategories: [string, string, string, string];
+  kaparot: { kicker: string; heading: string; body: string; cta: string };
   story: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   about: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   statsLabels: [string, string, string, string];
@@ -80,7 +80,6 @@ export const translations: Record<Language, Translations> = {
       paragraph:
         'קהילת ברסלב "נחלי התורה" מלווה כ-250 משפחות בעיר העתיקה בצפת, מגיל הרך ועד בית המדרש — בחינוך, בתמיכה קהילתית ובחסד יומיומי. הצטרפו אלינו בתרומה, בתפילה ובשותפות בדרך.',
       blessingCta: "השאירו שם לברכה",
-      supportCta: "לתמיכה",
       scrollDown: "גללו למטה",
     },
     blessing: {
@@ -95,6 +94,12 @@ export const translations: Record<Language, Translations> = {
       ctaButton: "השאירו שם לברכה עכשיו",
     },
     blessingCategories: ["ישועה", "זיווג הגון", "פרנסה טובה", "רפואה שלמה"],
+    kaparot: {
+      kicker: "לקראת יום הכיפורים",
+      heading: "פדיון כפרות במוסדות נחלי התורה",
+      body: 'מנהג ישראל מדורי דורות לתת את פדיון הכפרות לצדקה בערב יום הכיפורים. תרומתכם מסייעת להחזקת התורה והחסד בעיר העתיקה בצפת — ותפילת אברכי הכולל ובני הקהילה תעלה עבורכם ועבור כל בני ביתכם, לשנה טובה ומבורכת ולחתימה טובה.',
+      cta: "לפדיון כפרות",
+    },
     story: {
       kicker: "מקום של קדושה",
       heading: "בלב העיר העתיקה בצפת",
@@ -189,7 +194,6 @@ export const translations: Record<Language, Translations> = {
       paragraph:
         "The Nachalei HaTorah Breslov community accompanies about 250 families in the Old City of Tzfat, from early childhood through the study hall - through education, community support, and everyday kindness. Join us with a donation, a prayer, and a partnership in the journey.",
       blessingCta: "Leave a Name for Blessing",
-      supportCta: "Support Us",
       scrollDown: "Scroll Down",
     },
     blessing: {
@@ -204,6 +208,12 @@ export const translations: Record<Language, Translations> = {
       ctaButton: "Leave a Name for Blessing Now",
     },
     blessingCategories: ["Salvation", "A Good Match", "Good Livelihood", "Complete Healing"],
+    kaparot: {
+      kicker: "Ahead of Yom Kippur",
+      heading: "Pidyon Kaparot at Nachalei HaTorah",
+      body: "It is a long-standing Jewish custom to give the kaparot redemption to tzedakah on the eve of Yom Kippur. Your gift sustains Torah study and acts of kindness in the Old City of Tzfat — and the prayers of our kollel scholars and our community will rise on behalf of you and your entire household, for a good and blessed year.",
+      cta: "Give Pidyon Kaparot",
+    },
     story: {
       kicker: "A Place of Holiness",
       heading: "In the Heart of Old Tzfat",
