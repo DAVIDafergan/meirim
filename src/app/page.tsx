@@ -10,6 +10,7 @@ import SocialFollow from "@/components/SocialFollow";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import Kicker from "@/components/Kicker";
+import Footer from "@/components/Footer";
 import BlessingModal from "@/components/BlessingModal";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -68,7 +69,7 @@ export default function Home() {
       <section
         id="hero"
         ref={heroRef}
-        className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple-deep px-6 py-32 text-center text-cream"
+        className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple-deep px-6 pb-40 pt-32 text-center text-cream"
       >
         <div className="hero-backdrop absolute inset-0" aria-hidden="true">
           {!videoFailed && (
@@ -158,10 +159,27 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        <div className="absolute bottom-10 z-10 flex flex-col items-center gap-2 text-cream/70">
-          <span className="text-xs tracking-widest">{t.hero.scrollDown}</span>
-          <span className="h-8 w-px bg-gold/60" />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.8, ease: EASE_LUX }}
+          className="absolute inset-x-0 bottom-0 z-10 border-t border-white/20 bg-black/35 backdrop-blur-md"
+        >
+          <div className="mx-auto grid max-w-6xl grid-cols-2 divide-white/15 px-6 sm:grid-cols-4 sm:divide-x sm:divide-x-reverse">
+            {stats.map((st) => (
+              <div key={st.label} className="flex flex-col items-center gap-1 py-5">
+                <span className="font-display text-3xl font-bold text-gold sm:text-4xl">
+                  <AnimatedCounter to={st.to} prefix={st.prefix} suffix={st.suffix} />
+                </span>
+                <span className="text-xs tracking-wide text-cream/75 sm:text-sm">{st.label}</span>
+              </div>
+            ))}
+            <div className="flex flex-col items-center gap-1 py-5">
+              <span className="font-display text-3xl font-bold text-gold sm:text-4xl">❤️</span>
+              <span className="text-xs tracking-wide text-cream/75 sm:text-sm">{t.statsLabels[3]}</span>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Section: Pidyon Kaparot (seasonal, ahead of Yom Kippur) */}
@@ -301,30 +319,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stat bar */}
-      <section className="ambient-surface relative overflow-hidden bg-jewel-purple-deep px-6 py-10 text-cream">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={cardsContainer}
-          className="mx-auto grid max-w-5xl grid-cols-2 gap-6 sm:grid-cols-4"
-        >
-          {stats.map((s) => (
-            <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
-              <span className="font-display font-bold text-4xl text-gold sm:text-5xl">
-                <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
-              </span>
-              <span className="mt-1 text-xs text-cream/70 sm:text-sm">{s.label}</span>
-            </motion.div>
-          ))}
-          <motion.div variants={cardItem} className="flex flex-col items-center">
-            <span className="font-display font-bold text-4xl text-gold sm:text-5xl">❤️</span>
-            <span className="mt-1 text-xs text-cream/70 sm:text-sm">{t.statsLabels[3]}</span>
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* Section: Departments */}
       <section id="departments" className="relative scroll-mt-20 pt-28 sm:pt-40">
         <div>
@@ -344,9 +338,9 @@ export default function Home() {
       <BlessingModal open={blessingOpen} onClose={() => setBlessingOpen(false)} />
 
       {/* Section: Gallery */}
-      <section id="gallery" className="surface-alt relative scroll-mt-20 px-6 py-28 sm:py-40">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 flex flex-col items-center gap-6 text-center">
+      <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40">
+        <div>
+          <div className="mx-auto mb-12 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.gallery.kicker}</Kicker>
             </motion.div>
@@ -447,16 +441,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-ink px-6 py-10 text-center text-sm text-cream/60">
-        <p>{t.footer.text}</p>
-        <a
-          href="/admin"
-          className="mt-4 inline-block text-xs text-cream/40 transition-colors hover:text-cream/70"
-        >
-          {t.footer.admin}
-        </a>
-      </footer>
+      <Footer />
     </main>
   );
 }

@@ -24,7 +24,7 @@ export default function Gallery() {
   if (items.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+    <div className="grid auto-rows-[10rem] grid-flow-dense grid-cols-2 gap-1 sm:auto-rows-[14rem] md:grid-cols-4">
       {items.map((item, i) => (
         <motion.div
           key={item.id}
@@ -32,7 +32,7 @@ export default function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: (i % 8) * 0.05 }}
-          className="group relative aspect-square overflow-hidden rounded-2xl border border-line bg-white/60"
+          className={`group relative overflow-hidden bg-jewel-purple ${i % 7 === 0 ? "col-span-2 row-span-2" : i % 5 === 3 ? "col-span-2" : ""}`}
         >
           {item.type === "video" ? (
             <GalleryVideo src={item.url} caption={item.caption} />
