@@ -69,7 +69,7 @@ export const translations: Record<Language, Translations> = {
   he: {
     nav: {
       about: "מי אנחנו",
-      activities: "מחלקות",
+      activities: "הפעילות שלנו",
       gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
@@ -116,18 +116,18 @@ export const translations: Record<Language, Translations> = {
       paragraph2:
         'תחת קורת גג אחת פועלים גני ילדים, תלמוד תורה, בית חינוך ומדרשיה לבנות, כולל אברכים, בית תבשיל ומכון להוצאת ספרים — מענה מקיף לצרכים הרוחניים, החינוכיים והחומריים של הקהילה. מדי חודש עולה הרב לציון הרשב"י במירון, ונושא עמו את בקשות ותפילות התומכים במוסדות.',
     },
-    statsLabels: ["משפחות בקהילה", "שנות פעילות", "מחלקות פעילות", "לב אחד גדול"],
-    activitiesSection: { kicker: "מה אנחנו עושים", heading: "המחלקות שלנו" },
+    statsLabels: ["משפחות בקהילה", "שנות פעילות", "תחומי פעילות", "לב אחד גדול"],
+    activitiesSection: { kicker: "מה אנחנו עושים", heading: "הפעילות שלנו" },
     departmentsGrid: { details: "לפרטים", support: "תמכו בפעילות זו" },
     departmentsPage: {
       kicker: "מה אנחנו עושים",
-      heading: "המחלקות שלנו",
+      heading: "הפעילות שלנו",
       intro:
-        "שמונה מחלקות הפועלות יחד בלב העיר העתיקה בצפת, ומלוות את בני הקהילה מגיל הרך ולאורך כל שלבי החיים.",
+        "שמונה תחומי פעילות הפועלים יחד בלב העיר העתיקה בצפת, ומלוות את בני הקהילה מגיל הרך ולאורך כל שלבי החיים.",
     },
     departmentDetail: {
-      back: "← כל המחלקות",
-      kicker: "המחלקות שלנו",
+      back: "← כל הפעילות",
+      kicker: "הפעילות שלנו",
       support: "תמכו בפעילות זו",
     },
     donateSection: {
@@ -183,7 +183,7 @@ export const translations: Record<Language, Translations> = {
   en: {
     nav: {
       about: "About Us",
-      activities: "Departments",
+      activities: "Our Activities",
       gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
@@ -230,19 +230,19 @@ export const translations: Record<Language, Translations> = {
       paragraph2:
         "Under one roof operate kindergartens, a Talmud Torah, a girls' school and seminary, a kollel for young married men, a soup kitchen, and a publishing institute - a comprehensive response to the community's spiritual, educational, and material needs. Each month the Rav travels to Rabbi Shimon Bar Yochai's tomb in Meron, carrying with him the requests and prayers of the institutions' supporters.",
     },
-    statsLabels: ["Families in the Community", "Years of Activity", "Active Departments", "One Big Heart"],
-    activitiesSection: { kicker: "What We Do", heading: "Our Departments" },
-    departmentsGrid: { details: "Learn More", support: "Support This Department" },
+    statsLabels: ["Families in the Community", "Years of Activity", "Areas of Activity", "One Big Heart"],
+    activitiesSection: { kicker: "What We Do", heading: "Our Activities" },
+    departmentsGrid: { details: "Learn More", support: "Support This Activity" },
     departmentsPage: {
       kicker: "What We Do",
-      heading: "Our Departments",
+      heading: "Our Activities",
       intro:
-        "Eight departments working together in the heart of Tzfat's Old City, accompanying the community from early childhood through every stage of life.",
+        "Eight areas of activity working together in the heart of Tzfat's Old City, accompanying the community from early childhood through every stage of life.",
     },
     departmentDetail: {
-      back: "← All Departments",
-      kicker: "Our Departments",
-      support: "Support This Department",
+      back: "← All Activities",
+      kicker: "Our Activities",
+      support: "Support This Activity",
     },
     donateSection: {
       kicker: "Join the Shield",

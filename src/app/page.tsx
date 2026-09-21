@@ -326,9 +326,9 @@ export default function Home() {
       </section>
 
       {/* Section: Departments */}
-      <section id="departments" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-16 flex flex-col items-center gap-6 text-center">
+      <section id="departments" className="relative scroll-mt-20 pt-28 sm:pt-40">
+        <div>
+          <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.activitiesSection.kicker}</Kicker>
             </motion.div>
