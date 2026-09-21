@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f0de;
-  --background-alt: #efe4c8;
-  --foreground: #241a12;
-  --foreground-muted: #6b5c47;
-  --color-gold: #c79a34;
-  --color-gold-deep: #9a771f;
-  --color-cream: #f7f0de;
-  --color-ink: #241a12;
-  --color-jewel-purple: #3d1642;
-  --color-jewel-purple-deep: #26092b;
-  --color-jewel-green: #17402f;
-  --color-jewel-wine: #5c1626;
-  --color-line: #ddd0ac;
+  --background: #f5f5f2;
+  --background-alt: #e9e7db;
+  --foreground: #262625;
+  --foreground-muted: #4f5b5f;
+  --color-gold: #b5b295;
+  --color-gold-deep: #8a8768;
+  --color-cream: #f5f5f2;
+  --color-ink: #262625;
+  --color-jewel-purple: #262625;
+  --color-jewel-purple-deep: #181818;
+  --color-jewel-green: #427680;
+  --color-jewel-wine: #4f5b5f;
+  --color-line: #d6d4c2;
 }
 
 @theme inline {
@@ -69,7 +69,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   font-weight: 600;
-  color: var(--color-gold);
+  color: var(--color-gold-deep);
 }
 
 .rule {
@@ -130,7 +130,7 @@ body {
   content: "";
   position: absolute;
   inset: 0.75rem;
-  border: 1px solid rgba(199, 154, 52, 0.28);
+  border: 1px solid rgba(181, 178, 149, 0.35);
   border-radius: 1.25rem;
   pointer-events: none;
 }
@@ -161,4 +161,11 @@ body {
 
 .nav-link:hover::after {
   transform: scaleX(1);
+}
+
+/* Poster/fallback behind the hero video (shown while it loads or if absent). */
+.hero-backdrop {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 100%, rgba(181, 178, 149, 0.30), transparent 70%),
+    linear-gradient(180deg, #181818 0%, #2f4a50 55%, #427680 100%);
 }

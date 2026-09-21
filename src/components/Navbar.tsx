@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageProvider";
 import { goldButton } from "@/lib/uiConstants";
@@ -12,6 +12,14 @@ export default function Navbar() {
   const pathname = usePathname();
   const { t, language, toggleLanguage } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const overHero = pathname === "/" && !scrolled && !mobileOpen;
   if (pathname?.startsWith("/admin")) return null;
 
   const links = [
@@ -26,7 +34,11 @@ export default function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed inset-x-0 top-0 z-50 border-b-2 border-gold/70 bg-background/95 backdrop-blur-sm">
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-500 ${
+        overHero
+          ? "border-transparent bg-transparent text-cream"
+          : "border-gold/70 bg-background/95 backdrop-blur-sm text-foreground-muted"
+      }`}>
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="block">
           <Image
@@ -41,7 +53,7 @@ export default function Navbar() {
             className="h-14 w-auto sm:h-16"
           />
         </Link>
-        <ul className="hidden items-center gap-8 text-sm text-foreground-muted lg:flex">
+        <ul className="hidden items-center gap-8 text-sm lg:flex">
           {links.map((link) => (
             <li key={link.href}>
               <Link
@@ -57,7 +69,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-foreground-muted transition-colors hover:border-gold hover:text-gold"
+            className="rounded-full border border-current/30 px-3 py-1.5 text-xs font-bold transition-colors hover:border-gold hover:text-gold"
           >
             {t.languageToggle}
           </button>
@@ -69,11 +81,11 @@ export default function Navbar() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={t.nav.menu}
             aria-expanded={mobileOpen}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-full border border-line lg:hidden"
+            className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-full border border-current/30 lg:hidden"
           >
-            <span className="h-px w-4 bg-foreground" />
-            <span className="h-px w-4 bg-foreground" />
-            <span className="h-px w-4 bg-foreground" />
+            <span className="h-px w-4 bg-current" />
+            <span className="h-px w-4 bg-current" />
+            <span className="h-px w-4 bg-current" />
           </button>
         </div>
       </nav>

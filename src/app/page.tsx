@@ -52,6 +52,7 @@ export default function Home() {
   const stats = statValues.map((s, i) => ({ ...s, label: t.statsLabels[i] }));
 
   const [blessingOpen, setBlessingOpen] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({
@@ -63,69 +64,77 @@ export default function Home() {
 
   return (
     <main className="flex flex-col flex-1">
-      {/* Section A: Hero */}
+      {/* Section A: Hero - full-bleed looping video of Tzfat behind a dark veil */}
       <section
         id="hero"
         ref={heroRef}
-        className="ambient-surface relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple px-6 py-32 text-center text-cream"
+        className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple-deep px-6 py-32 text-center text-cream"
       >
+        <div className="hero-backdrop absolute inset-0" aria-hidden="true">
+          {!videoFailed && (
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onError={() => setVideoFailed(true)}
+            >
+              <source src="/videos/safed-hero.webm" type="video/webm" onError={() => setVideoFailed(true)} />
+              <source src="/videos/safed-hero.mp4" type="video/mp4" onError={() => setVideoFailed(true)} />
+            </video>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-jewel-purple-deep/80 via-jewel-purple-deep/45 to-jewel-purple-deep/90" />
+        </div>
+
         <motion.div
           style={{ y: heroContentY, opacity: heroContentOpacity }}
-          className="mx-auto flex w-full max-w-6xl flex-col items-center gap-14 px-4 lg:flex-row lg:items-center lg:justify-between lg:gap-16"
+          className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-8 px-4"
         >
-          {/* Crest */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={heroFade}
-            className="flex flex-col items-center gap-8 lg:order-2 lg:flex-1"
-          >
-            <div className="arch-niche flex h-64 w-56 items-center justify-center border-2 border-gold/50 bg-white/5 p-6 sm:h-72 sm:w-64">
-              <Image
-                src="/logo2.svg"
-                alt={
-                  isRtl
-                    ? "מוסדות ברסלב צפת - נחלי התורה"
-                    : "Nachalei HaTorah Breslov Institutions, Tzfat"
-                }
-                width={500}
-                height={500}
-                className="h-auto w-[170px] object-contain sm:w-[195px]"
-                priority
-              />
-            </div>
+          <motion.div initial="hidden" animate="visible" variants={heroFade}>
+            <Image
+              src="/logo2.svg"
+              alt={
+                isRtl
+                  ? "מוסדות ברסלב צפת - נחלי התורה"
+                  : "Nachalei HaTorah Breslov Institutions, Tzfat"
+              }
+              width={500}
+              height={500}
+              className="h-auto w-[130px] object-contain drop-shadow-lg sm:w-[160px]"
+              priority
+            />
           </motion.div>
 
-          {/* Explanation + CTAs */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={heroFade}
             transition={{ delay: 0.15 }}
-            className="flex flex-col items-center gap-8 text-center lg:order-1 lg:flex-1 lg:items-start lg:text-start"
+            className="flex flex-col items-center gap-7"
           >
-            <h1 className="font-display font-black text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+            <span className="h-px w-16 bg-gold" />
+            <h1 className="font-display font-black text-4xl leading-tight tracking-tight text-cream drop-shadow-md sm:text-5xl md:text-6xl">
               {t.hero.heading}
             </h1>
 
-            <p className="max-w-xl text-xl leading-relaxed text-cream/80 sm:text-2xl">
+            <p className="max-w-2xl text-lg leading-relaxed text-cream/85 sm:text-xl">
               {t.hero.paragraph}
             </p>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#blessing"
-                className="inline-block rounded-full border border-cream/40 px-8 py-4 text-lg font-display font-bold tracking-wide text-cream transition-colors duration-300 hover:border-gold hover:text-gold"
-              >
-                {t.hero.blessingCta}
-              </a>
-            </div>
+            <a
+              href="#blessing"
+              className="mt-2 inline-block rounded-full border border-cream/60 bg-white/5 px-10 py-4 text-lg font-display font-bold tracking-wide text-cream backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:bg-gold hover:text-ink"
+            >
+              {t.hero.blessingCta}
+            </a>
           </motion.div>
         </motion.div>
 
-        <div className="absolute bottom-10 flex flex-col items-center gap-2 text-cream/60">
+        <div className="absolute bottom-10 z-10 flex flex-col items-center gap-2 text-cream/70">
           <span className="text-xs tracking-widest">{t.hero.scrollDown}</span>
-          <span className="h-8 w-px bg-gold/50" />
+          <span className="h-8 w-px bg-gold/60" />
         </div>
       </section>
 
