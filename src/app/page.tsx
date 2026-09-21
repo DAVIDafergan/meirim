@@ -81,11 +81,10 @@ export default function Home() {
               preload="auto"
               onError={() => setVideoFailed(true)}
             >
-              <source src="/videos/safed-hero.webm" type="video/webm" onError={() => setVideoFailed(true)} />
               <source src="/videos/safed-hero.mp4" type="video/mp4" onError={() => setVideoFailed(true)} />
             </video>
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-jewel-purple-deep/80 via-jewel-purple-deep/45 to-jewel-purple-deep/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
         </div>
 
         <motion.div
@@ -102,7 +101,7 @@ export default function Home() {
               }
               width={500}
               height={500}
-              className="h-auto w-[130px] object-contain drop-shadow-lg sm:w-[160px]"
+              className="h-auto w-[110px] object-contain drop-shadow-lg sm:w-[140px]"
               priority
             />
           </motion.div>
@@ -115,17 +114,17 @@ export default function Home() {
             className="flex flex-col items-center gap-7"
           >
             <span className="h-px w-16 bg-gold" />
-            <h1 className="font-display font-black text-4xl leading-tight tracking-tight text-cream drop-shadow-md sm:text-5xl md:text-6xl">
+            <h1 className="font-display font-bold text-4xl leading-[1.15] text-cream drop-shadow-md sm:text-6xl md:text-7xl">
               {t.hero.heading}
             </h1>
 
-            <p className="max-w-2xl text-lg leading-relaxed text-cream/85 sm:text-xl">
+            <p className="max-w-2xl text-lg font-light leading-loose text-cream/90 sm:text-2xl">
               {t.hero.paragraph}
             </p>
 
             <a
               href="#blessing"
-              className="mt-2 inline-block rounded-full border border-cream/60 bg-white/5 px-10 py-4 text-lg font-display font-bold tracking-wide text-cream backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:bg-gold hover:text-ink"
+              className="mt-4 inline-block rounded-full bg-jewel-green px-12 py-4 text-lg font-display font-bold text-white transition-colors duration-300 hover:bg-cream hover:text-ink"
             >
               {t.hero.blessingCta}
             </a>
@@ -155,7 +154,7 @@ export default function Home() {
 
               <Kicker>{t.kaparot.kicker}</Kicker>
 
-              <h2 className="font-display font-black text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+              <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
                 {t.kaparot.heading}
               </h2>
 
@@ -172,12 +171,12 @@ export default function Home() {
       </section>
 
       {/* Section: Names for Blessing at the Rashbi's tomb */}
-      <section id="blessing" className="relative scroll-mt-20 px-6 py-24 sm:py-32">
+      <section id="blessing" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.blessing.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
             {t.blessing.heading}
           </h2>
           <motion.p
@@ -232,7 +231,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.story.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-cream sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-cream sm:text-5xl md:text-6xl">
             {t.story.heading}
           </h2>
           <motion.p
@@ -257,7 +256,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.about.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
             {t.about.heading}
           </h2>
           <motion.p
@@ -286,27 +285,27 @@ export default function Home() {
         >
           {stats.map((s) => (
             <motion.div key={s.label} variants={cardItem} className="flex flex-col items-center">
-              <span className="font-display font-black text-4xl text-gold sm:text-5xl">
+              <span className="font-display font-bold text-4xl text-gold sm:text-5xl">
                 <AnimatedCounter to={s.to} prefix={s.prefix} suffix={s.suffix} />
               </span>
               <span className="mt-1 text-xs text-cream/70 sm:text-sm">{s.label}</span>
             </motion.div>
           ))}
           <motion.div variants={cardItem} className="flex flex-col items-center">
-            <span className="font-display font-black text-4xl text-gold sm:text-5xl">❤️</span>
+            <span className="font-display font-bold text-4xl text-gold sm:text-5xl">❤️</span>
             <span className="mt-1 text-xs text-cream/70 sm:text-sm">{t.statsLabels[3]}</span>
           </motion.div>
         </motion.div>
       </section>
 
       {/* Section: Departments */}
-      <section id="departments" className="relative scroll-mt-20 px-6 py-24 sm:py-32">
+      <section id="departments" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 flex flex-col items-center gap-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.activitiesSection.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
               {t.activitiesSection.heading}
             </h2>
           </div>
@@ -318,13 +317,13 @@ export default function Home() {
       <BlessingModal open={blessingOpen} onClose={() => setBlessingOpen(false)} />
 
       {/* Section: Gallery */}
-      <section id="gallery" className="surface-alt relative scroll-mt-20 px-6 py-24 sm:py-32">
+      <section id="gallery" className="surface-alt relative scroll-mt-20 px-6 py-28 sm:py-40">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex flex-col items-center gap-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.gallery.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
               {t.gallery.heading}
             </h2>
           </div>
@@ -339,7 +338,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.social.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+            <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
               {t.social.heading}
             </h2>
           </div>
@@ -352,13 +351,13 @@ export default function Home() {
       </div>
 
       {/* Section C: Donation Tiers */}
-      <section id="donate" className="relative scroll-mt-20 px-6 py-24 sm:py-32">
+      <section id="donate" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 flex flex-col items-center gap-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.donateSection.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-black text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
               {t.donateSection.heading}
             </h2>
           </div>
@@ -376,7 +375,7 @@ export default function Home() {
                 variants={cardItem}
                 className={`arch-niche flex h-full flex-col items-center gap-4 p-8 pt-10 text-center text-cream ${jewelTones[i % jewelTones.length]} ${cardHover}`}
               >
-                <span className="font-display font-black text-5xl text-gold">{tier.amount}</span>
+                <span className="font-display font-bold text-5xl text-gold">{tier.amount}</span>
                 <h3 className="font-display text-xl font-bold text-cream">{tier.title}</h3>
                 <p className="text-cream/75">{tier.desc}</p>
                 <a

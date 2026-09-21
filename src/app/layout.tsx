@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { Heebo, Frank_Ruhl_Libre } from "next/font/google";
+import { Assistant, Rubik } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
-const heebo = Heebo({
+const heebo = Assistant({
   variable: "--font-heebo",
   subsets: ["hebrew", "latin"],
-  weight: ["400", "600", "700", "900"],
+  weight: ["300", "400", "600", "700"],
   display: "swap",
 });
 
-const frankRuhlLibre = Frank_Ruhl_Libre({
+const frankRuhlLibre = Rubik({
   variable: "--font-serif-display",
   subsets: ["hebrew", "latin"],
-  weight: ["500", "700", "900"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -34,7 +34,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <LanguageProvider>
-          <div className="grain-overlay" />
           <ScrollProgress />
           <Navbar />
           {children}

@@ -49,27 +49,16 @@ body {
 }
 
 /* Faint paper texture - a tactile, print-like grain rather than a glow */
-.grain-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 55;
-  pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-}
 
 .kicker {
   display: inline-block;
-  border-radius: 9999px;
-  border: 1px solid var(--color-gold);
-  background: transparent;
-  padding: 0.3rem 1.1rem;
   font-family: var(--font-heebo);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
   font-weight: 600;
   color: var(--color-gold-deep);
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--color-gold);
 }
 
 .rule {
@@ -81,7 +70,7 @@ body {
    architecture - used for icon badges and card tops instead of photography
    we don't have. */
 .arch-niche {
-  border-radius: 999px 999px 8px 8px;
+  border-radius: 1rem;
 }
 
 /* Very slow, low-amplitude drift of a soft radial highlight - ambient life
@@ -103,20 +92,6 @@ body {
   isolation: isolate;
 }
 
-.ambient-surface::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: radial-gradient(
-    ellipse 60% 50% at 50% 50%,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  background-size: 160% 160%;
-  animation: ambient-drift 28s ease-in-out infinite;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .ambient-surface::before {
@@ -126,20 +101,6 @@ body {
 
 /* A hairline drawn just inside a bordered panel - the double-rule framing of
    a printed plaque or certificate. */
-.plaque-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0.75rem;
-  border: 1px solid rgba(181, 178, 149, 0.35);
-  border-radius: 1.25rem;
-  pointer-events: none;
-}
-
-@media (min-width: 640px) {
-  .plaque-frame::after {
-    inset: 1rem;
-  }
-}
 
 /* Underline that draws in on hover, used for the primary nav links. */
 .nav-link {
