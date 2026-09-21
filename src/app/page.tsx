@@ -113,14 +113,41 @@ export default function Home() {
             transition={{ delay: 0.15 }}
             className="flex flex-col items-center gap-7"
           >
-            <span className="h-px w-16 bg-gold" />
-            <h1 className="font-display font-bold text-4xl leading-[1.15] text-cream drop-shadow-md sm:text-6xl md:text-7xl">
-              {t.hero.heading}
-            </h1>
+            <motion.span
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.3, ease: EASE_LUX }}
+              className="h-px w-20 bg-gold"
+            />
+            <motion.h1
+              key={language}
+              initial="hidden"
+              animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07, delayChildren: 0.4 } } }}
+              className="max-w-3xl font-display font-bold text-2xl leading-snug text-cream drop-shadow-lg sm:text-4xl md:text-5xl"
+            >
+              {t.hero.heading.split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
+                    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: EASE_LUX } },
+                  }}
+                  className="inline-block ltr:mr-[0.28em] rtl:ml-[0.28em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
 
-            <p className="max-w-2xl text-lg font-light leading-loose text-cream/90 sm:text-2xl">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.4, ease: EASE_LUX }}
+              className="max-w-xl text-base font-light leading-loose text-cream/85 sm:text-lg"
+            >
               {t.hero.paragraph}
-            </p>
+            </motion.p>
 
             <a
               href="#blessing"
