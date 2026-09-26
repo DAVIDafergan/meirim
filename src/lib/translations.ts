@@ -4,6 +4,7 @@ export interface Translations {
   nav: {
     about: string;
     activities: string;
+    courses: string;
     gallery: string;
     donate: string;
     donateNow: string;
@@ -39,6 +40,10 @@ export interface Translations {
     close: string;
   };
   abroad: { kicker: string; heading: string; body: string; cta: string };
+  coursesPage: { kicker: string; heading: string; intro: string };
+  coursesGrid: { details: string; buyNow: string; empty: string };
+  courseDetail: { back: string; buyNow: string };
+  courseThanks: { heading: string; accessIntro: string; note: string; openLink: string };
   story: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   about: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   statsLabels: [string, string, string, string];
@@ -84,6 +89,7 @@ export const translations: Record<Language, Translations> = {
     nav: {
       about: "מי אנחנו",
       activities: "הפעילות שלנו",
+      courses: "קורסים",
       gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
@@ -142,6 +148,26 @@ export const translations: Record<Language, Translations> = {
       heading: "תרומה מחוץ לישראל",
       body: "לנוחות התומכים היקרים שלנו מחוץ לישראל, ניתן לתרום גם דרך עמוד תרומות ייעודי בכרטיס אשראי בינלאומי.",
       cta: "תרומה לתומכים מחו\"ל",
+    },
+    coursesPage: {
+      kicker: "לומדים בעומק",
+      heading: "קורסים מהרב",
+      intro: 'קורסים תורניים מפי הגאון הרב נתן מרדכי ישראל שליט"א, לצפייה ולימוד בזמנכם החופשי.',
+    },
+    coursesGrid: {
+      details: "לפרטים",
+      buyNow: "רכישה",
+      empty: "בקרוב יעלו כאן קורסים חדשים",
+    },
+    courseDetail: {
+      back: "← כל הקורסים",
+      buyNow: "רכישת הקורס",
+    },
+    courseThanks: {
+      heading: "תודה על רכישת הקורס!",
+      accessIntro: "הנה הגישה לקורס שלכם:",
+      note: "מומלץ לשמור את הפרטים האלה או לצלם מסך - העמוד לא יישלח אליכם שוב.",
+      openLink: "כניסה לקורס",
     },
     story: {
       kicker: "מקום של קדושה",
@@ -227,6 +253,7 @@ export const translations: Record<Language, Translations> = {
     nav: {
       about: "About Us",
       activities: "Our Activities",
+      courses: "Courses",
       gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
@@ -285,6 +312,26 @@ export const translations: Record<Language, Translations> = {
       heading: "Donating from Outside Israel",
       body: "For the convenience of our dear supporters outside Israel, you can also donate through a dedicated donation page by international credit card.",
       cta: "Donate from Abroad",
+    },
+    coursesPage: {
+      kicker: "Learn in Depth",
+      heading: "Courses from the Rav",
+      intro: "Torah courses by HaRav Natan Mordechai Yisrael Shlita, to watch and study at your own pace.",
+    },
+    coursesGrid: {
+      details: "Learn More",
+      buyNow: "Purchase",
+      empty: "New courses are coming soon",
+    },
+    courseDetail: {
+      back: "← All Courses",
+      buyNow: "Purchase This Course",
+    },
+    courseThanks: {
+      heading: "Thank You for Your Purchase!",
+      accessIntro: "Here is access to your course:",
+      note: "We recommend saving these details or taking a screenshot - this page won't be sent to you again.",
+      openLink: "Enter the Course",
     },
     story: {
       kicker: "A Place of Holiness",

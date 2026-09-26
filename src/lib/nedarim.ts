@@ -17,7 +17,7 @@ export const DISPLAY_CATEGORIES = [
 // Categories on the shared MosadId that are never real campaign/institution
 // donations (e.g. Meron pilgrimage registrations, paid services) - excluded
 // even if the amount clears GENERAL_DONATION_MIN_AMOUNT below.
-const EXCLUDED_CATEGORY_SUBSTRINGS = ["מירון", "שירות"];
+const EXCLUDED_CATEGORY_SUBSTRINGS = ["מירון", "שירות", "קורס"];
 
 // A large-but-plausible amount: sizable general donations connected to the
 // campaign are shown even without an exact category match, but this stays

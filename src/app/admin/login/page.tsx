@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
         className="w-full max-w-sm rounded-2xl border border-gold/30 bg-gradient-to-b from-purple-box/60 via-black to-purple-deep/60 p-8 text-center shadow-[0_0_50px_rgba(253,224,71,0.15)]"
       >
         <h1 className="font-display text-2xl text-gold">כניסת מנהל</h1>
-        <p className="mt-2 text-sm text-gray-400">מאירים את הגליל</p>
+        <p className="mt-2 text-sm text-gray-400">מוסדות נחלי התורה</p>
 
         <input
           type="password"

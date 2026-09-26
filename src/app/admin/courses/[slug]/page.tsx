@@ -3,11 +3,12 @@ import Link from "next/link";
 import { isAdminAuthed } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import AdminLogoutButton from "@/components/AdminLogoutButton";
-import DepartmentEditor from "./DepartmentEditor";
+import CourseEditor from "../CourseEditor";
+import DeleteCourseButton from "./DeleteCourseButton";
 
 export const dynamic = "force-dynamic";
 
-export default async function DepartmentAdminPage({
+export default async function CourseAdminPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -17,11 +18,8 @@ export default async function DepartmentAdminPage({
   }
 
   const { slug } = await params;
-  const department = await prisma.department.findUnique({
-    where: { slug },
-    include: { images: { orderBy: { order: "asc" } } },
-  });
-  if (!department) {
+  const course = await prisma.course.findUnique({ where: { slug } });
+  if (!course) {
     notFound();
   }
 
@@ -30,32 +28,32 @@ export default async function DepartmentAdminPage({
       <div className="mx-auto max-w-4xl">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="font-display text-2xl text-gold sm:text-3xl">{department.name}</h1>
+            <h1 className="font-display text-2xl text-gold sm:text-3xl">{course.title}</h1>
             <p className="mt-1 text-sm text-gray-400">
-              <Link href="/admin/departments" className="hover:text-gold">
-                מחלקות
-              </Link>
-              {" · "}
               <Link href="/admin/courses" className="hover:text-gold">
                 קורסים
               </Link>
               {" · "}
-              {department.name}
+              {course.title}
             </p>
           </div>
-          <AdminLogoutButton />
+          <div className="flex items-center gap-3">
+            <DeleteCourseButton slug={course.slug} />
+            <AdminLogoutButton />
+          </div>
         </div>
 
-        <DepartmentEditor
-          slug={department.slug}
-          initialName={department.name}
-          initialSummary={department.summary}
-          initialBody={department.body ?? ""}
-          initialImages={department.images.map((img) => ({
-            id: img.id,
-            caption: img.caption,
-            url: `/api/media/${img.filename}`,
-          }))}
+        <CourseEditor
+          course={{
+            slug: course.slug,
+            title: course.title,
+            summary: course.summary,
+            description: course.description,
+            price: course.price,
+            accessContent: course.accessContent,
+            published: course.published,
+            image: course.image,
+          }}
         />
       </div>
     </main>

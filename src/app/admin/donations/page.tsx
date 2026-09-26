@@ -109,6 +109,10 @@ export default async function DonationsAdminPage({
               <Link href="/admin/departments" className="hover:text-gold">
                 מחלקות
               </Link>
+              {" · "}
+              <Link href="/admin/courses" className="hover:text-gold">
+                קורסים
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-3">

@@ -84,6 +84,27 @@ model DepartmentImage {
   @@map("department_images")
 }
 
+model Course {
+  id            Int      @id @default(autoincrement())
+  slug          String   @unique
+  order         Int      @default(0)
+  title         String
+  summary       String
+  description   String?
+  price         Int
+  image         String?
+  // Revealed to the buyer on the /thanks page right after a successful
+  // Nedarim Plus payment - a link (Drive/Vimeo/etc.) or plain instructions.
+  // Never exposed by the public course API before purchase.
+  accessContent String   @map("access_content")
+  analyticTag   String   @unique @map("analytic_tag")
+  published     Boolean  @default(true)
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("courses")
+}
+
 model WebhookLog {
   id        Int      @id @default(autoincrement())
   source    String   @default("nedarim_plus")

@@ -36,6 +36,10 @@ export default async function DepartmentsAdminPage() {
                 גלריה
               </Link>
               {" · "}
+              <Link href="/admin/courses" className="hover:text-gold">
+                קורסים
+              </Link>
+              {" · "}
               מחלקות
             </p>
           </div>
