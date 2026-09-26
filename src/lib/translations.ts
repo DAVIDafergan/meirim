@@ -25,6 +25,20 @@ export interface Translations {
   };
   blessingCategories: [string, string, string, string];
   kaparot: { kicker: string; heading: string; body: string; cta: string };
+  pidyonNefesh: { kicker: string; heading: string; body: string; cta: string };
+  partnership: { kicker: string; heading: string; body: string; ctaButton: string };
+  partnershipModal: {
+    title: string;
+    body: string;
+    firstName: string;
+    phone: string;
+    amount: string;
+    notePlaceholder: string;
+    submit: string;
+    success: string;
+    close: string;
+  };
+  abroad: { kicker: string; heading: string; body: string; cta: string };
   story: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   about: { kicker: string; heading: string; paragraph1: string; paragraph2: string };
   statsLabels: [string, string, string, string];
@@ -99,6 +113,35 @@ export const translations: Record<Language, Translations> = {
       heading: "פדיון כפרות במוסדות נחלי התורה",
       body: 'מנהג ישראל מדורי דורות לתת את פדיון הכפרות לצדקה בערב יום הכיפורים. תרומתכם מסייעת להחזקת התורה והחסד בעיר העתיקה בצפת — ותפילת אברכי הכולל ובני הקהילה תעלה עבורכם ועבור כל בני ביתכם, לשנה טובה ומבורכת ולחתימה טובה.',
       cta: "לפדיון כפרות",
+    },
+    pidyonNefesh: {
+      kicker: "מנהג ישראל סבא",
+      heading: "פדיון נפש אצל הצדיק",
+      body: 'נהגו ישראל מדורי דורות לתת "פדיון נפש" לצדיק, כסגולה לישועה ולהמשכת שפע וברכה על הנותן ובני ביתו. תרומתכם תעלה עם שאר הבקשות לציון הרשב"י במירון, ותסייע בד בבד להחזקת התורה והחסד במוסדות.',
+      cta: "לתת פדיון נפש",
+    },
+    partnership: {
+      kicker: "שותפות מיוחדת",
+      heading: "הסכם שותפות יששכר-זבולון",
+      body: 'זבולון ויששכר נשאו יחד בעול התורה — האחד יוצא לפרנסה והשני יושב ולומד, וזוכים שניהם בשכר הלימוד כאחד. הצטרפו כ"זבולון" לאברכי הכולל שלנו: הפכו לשותפים קבועים בלימוד התורה הנלמד יום-יום בבית המדרש, ושכר התורה יהיה שייך גם לכם. השאירו פרטים ונחזור אליכם לגיבוש השותפות.',
+      ctaButton: "אני רוצה להיות שותף",
+    },
+    partnershipModal: {
+      title: "שותפות יששכר-זבולון",
+      body: "השאירו פרטים, ונציג המוסדות יחזור אליכם באופן אישי לגיבוש הסכם השותפות.",
+      firstName: "שם מלא",
+      phone: "טלפון ליצירת קשר",
+      amount: "סכום חודשי משוער (לא מחייב)",
+      notePlaceholder: "הערה נוספת (לא חובה)",
+      submit: "שליחת פרטים",
+      success: "הפרטים נשלחו בהצלחה, ניצור עמכם קשר בקרוב",
+      close: "סגירה",
+    },
+    abroad: {
+      kicker: "תומכים מחו\"ל",
+      heading: "תרומה מחוץ לישראל",
+      body: "לנוחות התומכים היקרים שלנו מחוץ לישראל, ניתן לתרום גם דרך עמוד תרומות ייעודי בכרטיס אשראי בינלאומי.",
+      cta: "תרומה לתומכים מחו\"ל",
     },
     story: {
       kicker: "מקום של קדושה",
@@ -213,6 +256,35 @@ export const translations: Record<Language, Translations> = {
       heading: "Pidyon Kaparot at Nachalei HaTorah",
       body: "It is a long-standing Jewish custom to give the kaparot redemption to tzedakah on the eve of Yom Kippur. Your gift sustains Torah study and acts of kindness in the Old City of Tzfat — and the prayers of our kollel scholars and our community will rise on behalf of you and your entire household, for a good and blessed year.",
       cta: "Give Pidyon Kaparot",
+    },
+    pidyonNefesh: {
+      kicker: "A Timeless Jewish Custom",
+      heading: "Pidyon Nefesh with the Tzaddik",
+      body: "For generations, Jews have given a \"pidyon nefesh\" (redemption of the soul) to a tzaddik, as a segula for salvation and for drawing down blessing and abundance upon the giver and their household. Your gift will rise together with the other requests at Rashbi's tomb in Meron, while also sustaining Torah study and kindness at the institutions.",
+      cta: "Give a Pidyon Nefesh",
+    },
+    partnership: {
+      kicker: "A Special Partnership",
+      heading: "The Issachar-Zevulun Partnership Agreement",
+      body: "Zevulun and Issachar carried the yoke of Torah together — one went out to earn a livelihood, the other sat and learned, and both shared equally in the reward of the Torah studied. Join as a \"Zevulun\" partner to our kollel scholars: become a standing partner in the Torah learned day after day in our study hall, and its reward will belong to you as well. Leave your details and we will contact you to arrange the partnership.",
+      ctaButton: "I Want to Become a Partner",
+    },
+    partnershipModal: {
+      title: "The Issachar-Zevulun Partnership",
+      body: "Leave your details, and a representative of the institutions will personally contact you to arrange the partnership agreement.",
+      firstName: "Full name",
+      phone: "Phone number",
+      amount: "Approximate monthly amount (non-binding)",
+      notePlaceholder: "Additional note (optional)",
+      submit: "Send Details",
+      success: "Your details were sent successfully - we'll be in touch soon",
+      close: "Close",
+    },
+    abroad: {
+      kicker: "Supporters Abroad",
+      heading: "Donating from Outside Israel",
+      body: "For the convenience of our dear supporters outside Israel, you can also donate through a dedicated donation page by international credit card.",
+      cta: "Donate from Abroad",
     },
     story: {
       kicker: "A Place of Holiness",

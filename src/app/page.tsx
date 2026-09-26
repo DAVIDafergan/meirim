@@ -12,11 +12,17 @@ import Divider from "@/components/Divider";
 import Kicker from "@/components/Kicker";
 import Footer from "@/components/Footer";
 import BlessingModal from "@/components/BlessingModal";
+import PartnershipModal from "@/components/PartnershipModal";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
 import { EASE_LUX, fadeUp, cardsContainer, cardItem } from "@/lib/motionVariants";
 import { goldButton, outlineButton, jewelTones, cardHover } from "@/lib/uiConstants";
 import { StarIcon, RingIcon, CoinIcon, HeartIcon } from "@/components/icons";
+
+// TODO: replace with the real link once it's confirmed / a Nedarim Plus
+// international-card flow is set up, per the Rav's request to point overseas
+// supporters at their shulspace.org donation page.
+const ABROAD_DONATE_URL = "https://shulspace.org/toda-el/donate";
 
 const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
 
@@ -53,6 +59,7 @@ export default function Home() {
   const stats = statValues.map((s, i) => ({ ...s, label: t.statsLabels[i] }));
 
   const [blessingOpen, setBlessingOpen] = useState(false);
+  const [partnershipOpen, setPartnershipOpen] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -267,6 +274,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section: Pidyon Nefesh (year-round, distinct from the seasonal Kaparot above) */}
+      <section id="pidyon-nefesh" className="surface-alt scroll-mt-20 px-6 py-16 sm:py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={fadeUp}
+          className="mx-auto max-w-4xl"
+        >
+          <div className="relative overflow-hidden rounded-3xl border-2 border-gold/50 bg-jewel-purple-deep px-6 py-12 text-center text-cream sm:px-12 sm:py-14">
+            <div className="flex flex-col items-center gap-5">
+              <span className="flex h-16 w-14 items-center justify-center rounded-2xl border-2 border-gold/60 text-gold">
+                <HeartIcon className="h-7 w-7" />
+              </span>
+
+              <Kicker>{t.pidyonNefesh.kicker}</Kicker>
+
+              <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+                {t.pidyonNefesh.heading}
+              </h2>
+
+              <p className="max-w-2xl text-base leading-loose text-cream/80 sm:text-lg">
+                {t.pidyonNefesh.body}
+              </p>
+
+              <a
+                href={nedarimPlusUrl({
+                  groupe: CAMPAIGN_GROUPE,
+                  analytic: "landing-page-pidyon-nefesh",
+                  redirectPath: "/thanks",
+                })}
+                className={`mt-2 inline-block px-10 py-4 text-lg ${goldButton}`}
+              >
+                {t.pidyonNefesh.cta}
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {/* Section B: The Old City */}
       <section
         id="heritage"
@@ -371,6 +418,32 @@ export default function Home() {
         <Divider />
       </div>
 
+      {/* Section: Issachar-Zevulun partnership */}
+      <section id="partnership" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-24 text-cream sm:py-28">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+          className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center"
+        >
+          <Kicker>{t.partnership.kicker}</Kicker>
+          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-cream sm:text-5xl">
+            {t.partnership.heading}
+          </h2>
+          <p className="text-lg leading-loose text-cream/80 sm:text-xl">{t.partnership.body}</p>
+          <button
+            type="button"
+            onClick={() => setPartnershipOpen(true)}
+            className={`mt-2 inline-block px-10 py-4 text-lg ${goldButton}`}
+          >
+            {t.partnership.ctaButton}
+          </button>
+        </motion.div>
+      </section>
+
+      <PartnershipModal open={partnershipOpen} onClose={() => setPartnershipOpen(false)} />
+
       {/* Section C: Donation Tiers */}
       <section id="donate" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
         <div className="mx-auto max-w-6xl">
@@ -438,6 +511,20 @@ export default function Home() {
               {t.donateSection.monthly}
             </a>
           </div>
+        </div>
+
+        <div className="mx-auto mt-16 flex max-w-2xl flex-col items-center gap-3 rounded-2xl border border-line bg-background-alt px-6 py-8 text-center">
+          <Kicker>{t.abroad.kicker}</Kicker>
+          <h3 className="font-display text-2xl font-bold text-jewel-purple">{t.abroad.heading}</h3>
+          <p className="text-foreground-muted">{t.abroad.body}</p>
+          <a
+            href={ABROAD_DONATE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`mt-2 px-8 py-3 ${outlineButton} text-jewel-purple`}
+          >
+            {t.abroad.cta}
+          </a>
         </div>
       </section>
 
