@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Gallery from "@/components/Gallery";
 import DepartmentsGridClient from "@/components/DepartmentsGridClient";
 import SocialFollow from "@/components/SocialFollow";
+import YoutubeFeed from "@/components/YoutubeFeed";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import Kicker from "@/components/Kicker";
@@ -399,9 +400,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Social Follow */}
-      <section className="ambient-surface relative overflow-hidden bg-jewel-wine px-6 py-16 text-cream sm:py-20">
-        <div className="mx-auto max-w-4xl">
+      {/* Section: Lessons feed (auto-pulled from the Rav's YouTube channel) + social */}
+      <section id="lessons" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-16 text-cream sm:py-20">
+        <div className="mx-auto max-w-5xl">
           <div className="mb-10 flex flex-col items-center gap-6 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.social.kicker}</Kicker>
@@ -410,7 +411,10 @@ export default function Home() {
               {t.social.heading}
             </h2>
           </div>
-          <SocialFollow />
+          <YoutubeFeed />
+          <div className="mx-auto mt-12 max-w-4xl">
+            <SocialFollow />
+          </div>
         </div>
       </section>
 
