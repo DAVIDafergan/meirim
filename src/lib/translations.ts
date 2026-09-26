@@ -5,6 +5,7 @@ export interface Translations {
     about: string;
     activities: string;
     courses: string;
+    lessons: string;
     gallery: string;
     donate: string;
     donateNow: string;
@@ -66,7 +67,19 @@ export interface Translations {
   ];
   recentDonations: { kicker: string; heading: string; anonymous: string };
   gallery: { kicker: string; heading: string };
-  social: { kicker: string; heading: string; cta: string };
+  social: { kicker: string; heading: string; cta: string; teaser: string; viewAll: string };
+  lessonsPage: {
+    kicker: string;
+    heading: string;
+    intro: string;
+    videosTitle: string;
+    shortsTitle: string;
+    viewAllVideos: string;
+    viewAllShorts: string;
+    empty: string;
+    followKicker: string;
+    followHeading: string;
+  };
   liveCounter: { label: string };
   footer: { text: string; admin: string };
   blessingModal: {
@@ -90,6 +103,7 @@ export const translations: Record<Language, Translations> = {
       about: "מי אנחנו",
       activities: "הפעילות שלנו",
       courses: "קורסים",
+      lessons: "שיעורים",
       gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
@@ -225,6 +239,20 @@ export const translations: Record<Language, Translations> = {
       kicker: "עקבו אחרינו",
       heading: "שיעורים ועדכונים מהרב",
       cta: "עקבו לשיעורים ועדכונים",
+      teaser: "שיעורי תורה וסרטונים קצרים מהרב, מתעדכן ישירות מהערוץ ביוטיוב.",
+      viewAll: "לכל השיעורים ←",
+    },
+    lessonsPage: {
+      kicker: "תורה בכל זמן",
+      heading: "שיעורים מהרב",
+      intro: "שיעורים מלאים וסרטונים קצרים מהרב, מתעדכן אוטומטית מהערוץ ביוטיוב.",
+      videosTitle: "שיעורים מלאים",
+      shortsTitle: "רגעים קצרים",
+      viewAllVideos: "כל השיעורים ביוטיוב ←",
+      viewAllShorts: "כל הסרטונים הקצרים ←",
+      empty: "בקרוב יעלו כאן שיעורים חדשים",
+      followKicker: "עקבו אחרינו",
+      followHeading: "הישארו מחוברים",
     },
     liveCounter: { label: "נתרם עד כה · מתעדכן בלייב" },
     footer: {
@@ -254,6 +282,7 @@ export const translations: Record<Language, Translations> = {
       about: "About Us",
       activities: "Our Activities",
       courses: "Courses",
+      lessons: "Lessons",
       gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
@@ -389,6 +418,20 @@ export const translations: Record<Language, Translations> = {
       kicker: "Follow Us",
       heading: "Lessons & Updates from the Rabbi",
       cta: "Follow for lessons & updates",
+      teaser: "Torah lessons and short videos from the Rav, updated automatically from the YouTube channel.",
+      viewAll: "All Lessons ←",
+    },
+    lessonsPage: {
+      kicker: "Torah, Anytime",
+      heading: "Lessons from the Rav",
+      intro: "Full lessons and short videos from the Rav, updated automatically from the YouTube channel.",
+      videosTitle: "Full Lessons",
+      shortsTitle: "Short Moments",
+      viewAllVideos: "All Lessons on YouTube ←",
+      viewAllShorts: "All Shorts ←",
+      empty: "New lessons are coming soon",
+      followKicker: "Follow Us",
+      followHeading: "Stay Connected",
     },
     liveCounter: { label: "Raised so far · Live updates" },
     footer: {

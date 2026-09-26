@@ -15,6 +15,7 @@ export default function Footer() {
   const links = [
     { href: "/#about", label: t.nav.about },
     { href: "/departments", label: t.nav.activities },
+    { href: "/lessons", label: t.nav.lessons },
     { href: "/courses", label: t.nav.courses },
     { href: "/#gallery", label: t.nav.gallery },
     { href: "/donate", label: t.nav.donate },

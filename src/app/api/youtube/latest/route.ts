@@ -66,7 +66,7 @@ export async function GET() {
     const res = await fetch(FEED_URL, { next: { revalidate: 3600 } });
     if (!res.ok) throw new Error(`YouTube feed responded ${res.status}`);
     const xml = await res.text();
-    const videos = parseFeed(xml).slice(0, 8);
+    const videos = parseFeed(xml).slice(0, 16);
     return NextResponse.json({ videos });
   } catch {
     return NextResponse.json({ videos: [] });

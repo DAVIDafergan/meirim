@@ -6,8 +6,6 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Gallery from "@/components/Gallery";
 import DepartmentsGridClient from "@/components/DepartmentsGridClient";
-import SocialFollow from "@/components/SocialFollow";
-import YoutubeFeed from "@/components/YoutubeFeed";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import Kicker from "@/components/Kicker";
@@ -400,22 +398,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Lessons feed (auto-pulled from the Rav's YouTube channel) + social */}
-      <section id="lessons" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-16 text-cream sm:py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex flex-col items-center gap-6 text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-              <Kicker>{t.social.kicker}</Kicker>
-            </motion.div>
-            <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
-              {t.social.heading}
-            </h2>
-          </div>
-          <YoutubeFeed />
-          <div className="mx-auto mt-12 max-w-4xl">
-            <SocialFollow />
-          </div>
-        </div>
+      {/* Section: Lessons teaser - the full feed lives on its own /lessons page */}
+      <section id="lessons" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-20 text-cream sm:py-24">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeUp}
+          className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center"
+        >
+          <Kicker>{t.social.kicker}</Kicker>
+          <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+            {t.social.heading}
+          </h2>
+          <p className="text-lg leading-loose text-cream/80">{t.social.teaser}</p>
+          <Link href="/lessons" className={`mt-2 inline-block px-10 py-4 text-lg ${goldButton}`}>
+            {t.social.viewAll}
+          </Link>
+        </motion.div>
       </section>
 
       <div className="py-2">
