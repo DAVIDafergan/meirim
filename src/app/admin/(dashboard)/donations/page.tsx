@@ -1,9 +1,6 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { isAdminAuthed } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import { donationDisplayFilter } from "@/lib/nedarim";
-import AdminLogoutButton from "@/components/AdminLogoutButton";
 
 export const dynamic = "force-dynamic";
 
@@ -35,10 +32,6 @@ export default async function DonationsAdminPage({
 }: {
   searchParams: Promise<{ period?: string; q?: string }>;
 }) {
-  if (!(await isAdminAuthed())) {
-    redirect("/admin/login");
-  }
-
   const params = await searchParams;
   const period = params.period ?? "all";
   const q = params.q?.trim() ?? "";
@@ -88,43 +81,19 @@ export default async function DonationsAdminPage({
   if (q) qs.set("q", q);
 
   return (
-    <main className="min-h-screen bg-black px-4 py-10 sm:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h1 className="font-display text-2xl text-gold sm:text-3xl">
-              דשבורד תרומות
-            </h1>
-            <p className="mt-1 text-sm text-gray-400">
-              <Link href="/admin" className="hover:text-gold">
-                לידים
-              </Link>
-              {" · "}
-              דשבורד תרומות
-              {" · "}
-              <Link href="/admin/gallery" className="hover:text-gold">
-                גלריה
-              </Link>
-              {" · "}
-              <Link href="/admin/departments" className="hover:text-gold">
-                מחלקות
-              </Link>
-              {" · "}
-              <Link href="/admin/courses" className="hover:text-gold">
-                קורסים
-              </Link>
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <a
-              href={`/api/admin/donations/export?${qs.toString()}`}
-              className="rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-5 py-2 text-sm font-bold text-black shadow-[0_0_16px_rgba(253,224,71,0.35)]"
-            >
-              ייצוא ל-CSV
-            </a>
-            <AdminLogoutButton />
-          </div>
+    <div>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h1 className="font-display text-2xl text-gold sm:text-3xl">דשבורד תרומות</h1>
+          <p className="mt-1 text-sm text-gray-400">מעקב ופילוח תרומות</p>
         </div>
+        <a
+          href={`/api/admin/donations/export?${qs.toString()}`}
+          className="rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 px-5 py-2 text-sm font-bold text-black shadow-[0_0_16px_rgba(253,224,71,0.35)]"
+        >
+          ייצוא ל-CSV
+        </a>
+      </div>
 
         {/* Filters */}
         <form className="mt-6 flex flex-wrap items-center gap-3" method="get">
@@ -271,6 +240,5 @@ export default async function DonationsAdminPage({
           </table>
         </div>
       </div>
-    </main>
   );
 }
