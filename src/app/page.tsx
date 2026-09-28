@@ -6,6 +6,9 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Gallery from "@/components/Gallery";
 import DepartmentsGridClient from "@/components/DepartmentsGridClient";
+import CoursesGridClient from "@/components/CoursesGridClient";
+import YoutubeFeed from "@/components/YoutubeFeed";
+import SocialFollow from "@/components/SocialFollow";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import Kicker from "@/components/Kicker";
@@ -22,6 +25,11 @@ import { StarIcon, RingIcon, CoinIcon, HeartIcon } from "@/components/icons";
 // international-card flow is set up, per the Rav's request to point overseas
 // supporters at their shulspace.org donation page.
 const ABROAD_DONATE_URL = "https://shulspace.org/toda-el/donate";
+
+// Zelle (US bank-to-bank transfer) recipient, provided directly by the Rav
+// for American supporters - Zelle has no "pay" link, just a recipient
+// email/phone shown inside the donor's own banking app.
+const ZELLE_EMAIL = "a0533123058@gmail.com";
 
 const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
 
@@ -59,6 +67,14 @@ export default function Home() {
 
   const [blessingOpen, setBlessingOpen] = useState(false);
   const [partnershipOpen, setPartnershipOpen] = useState(false);
+  const [zelleCopied, setZelleCopied] = useState(false);
+
+  function copyZelleEmail() {
+    navigator.clipboard?.writeText(ZELLE_EMAIL).then(() => {
+      setZelleCopied(true);
+      setTimeout(() => setZelleCopied(false), 2000);
+    });
+  }
   const [videoFailed, setVideoFailed] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -383,6 +399,23 @@ export default function Home() {
 
       <BlessingModal open={blessingOpen} onClose={() => setBlessingOpen(false)} />
 
+      {/* Section: Courses */}
+      <section id="courses" className="relative scroll-mt-20 pt-28 sm:pt-40">
+        <div>
+          <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+              <Kicker>{t.coursesPage.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+              {t.coursesPage.heading}
+            </h2>
+          </div>
+          <div className="mx-auto max-w-6xl px-6">
+            <CoursesGridClient />
+          </div>
+        </div>
+      </section>
+
       {/* Section: Gallery */}
       <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40">
         <div>
@@ -400,22 +433,29 @@ export default function Home() {
 
       {/* Section: Lessons teaser - the full feed lives on its own /lessons page */}
       <section id="lessons" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-20 text-cream sm:py-24">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={fadeUp}
-          className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center"
-        >
-          <Kicker>{t.social.kicker}</Kicker>
-          <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
-            {t.social.heading}
-          </h2>
-          <p className="text-lg leading-loose text-cream/80">{t.social.teaser}</p>
-          <Link href="/lessons" className={`mt-2 inline-block px-10 py-4 text-lg ${goldButton}`}>
-            {t.social.viewAll}
-          </Link>
-        </motion.div>
+        <div className="mx-auto max-w-5xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeUp}
+            className="mb-12 flex flex-col items-center gap-6 text-center"
+          >
+            <Kicker>{t.lessonsPage.kicker}</Kicker>
+            <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+              {t.lessonsPage.heading}
+            </h2>
+            <p className="max-w-2xl text-lg leading-loose text-cream/80">{t.lessonsPage.intro}</p>
+          </motion.div>
+
+          <YoutubeFeed />
+
+          <div className="mx-auto mt-16 flex max-w-4xl flex-col items-center gap-6 border-t border-white/10 pt-12 text-center">
+            <Kicker>{t.lessonsPage.followKicker}</Kicker>
+            <h3 className="font-display text-2xl font-bold text-cream">{t.lessonsPage.followHeading}</h3>
+            <SocialFollow />
+          </div>
+        </div>
       </section>
 
       <div className="py-2">
@@ -529,6 +569,25 @@ export default function Home() {
           >
             {t.abroad.cta}
           </a>
+
+          <div className="mt-6 w-full border-t border-line pt-6">
+            <h4 className="font-display text-lg font-bold text-jewel-purple">
+              {t.abroad.zelleHeading}
+            </h4>
+            <p className="mt-2 text-sm text-foreground-muted">{t.abroad.zelleNote}</p>
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+              <span dir="ltr" className="rounded-full bg-background px-4 py-2 font-mono text-sm text-foreground">
+                {ZELLE_EMAIL}
+              </span>
+              <button
+                type="button"
+                onClick={copyZelleEmail}
+                className={`px-4 py-2 text-xs ${outlineButton} text-jewel-purple`}
+              >
+                {zelleCopied ? t.abroad.zelleCopied : t.abroad.zelleCopy}
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

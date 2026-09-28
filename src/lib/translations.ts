@@ -40,7 +40,16 @@ export interface Translations {
     success: string;
     close: string;
   };
-  abroad: { kicker: string; heading: string; body: string; cta: string };
+  abroad: {
+    kicker: string;
+    heading: string;
+    body: string;
+    cta: string;
+    zelleHeading: string;
+    zelleNote: string;
+    zelleCopy: string;
+    zelleCopied: string;
+  };
   coursesPage: { kicker: string; heading: string; intro: string };
   coursesGrid: { details: string; buyNow: string; empty: string };
   courseDetail: { back: string; buyNow: string };
@@ -162,6 +171,10 @@ export const translations: Record<Language, Translations> = {
       heading: "תרומה מחוץ לישראל",
       body: "לנוחות התומכים היקרים שלנו מחוץ לישראל, ניתן לתרום גם דרך עמוד תרומות ייעודי בכרטיס אשראי בינלאומי.",
       cta: "תרומה לתומכים מחו\"ל",
+      zelleHeading: "תרומה דרך Zelle (לתומכים בארה\"ב)",
+      zelleNote: "ניתן להעביר תרומה גם ישירות דרך Zelle, לכתובת המייל המשויכת:",
+      zelleCopy: "העתקת הכתובת",
+      zelleCopied: "הועתק!",
     },
     coursesPage: {
       kicker: "לומדים בעומק",
@@ -341,6 +354,10 @@ export const translations: Record<Language, Translations> = {
       heading: "Donating from Outside Israel",
       body: "For the convenience of our dear supporters outside Israel, you can also donate through a dedicated donation page by international credit card.",
       cta: "Donate from Abroad",
+      zelleHeading: "Donate via Zelle (for U.S. supporters)",
+      zelleNote: "You can also send your donation directly through Zelle, to the email address below:",
+      zelleCopy: "Copy email",
+      zelleCopied: "Copied!",
     },
     coursesPage: {
       kicker: "Learn in Depth",
