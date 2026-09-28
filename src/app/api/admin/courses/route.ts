@@ -10,15 +10,22 @@ export async function GET() {
   return NextResponse.json({ courses });
 }
 
+// ASCII-only on purpose: Next.js 16's App Router page segments (unlike route
+// handlers) fail to match a dynamic [slug] containing non-Latin characters -
+// verified directly against this app's own /admin/courses/[slug] and
+// /courses/[slug] pages, which 404 on a Hebrew slug while the equivalent
+// /api/.../[slug] route handler resolves it fine. Since course titles here
+// are almost always Hebrew, this reliably falls through to the timestamp
+// fallback - a stable, working URL beats a pretty one that 404s.
 function slugify(title: string) {
-  return (
-    title
-      .trim()
-      .toLowerCase()
-      .replace(/['"]/g, "")
-      .replace(/[^\p{L}\p{N}]+/gu, "-")
-      .replace(/^-+|-+$/g, "") || `course-${Date.now()}`
-  );
+  const base = title
+    .trim()
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "") // strip accents from any Latin transliteration
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return base || `course-${Date.now().toString(36)}`;
 }
 
 export async function POST(request: Request) {
