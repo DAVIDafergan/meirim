@@ -15,21 +15,12 @@ import Kicker from "@/components/Kicker";
 import Footer from "@/components/Footer";
 import BlessingModal from "@/components/BlessingModal";
 import PartnershipModal from "@/components/PartnershipModal";
+import AbroadDonation from "@/components/AbroadDonation";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
 import { EASE_LUX, fadeUp, cardsContainer, cardItem } from "@/lib/motionVariants";
 import { goldButton, outlineButton, jewelTones, cardHover } from "@/lib/uiConstants";
 import { StarIcon, RingIcon, CoinIcon, HeartIcon } from "@/components/icons";
-
-// TODO: replace with the real link once it's confirmed / a Nedarim Plus
-// international-card flow is set up, per the Rav's request to point overseas
-// supporters at their shulspace.org donation page.
-const ABROAD_DONATE_URL = "https://shulspace.org/toda-el/donate";
-
-// Zelle (US bank-to-bank transfer) recipient, provided directly by the Rav
-// for American supporters - Zelle has no "pay" link, just a recipient
-// email/phone shown inside the donor's own banking app.
-const ZELLE_EMAIL = "a0533123058@gmail.com";
 
 const blessingIcons = [StarIcon, RingIcon, CoinIcon, HeartIcon];
 
@@ -67,15 +58,10 @@ export default function Home() {
 
   const [blessingOpen, setBlessingOpen] = useState(false);
   const [partnershipOpen, setPartnershipOpen] = useState(false);
-  const [zelleCopied, setZelleCopied] = useState(false);
-
-  function copyZelleEmail() {
-    navigator.clipboard?.writeText(ZELLE_EMAIL).then(() => {
-      setZelleCopied(true);
-      setTimeout(() => setZelleCopied(false), 2000);
-    });
-  }
   const [videoFailed, setVideoFailed] = useState(false);
+  const [purposeIndex, setPurposeIndex] = useState(0);
+  const purposeGroupe =
+    purposeIndex === 0 ? CAMPAIGN_GROUPE : `${CAMPAIGN_GROUPE} · ${t.donatePurposes[purposeIndex]}`;
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({
@@ -173,10 +159,10 @@ export default function Home() {
             </motion.p>
 
             <a
-              href="#blessing"
+              href="#departments"
               className="mt-4 inline-block rounded-full bg-jewel-green px-12 py-4 text-lg font-display font-bold text-white transition-colors duration-300 hover:bg-cream hover:text-ink"
             >
-              {t.hero.blessingCta}
+              {t.hero.cta}
             </a>
           </motion.div>
         </motion.div>
@@ -500,6 +486,14 @@ export default function Home() {
             </h2>
           </div>
 
+          {/* English visitors are assumed to be mostly overseas supporters -
+              lead with the Zelle/international-card option for them. */}
+          {language === "en" && (
+            <div className="mb-16">
+              <AbroadDonation prominent />
+            </div>
+          )}
+
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -532,10 +526,30 @@ export default function Home() {
             ))}
           </motion.div>
 
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="mt-10 flex flex-col items-center gap-3">
+            <p className="text-sm font-bold text-foreground-muted">{t.donateSection.purposeLabel}</p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {t.donatePurposes.map((label, i) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => setPurposeIndex(i)}
+                  className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                    purposeIndex === i
+                      ? "border-gold bg-gold/10 text-gold"
+                      : "border-line text-foreground-muted hover:border-gold/50"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
               href={nedarimPlusUrl({
-                groupe: CAMPAIGN_GROUPE,
+                groupe: purposeGroupe,
                 analytic: "landing-page-free-amount",
                 redirectPath: "/thanks",
               })}
@@ -545,7 +559,7 @@ export default function Home() {
             </a>
             <a
               href={nedarimPlusUrl({
-                groupe: CAMPAIGN_GROUPE,
+                groupe: purposeGroupe,
                 analytic: "landing-page-monthly",
                 redirectPath: "/thanks",
                 onlyKeva: true,
@@ -557,38 +571,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mx-auto mt-16 flex max-w-2xl flex-col items-center gap-3 rounded-2xl border border-line bg-background-alt px-6 py-8 text-center">
-          <Kicker>{t.abroad.kicker}</Kicker>
-          <h3 className="font-display text-2xl font-bold text-jewel-purple">{t.abroad.heading}</h3>
-          <p className="text-foreground-muted">{t.abroad.body}</p>
-          <a
-            href={ABROAD_DONATE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-2 px-8 py-3 ${outlineButton} text-jewel-purple`}
-          >
-            {t.abroad.cta}
-          </a>
-
-          <div className="mt-6 w-full border-t border-line pt-6">
-            <h4 className="font-display text-lg font-bold text-jewel-purple">
-              {t.abroad.zelleHeading}
-            </h4>
-            <p className="mt-2 text-sm text-foreground-muted">{t.abroad.zelleNote}</p>
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
-              <span dir="ltr" className="rounded-full bg-background px-4 py-2 font-mono text-sm text-foreground">
-                {ZELLE_EMAIL}
-              </span>
-              <button
-                type="button"
-                onClick={copyZelleEmail}
-                className={`px-4 py-2 text-xs ${outlineButton} text-jewel-purple`}
-              >
-                {zelleCopied ? t.abroad.zelleCopied : t.abroad.zelleCopy}
-              </button>
-            </div>
+        {language !== "en" && (
+          <div className="mt-16">
+            <AbroadDonation />
           </div>
-        </div>
+        )}
       </section>
 
       <Footer />

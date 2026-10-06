@@ -14,7 +14,7 @@ export interface Translations {
   hero: {
     heading: string;
     paragraph: string;
-    blessingCta: string;
+    cta: string;
     scrollDown: string;
   };
   blessing: {
@@ -67,7 +67,9 @@ export interface Translations {
     donateNow: string;
     otherAmount: string;
     monthly: string;
+    purposeLabel: string;
   };
+  donatePurposes: [string, string, string, string, string, string];
   donationTiers: [
     { title: string; desc: string },
     { title: string; desc: string },
@@ -122,7 +124,7 @@ export const translations: Record<Language, Translations> = {
       heading: 'מוסדות ברסלב "נחלי התורה" — תורה, קהילה וחסד בלב צפת העתיקה',
       paragraph:
         'קהילת ברסלב "נחלי התורה" מלווה כ-250 משפחות בעיר העתיקה בצפת, מגיל הרך ועד בית המדרש — בחינוך, בתמיכה קהילתית ובחסד יומיומי. הצטרפו אלינו בתרומה, בתפילה ובשותפות בדרך.',
-      blessingCta: "השאירו שם לברכה",
+      cta: "לכל פעילות המוסדות",
       scrollDown: "גללו למטה",
     },
     blessing: {
@@ -232,7 +234,9 @@ export const translations: Record<Language, Translations> = {
       donateNow: "תרמו עכשיו",
       otherAmount: "תרומה בסכום אחר",
       monthly: "הוראת קבע חודשית",
+      purposeLabel: "במה תרצו לתמוך?",
     },
+    donatePurposes: ["כללי", "לימוד תורה", "עזרה למשפחות", "לעילוי נשמת", "לרפואה", "להצלחה"],
     donationTiers: [
       { title: "מחזירים את החיוך", desc: "מימון טיפול רגשי לילד" },
       { title: "עוגן למשפחה", desc: "סל תמיכה בסיסי" },
@@ -305,7 +309,7 @@ export const translations: Record<Language, Translations> = {
       heading: 'The Nachalei HaTorah Breslov Institutions — Torah, Community & Kindness in the Heart of Old Tzfat',
       paragraph:
         "The Nachalei HaTorah Breslov community accompanies about 250 families in the Old City of Tzfat, from early childhood through the study hall - through education, community support, and everyday kindness. Join us with a donation, a prayer, and a partnership in the journey.",
-      blessingCta: "Leave a Name for Blessing",
+      cta: "See All Our Activities",
       scrollDown: "Scroll Down",
     },
     blessing: {
@@ -415,7 +419,9 @@ export const translations: Record<Language, Translations> = {
       donateNow: "Donate Now",
       otherAmount: "Donate a Different Amount",
       monthly: "Monthly Standing Order",
+      purposeLabel: "What would you like to support?",
     },
+    donatePurposes: ["General", "Torah Study", "Helping Families", "In Memory Of", "For Healing", "For Success"],
     donationTiers: [
       { title: "Bringing Back the Smile", desc: "Funding emotional therapy for a child" },
       { title: "An Anchor for the Family", desc: "A basic support package" },

@@ -28,6 +28,10 @@ export const GENERAL_DONATION_MIN_AMOUNT = 1800;
 export const donationDisplayFilter = {
   OR: [
     { category: { in: DISPLAY_CATEGORIES } },
+    // A donor-selected purpose is appended to CAMPAIGN_GROUPE as
+    // "<CAMPAIGN_GROUPE> · <purpose>" (see the purpose picker on the
+    // homepage/donate page) - still counts as this campaign's own donation.
+    { category: { startsWith: `${CAMPAIGN_GROUPE} ·` } },
     {
       amount: { gte: GENERAL_DONATION_MIN_AMOUNT },
       NOT: EXCLUDED_CATEGORY_SUBSTRINGS.map((s) => ({

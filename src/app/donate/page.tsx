@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Kicker from "@/components/Kicker";
 import LiveDonationCounter from "@/components/LiveDonationCounter";
 import RecentDonations from "@/components/RecentDonations";
+import AbroadDonation from "@/components/AbroadDonation";
 import { nedarimPlusUrl, CAMPAIGN_GROUPE, donationTierValues } from "@/lib/nedarim";
 import { useLanguage } from "@/components/LanguageProvider";
 import { fadeUp, cardsContainer, cardItem } from "@/lib/motionVariants";
@@ -19,6 +21,10 @@ export default function DonatePage() {
     desc: t.donationTiers[i].desc,
   }));
 
+  const [purposeIndex, setPurposeIndex] = useState(0);
+  const purposeGroupe =
+    purposeIndex === 0 ? CAMPAIGN_GROUPE : `${CAMPAIGN_GROUPE} · ${t.donatePurposes[purposeIndex]}`;
+
   return (
     <main className="relative flex-1 px-6 py-28 sm:py-32">
       <div className="mx-auto max-w-6xl">
@@ -30,6 +36,14 @@ export default function DonatePage() {
             {t.donateSection.heading}
           </h1>
         </div>
+
+        {/* English visitors are assumed to be mostly overseas supporters -
+            lead with the Zelle/international-card option for them. */}
+        {language === "en" && (
+          <div className="mb-16">
+            <AbroadDonation prominent />
+          </div>
+        )}
 
         <motion.div
           initial="hidden"
@@ -62,10 +76,30 @@ export default function DonatePage() {
           ))}
         </motion.div>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <p className="text-sm font-bold text-foreground-muted">{t.donateSection.purposeLabel}</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {t.donatePurposes.map((label, i) => (
+              <button
+                key={label}
+                type="button"
+                onClick={() => setPurposeIndex(i)}
+                className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                  purposeIndex === i
+                    ? "border-gold bg-gold/10 text-gold"
+                    : "border-line text-foreground-muted hover:border-gold/50"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
             href={nedarimPlusUrl({
-              groupe: CAMPAIGN_GROUPE,
+              groupe: purposeGroupe,
               analytic: "donate-page-free-amount",
               redirectPath: "/thanks",
             })}
@@ -75,7 +109,7 @@ export default function DonatePage() {
           </a>
           <a
             href={nedarimPlusUrl({
-              groupe: CAMPAIGN_GROUPE,
+              groupe: purposeGroupe,
               analytic: "donate-page-monthly",
               redirectPath: "/thanks",
               onlyKeva: true,
@@ -85,6 +119,12 @@ export default function DonatePage() {
             {t.donateSection.monthly}
           </a>
         </div>
+
+        {language !== "en" && (
+          <div className="mt-16">
+            <AbroadDonation />
+          </div>
+        )}
 
         <div className="mt-16 flex flex-col items-center gap-8 border-t border-line pt-12">
           <LiveDonationCounter />
