@@ -49,12 +49,22 @@ function CoursesIcon({ className }: { className?: string }) {
   );
 }
 
+function UpdatesIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className}>
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2.2" />
+      <path d="M7.5 9h9M7.5 13h6M7.5 17h4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const NAV = [
   { href: "/admin", label: "לוח בקרה", Icon: LeadsIcon },
   { href: "/admin/donations", label: "תרומות", Icon: DonationsIcon },
   { href: "/admin/gallery", label: "גלריה", Icon: GalleryIcon },
   { href: "/admin/departments", label: "פעילות", Icon: DepartmentsIcon },
   { href: "/admin/courses", label: "קורסים", Icon: CoursesIcon },
+  { href: "/admin/updates", label: "אירועים ועדכונים", Icon: UpdatesIcon },
 ];
 
 export default function AdminSidebar() {

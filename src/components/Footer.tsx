@@ -17,6 +17,7 @@ export default function Footer() {
     { href: "/departments", label: t.nav.activities },
     { href: "/lessons", label: t.nav.lessons },
     { href: "/courses", label: t.nav.courses },
+    { href: "/updates", label: t.nav.updates },
     { href: "/#gallery", label: t.nav.gallery },
     { href: "/donate", label: t.nav.donate },
   ];

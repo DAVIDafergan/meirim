@@ -6,6 +6,7 @@ export interface Translations {
     activities: string;
     courses: string;
     lessons: string;
+    updates: string;
     gallery: string;
     donate: string;
     donateNow: string;
@@ -91,6 +92,7 @@ export interface Translations {
     followKicker: string;
     followHeading: string;
   };
+  updatesPage: { kicker: string; heading: string; intro: string; empty: string; readMore: string };
   liveCounter: { label: string };
   footer: { text: string; admin: string };
   blessingModal: {
@@ -115,6 +117,7 @@ export const translations: Record<Language, Translations> = {
       activities: "הפעילות שלנו",
       courses: "קורסים",
       lessons: "שיעורים",
+      updates: "אירועים ועדכונים",
       gallery: "גלריה",
       donate: "תרומה",
       donateNow: "תרמו עכשיו",
@@ -271,6 +274,13 @@ export const translations: Record<Language, Translations> = {
       followKicker: "עקבו אחרינו",
       followHeading: "הישארו מחוברים",
     },
+    updatesPage: {
+      kicker: "מה קורה אצלנו",
+      heading: "אירועים ועדכונים",
+      intro: "חדשות, אירועים והודעות עדכניות ממוסדות נחלי התורה.",
+      empty: "בקרוב יעלו כאן עדכונים חדשים",
+      readMore: "לפרטים נוספים ←",
+    },
     liveCounter: { label: "נתרם עד כה · מתעדכן בלייב" },
     footer: {
       text: 'מוסדות ברסלב "נחלי התורה" צפת · ע"ר 580785392',
@@ -300,6 +310,7 @@ export const translations: Record<Language, Translations> = {
       activities: "Our Activities",
       courses: "Courses",
       lessons: "Lessons",
+      updates: "Events & Updates",
       gallery: "Gallery",
       donate: "Donate",
       donateNow: "Donate Now",
@@ -455,6 +466,13 @@ export const translations: Record<Language, Translations> = {
       empty: "New lessons are coming soon",
       followKicker: "Follow Us",
       followHeading: "Stay Connected",
+    },
+    updatesPage: {
+      kicker: "What's Happening",
+      heading: "Events & Updates",
+      intro: "News, events, and current announcements from the Nachalei HaTorah institutions.",
+      empty: "New updates are coming soon",
+      readMore: "Learn More ←",
     },
     liveCounter: { label: "Raised so far · Live updates" },
     footer: {

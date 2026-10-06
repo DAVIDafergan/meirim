@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Gallery from "@/components/Gallery";
 import DepartmentsGridClient from "@/components/DepartmentsGridClient";
 import CoursesGridClient from "@/components/CoursesGridClient";
+import UpdatesList from "@/components/UpdatesList";
 import YoutubeFeed from "@/components/YoutubeFeed";
 import SocialFollow from "@/components/SocialFollow";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -399,6 +400,24 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6">
             <CoursesGridClient />
           </div>
+        </div>
+      </section>
+
+      {/* Section: Events & Updates */}
+      <section id="updates" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
+        <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+            <Kicker>{t.updatesPage.kicker}</Kicker>
+          </motion.div>
+          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            {t.updatesPage.heading}
+          </h2>
+        </div>
+        <UpdatesList limit={4} />
+        <div className="mt-10 flex justify-center">
+          <Link href="/updates" className={`px-8 py-3 text-sm text-jewel-purple ${outlineButton}`}>
+            {t.updatesPage.readMore}
+          </Link>
         </div>
       </section>
 
