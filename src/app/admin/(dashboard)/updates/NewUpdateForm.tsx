@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 export default function NewUpdateForm() {
@@ -11,6 +11,7 @@ export default function NewUpdateForm() {
   const [link, setLink] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!open) {
     return (
@@ -36,6 +37,22 @@ export default function NewUpdateForm() {
       });
       const data = await res.json().catch(() => null);
       if (!res.ok) throw new Error(data?.error ?? "היצירה נכשלה");
+
+      const file = fileInputRef.current?.files?.[0];
+      if (file) {
+        const formData = new FormData();
+        formData.set("file", file);
+        const imgRes = await fetch(`/api/admin/updates/${data.update.id}/image`, {
+          method: "POST",
+          body: formData,
+        });
+        if (!imgRes.ok) {
+          // The update itself was created fine - just land on its edit page
+          // so the image can be retried there, instead of losing the text.
+          setError("העדכון נוצר, אך העלאת התמונה נכשלה - נסו שוב בעמוד העריכה");
+        }
+      }
+
       router.push(`/admin/updates/${data.update.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "היצירה נכשלה");
@@ -73,6 +90,15 @@ export default function NewUpdateForm() {
         dir="ltr"
         className={inputClass}
       />
+      <label className="flex flex-col gap-1.5 text-sm text-gray-300">
+        תמונה (לא חובה)
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          className="text-sm text-gray-300 file:mr-3 file:rounded-full file:border-0 file:bg-gold/20 file:px-4 file:py-2 file:text-sm file:font-bold file:text-gold"
+        />
+      </label>
       {error && <p className="text-sm text-red-400">{error}</p>}
       <div className="flex gap-3">
         <button
@@ -91,7 +117,7 @@ export default function NewUpdateForm() {
         </button>
       </div>
       <p className="text-xs text-gray-500">
-        העדכון ייווצר כ&quot;מוסתר&quot; - תוכלו להוסיף תמונה ולפרסם אותו בעמוד העריכה.
+        העדכון ייווצר כ&quot;מוסתר&quot; - תוכלו לפרסם אותו בעמוד העריכה.
       </p>
     </form>
   );
