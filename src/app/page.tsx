@@ -191,8 +191,61 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Section: Gallery */}
+      <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40">
+        <div>
+          <div className="mx-auto mb-12 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+              <Kicker>{t.gallery.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+              {t.gallery.heading}
+            </h2>
+          </div>
+          <Gallery />
+        </div>
+      </section>
+
+
+      {/* Section: Departments */}
+      <section id="departments" className="relative scroll-mt-20 pt-28 sm:pt-40">
+        <div>
+          <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+              <Kicker>{t.activitiesSection.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+              {t.activitiesSection.heading}
+            </h2>
+          </div>
+
+          <DepartmentsGridClient />
+        </div>
+      </section>
+
+      <BlessingModal open={blessingOpen} onClose={() => setBlessingOpen(false)} />
+
+      {/* Section: Events & Updates */}
+      <section id="updates" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
+        <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+            <Kicker>{t.updatesPage.kicker}</Kicker>
+          </motion.div>
+          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            {t.updatesPage.heading}
+          </h2>
+        </div>
+        <UpdatesList limit={4} />
+        <div className="mt-10 flex justify-center">
+          <Link href="/updates" className={`px-8 py-3 text-sm text-jewel-purple ${outlineButton}`}>
+            {t.updatesPage.readMore}
+          </Link>
+        </div>
+      </section>
+
+
       {/* Section: Pidyon Kaparot (seasonal, ahead of Yom Kippur) */}
-      <section id="kaparot" className="surface-alt scroll-mt-20 px-6 py-16 sm:py-20">
+      <section id="kaparot" className="scroll-mt-20 px-6 py-16 sm:py-20">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -368,24 +421,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Departments */}
-      <section id="departments" className="relative scroll-mt-20 pt-28 sm:pt-40">
-        <div>
-          <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-              <Kicker>{t.activitiesSection.kicker}</Kicker>
-            </motion.div>
-            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
-              {t.activitiesSection.heading}
-            </h2>
-          </div>
-
-          <DepartmentsGridClient />
-        </div>
-      </section>
-
-      <BlessingModal open={blessingOpen} onClose={() => setBlessingOpen(false)} />
-
       {/* Section: Courses */}
       <section id="courses" className="relative scroll-mt-20 pt-28 sm:pt-40">
         <div>
@@ -400,39 +435,6 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6">
             <CoursesGridClient />
           </div>
-        </div>
-      </section>
-
-      {/* Section: Events & Updates */}
-      <section id="updates" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
-        <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-            <Kicker>{t.updatesPage.kicker}</Kicker>
-          </motion.div>
-          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
-            {t.updatesPage.heading}
-          </h2>
-        </div>
-        <UpdatesList limit={4} />
-        <div className="mt-10 flex justify-center">
-          <Link href="/updates" className={`px-8 py-3 text-sm text-jewel-purple ${outlineButton}`}>
-            {t.updatesPage.readMore}
-          </Link>
-        </div>
-      </section>
-
-      {/* Section: Gallery */}
-      <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40">
-        <div>
-          <div className="mx-auto mb-12 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-              <Kicker>{t.gallery.kicker}</Kicker>
-            </motion.div>
-            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
-              {t.gallery.heading}
-            </h2>
-          </div>
-          <Gallery />
         </div>
       </section>
 
