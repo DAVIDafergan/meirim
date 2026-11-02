@@ -40,7 +40,7 @@ export default function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-500 ${
         overHero
           ? "border-transparent bg-transparent text-cream"
-          : "border-gold/70 bg-background/95 backdrop-blur-sm text-foreground-muted"
+          : "border-gold/30 bg-ink/80 backdrop-blur-xl text-cream/90 shadow-[0_10px_40px_-20px_rgba(0,0,0,.8)]"
       }`}>
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link href="/" className="block">
@@ -100,7 +100,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="flex flex-col gap-1 overflow-hidden border-t border-line px-6 py-3 text-sm text-foreground-muted lg:hidden"
+            className="flex flex-col gap-1 overflow-hidden border-t border-gold/20 px-6 py-3 text-sm text-cream/80 lg:hidden"
           >
             {links.map((link) => (
               <li key={link.href}>

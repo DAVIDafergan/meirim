@@ -19,9 +19,9 @@ export type DepartmentSummary = {
 
 // Row palettes: text panel background / text colour, and the media panel's fallback.
 const rows = [
-  { panel: "bg-jewel-purple text-cream", media: "from-jewel-green to-jewel-purple-deep", dark: true },
-  { panel: "bg-background-alt text-foreground", media: "from-jewel-wine to-jewel-purple", dark: false },
-  { panel: "bg-jewel-green text-cream", media: "from-jewel-purple to-jewel-wine", dark: true },
+  { panel: "night text-cream", media: "from-jewel-green via-jewel-wine to-jewel-purple-deep", dark: true },
+  { panel: "bg-background-alt text-foreground", media: "from-jewel-wine via-jewel-green to-jewel-purple", dark: false },
+  { panel: "bg-jewel-green text-cream", media: "from-jewel-purple via-jewel-wine to-jewel-green", dark: true },
 ];
 
 export default function DepartmentsGrid({
@@ -44,7 +44,7 @@ export default function DepartmentsGrid({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.25 }}
-            className={`grid min-h-[28rem] grid-cols-1 md:grid-cols-2 ${tone.panel}`}
+            className={`grid min-h-[32rem] grid-cols-1 md:grid-cols-2 ${tone.panel}`}
           >
             <motion.div
               variants={{
@@ -59,11 +59,12 @@ export default function DepartmentsGrid({
               ) : (
                 <div className={`absolute inset-0 bg-gradient-to-br ${tone.media}`}>
                   {Icon && (
-                    <Icon className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 text-white/15" />
+                    <Icon className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 text-gold/20" />
                   )}
                 </div>
               )}
-              <span className="absolute bottom-4 start-6 font-display text-7xl font-bold leading-none text-white/80 drop-shadow-lg sm:text-8xl">
+              <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(244,220,146,0.22),transparent_55%)]" aria-hidden="true" />
+              <span className="absolute bottom-2 start-6 font-display text-[9rem] font-black leading-none text-transparent [-webkit-text-stroke:2px_rgba(244,220,146,0.75)] drop-shadow-lg sm:text-[12rem]">
                 {String(i + 1).padStart(2, "0")}
               </span>
             </motion.div>
@@ -75,15 +76,15 @@ export default function DepartmentsGrid({
               }}
               className="flex flex-col items-start justify-center gap-5 px-8 py-14 sm:px-14 lg:px-20"
             >
-              <span className="h-px w-14 bg-gold" />
-              <h3 className="font-display text-3xl font-bold leading-snug sm:text-4xl">{dept.name}</h3>
+              <span className="h-px w-20 bg-gradient-to-l from-gold to-transparent" />
+              <h3 className="font-display text-4xl font-black leading-tight sm:text-6xl">{dept.name}</h3>
               <p className={`max-w-lg text-base leading-loose sm:text-lg ${tone.dark ? "text-cream/80" : "text-foreground-muted"}`}>
                 {dept.summary}
               </p>
               <div className="mt-2 flex flex-wrap gap-3">
                 <Link
                   href={`/departments/${dept.slug}`}
-                  className="rounded-full border border-current px-7 py-3 text-sm font-bold transition-opacity hover:opacity-70"
+                  className="rounded-full border border-current/60 px-7 py-3 text-sm font-bold transition-colors hover:border-gold hover:text-gold"
                 >
                   {t.departmentsGrid.details}
                 </Link>

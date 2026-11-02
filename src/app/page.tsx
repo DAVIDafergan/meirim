@@ -14,6 +14,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import Divider from "@/components/Divider";
 import Kicker from "@/components/Kicker";
 import Footer from "@/components/Footer";
+import HeroDust from "@/components/HeroDust";
+import Marquee from "@/components/Marquee";
 import BlessingModal from "@/components/BlessingModal";
 import PartnershipModal from "@/components/PartnershipModal";
 import AbroadDonation from "@/components/AbroadDonation";
@@ -55,6 +57,9 @@ export default function Home() {
     Icon,
     title: t.blessingCategories[i],
   }));
+  const ribbon = isRtl
+    ? ["תורה", "תפילה", "חסד", "קהילה", "צפת העתיקה", "ברסלב", "נחלי התורה", "אש התורה"]
+    : ["Torah", "Prayer", "Kindness", "Community", "Old City Tzfat", "Breslov", "Nachalei HaTorah", "Fire of Torah"];
   const stats = statValues.map((s, i) => ({ ...s, label: t.statsLabels[i] }));
 
   const [blessingOpen, setBlessingOpen] = useState(false);
@@ -70,19 +75,21 @@ export default function Home() {
     offset: ["start start", "end start"],
   });
   const heroContentY = useTransform(heroScroll, [0, 1], ["0%", "10%"]);
+  const heroZoom = useTransform(heroScroll, [0, 1], [1, 1.18]);
   const heroContentOpacity = useTransform(heroScroll, [0, 0.85], [1, 0]);
 
   return (
     <main className="flex flex-col flex-1">
-      {/* Section A: Hero - full-bleed looping video of Tzfat behind a dark veil */}
+      {/* Hero - cinematic: Safed video, light rays, drifting gold embers */}
       <section
         id="hero"
         ref={heroRef}
-        className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple-deep px-6 pb-40 pt-32 text-center text-cream"
+        className="relative flex min-h-[100svh] scroll-mt-20 flex-col items-center justify-center overflow-hidden bg-jewel-purple-deep px-6 pb-48 pt-28 text-center text-cream"
       >
         <div className="hero-backdrop absolute inset-0" aria-hidden="true">
           {!videoFailed && (
-            <video
+            <motion.video
+              style={{ scale: heroZoom }}
               className="absolute inset-0 h-full w-full object-cover"
               autoPlay
               muted
@@ -92,16 +99,26 @@ export default function Home() {
               onError={() => setVideoFailed(true)}
             >
               <source src="/videos/safed-hero.mp4" type="video/mp4" onError={() => setVideoFailed(true)} />
-            </video>
+            </motion.video>
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(6,11,20,0.35),rgba(6,11,20,0.88)_75%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-transparent to-ink" />
+          <div className="rays" />
+          <HeroDust />
         </div>
+
+        {/* arched gold frame */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-4 bottom-36 top-24 hidden rounded-t-[50%] border border-gold/20 md:block lg:inset-x-[12%]"
+        />
 
         <motion.div
           style={{ y: heroContentY, opacity: heroContentOpacity }}
-          className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-8 px-4"
+          className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-4"
         >
-          <motion.div initial="hidden" animate="visible" variants={heroFade}>
+          <motion.div initial="hidden" animate="visible" variants={heroFade} className="relative">
+            <span className="absolute inset-0 -m-6 rounded-full bg-gold/20 blur-3xl" aria-hidden="true" />
             <Image
               src="/logo2.svg"
               alt={
@@ -111,7 +128,7 @@ export default function Home() {
               }
               width={500}
               height={500}
-              className="h-auto w-[110px] object-contain drop-shadow-lg sm:w-[140px]"
+              className="relative h-auto w-[84px] object-contain drop-shadow-[0_10px_30px_rgba(212,166,60,0.45)] sm:w-[104px]"
               priority
             />
           </motion.div>
@@ -126,24 +143,24 @@ export default function Home() {
             <motion.span
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 1, delay: 0.3, ease: EASE_LUX }}
-              className="h-px w-20 bg-gold"
+              transition={{ duration: 1.2, delay: 0.3, ease: EASE_LUX }}
+              className="h-px w-32 bg-gradient-to-r from-transparent via-gold to-transparent"
             />
             <motion.h1
               key={language}
               initial="hidden"
               animate="visible"
-              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07, delayChildren: 0.4 } } }}
-              className="max-w-3xl font-display font-bold text-2xl leading-snug text-cream drop-shadow-lg sm:text-4xl md:text-5xl"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.4 } } }}
+              className="max-w-4xl font-display text-4xl font-black leading-[1.12] tracking-tight text-cream drop-shadow-[0_6px_30px_rgba(0,0,0,0.7)] sm:text-5xl md:text-6xl"
             >
-              {t.hero.heading.split(" ").map((word, i) => (
+              {t.hero.heading.split(" ").map((word, i, arr) => (
                 <motion.span
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
-                    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: EASE_LUX } },
+                    hidden: { opacity: 0, y: 28, filter: "blur(12px)" },
+                    visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: EASE_LUX } },
                   }}
-                  className="inline-block ltr:mr-[0.28em] rtl:ml-[0.28em]"
+                  className={`inline-block ltr:mr-[0.28em] rtl:ml-[0.28em] ${i >= arr.length - 3 ? "gold-text" : ""}`}
                 >
                   {word}
                 </motion.span>
@@ -153,59 +170,97 @@ export default function Home() {
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.4, ease: EASE_LUX }}
-              className="max-w-xl text-base font-light leading-loose text-cream/85 sm:text-lg"
+              transition={{ duration: 1, delay: 1.5, ease: EASE_LUX }}
+              className="max-w-2xl text-base font-light leading-loose text-cream/85 sm:text-lg"
             >
               {t.hero.paragraph}
             </motion.p>
 
-            <a
-              href="#departments"
-              className="mt-4 inline-block rounded-full bg-jewel-green px-12 py-4 text-lg font-display font-bold text-white transition-colors duration-300 hover:bg-cream hover:text-ink"
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.8, ease: EASE_LUX }}
+              className="mt-2 flex flex-col items-center gap-4 sm:flex-row"
             >
-              {t.hero.cta}
-            </a>
+              <Link href="/donate" className={`px-12 py-4 text-lg ${goldButton}`}>
+                {t.nav.donateNow}
+              </Link>
+              <a
+                href="#departments"
+                className="rounded-full border border-gold/50 px-10 py-4 text-lg font-display font-bold text-cream backdrop-blur transition-colors duration-300 hover:border-gold hover:bg-gold/15"
+              >
+                {t.hero.cta}
+              </a>
+            </motion.div>
           </motion.div>
         </motion.div>
+
+        {/* scroll cue */}
+        <motion.a
+          href="#about"
+          aria-label="scroll"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.4, duration: 1 }}
+          className="absolute bottom-40 left-1/2 z-10 hidden"
+        >
+          <span className="h-10 w-6 rounded-full border border-gold/60 p-1">
+            <span className="block h-2 w-full animate-[float-slow_1.6s_ease-in-out_infinite] rounded-full bg-gold" />
+          </span>
+        </motion.a>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.8, ease: EASE_LUX }}
-          className="absolute inset-x-0 bottom-0 z-10 border-t border-white/20 bg-black/35 backdrop-blur-md"
+          transition={{ duration: 1, delay: 2, ease: EASE_LUX }}
+          className="glass absolute inset-x-4 bottom-6 z-10 mx-auto max-w-5xl rounded-3xl sm:inset-x-6"
         >
-          <div className="mx-auto grid max-w-6xl grid-cols-2 divide-white/15 px-6 sm:grid-cols-4 sm:divide-x sm:divide-x-reverse">
+          <div className="grid grid-cols-2 divide-gold/15 px-4 sm:grid-cols-4 sm:divide-x sm:divide-x-reverse">
             {stats.map((st) => (
-              <div key={st.label} className="flex flex-col items-center gap-1 py-5">
-                <span className="font-display text-3xl font-bold text-gold sm:text-4xl">
+              <div key={st.label} className="flex flex-col items-center gap-1 py-4 sm:py-5">
+                <span className="gold-text font-display text-4xl font-black sm:text-5xl">
                   <AnimatedCounter to={st.to} prefix={st.prefix} suffix={st.suffix} />
                 </span>
-                <span className="text-xs tracking-wide text-cream/75 sm:text-sm">{st.label}</span>
+                <span className="text-xs tracking-wide text-cream/80 sm:text-sm">{st.label}</span>
               </div>
             ))}
-            <div className="flex flex-col items-center gap-1 py-5">
-              <span className="font-display text-3xl font-bold text-gold sm:text-4xl">❤️</span>
-              <span className="text-xs tracking-wide text-cream/75 sm:text-sm">{t.statsLabels[3]}</span>
+            <div className="flex flex-col items-center gap-1 py-4 sm:py-5">
+              <span className="font-display text-4xl font-black sm:text-5xl">❤️</span>
+              <span className="text-xs tracking-wide text-cream/80 sm:text-sm">{t.statsLabels[3]}</span>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Section: Gallery */}
-      <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40">
-        <div>
-          <div className="mx-auto mb-12 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-              <Kicker>{t.gallery.kicker}</Kicker>
-            </motion.div>
-            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
-              {t.gallery.heading}
-            </h2>
-          </div>
-          <Gallery />
+      {/* Ribbon */}
+      <div className="night border-y border-gold/20 py-5 font-display text-2xl font-bold text-gold/90 sm:text-3xl">
+        <Marquee items={ribbon} />
+      </div>
+
+      {/* Section: About the institution */}
+      <section id="about" className="night relative scroll-mt-20 overflow-hidden px-6 py-28 sm:py-40">
+        <span className="watermark -start-10 top-4 text-[28rem] opacity-70" aria-hidden="true">{isRtl ? "א" : "A"}</span>
+        <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+            <Kicker>{t.about.kicker}</Kicker>
+          </motion.div>
+          <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight gold-text sm:text-6xl md:text-7xl">
+            {t.about.heading}
+          </h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            className="text-lg leading-loose text-cream/80 sm:text-2xl"
+          >
+            {t.about.paragraph1}
+            <br />
+            <br />
+            {t.about.paragraph2}
+          </motion.p>
         </div>
       </section>
-
 
       {/* Section: Departments */}
       <section id="departments" className="relative scroll-mt-20 pt-28 sm:pt-40">
@@ -214,7 +269,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.activitiesSection.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-jewel-purple sm:text-6xl md:text-7xl">
               {t.activitiesSection.heading}
             </h2>
           </div>
@@ -225,13 +280,58 @@ export default function Home() {
 
       <BlessingModal open={blessingOpen} onClose={() => setBlessingOpen(false)} />
 
+      {/* Section B: The Old City */}
+      <section
+        id="heritage"
+        className="night ambient-surface relative scroll-mt-20 overflow-hidden px-6 py-32 text-cream sm:py-44"
+      >
+        <div className="rays" aria-hidden="true" />
+        <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+            <Kicker>{t.story.kicker}</Kicker>
+          </motion.div>
+          <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-cream sm:text-6xl md:text-7xl">
+            {t.story.heading}
+          </h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            transition={{ delay: 0.1 }}
+            className="text-lg leading-loose text-cream/85 sm:text-2xl"
+          >
+            {t.story.paragraph1}
+            <br />
+            <br />
+            {t.story.paragraph2}
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Section: Gallery */}
+      <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40 pb-0">
+        <div>
+          <div className="mx-auto mb-12 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+              <Kicker>{t.gallery.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-jewel-purple sm:text-6xl md:text-7xl">
+              {t.gallery.heading}
+            </h2>
+          </div>
+          <Gallery />
+        </div>
+      </section>
+
+
       {/* Section: Events & Updates */}
       <section id="updates" className="relative scroll-mt-20 px-6 py-28 sm:py-40">
         <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.updatesPage.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-jewel-purple sm:text-6xl md:text-7xl">
             {t.updatesPage.heading}
           </h2>
         </div>
@@ -243,6 +343,54 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* Section: Lessons teaser - the full feed lives on its own /lessons page */}
+      <section id="lessons" className="night ambient-surface relative scroll-mt-20 overflow-hidden px-6 py-20 text-cream sm:py-24">
+        <div className="mx-auto max-w-5xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={fadeUp}
+            className="mb-12 flex flex-col items-center gap-6 text-center"
+          >
+            <Kicker>{t.lessonsPage.kicker}</Kicker>
+            <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
+              {t.lessonsPage.heading}
+            </h2>
+            <p className="max-w-2xl text-lg leading-loose text-cream/80">{t.lessonsPage.intro}</p>
+          </motion.div>
+
+          <YoutubeFeed />
+
+          <div className="mx-auto mt-16 flex max-w-4xl flex-col items-center gap-6 border-t border-white/10 pt-12 text-center">
+            <Kicker>{t.lessonsPage.followKicker}</Kicker>
+            <h3 className="font-display text-2xl font-bold text-cream">{t.lessonsPage.followHeading}</h3>
+            <SocialFollow />
+          </div>
+        </div>
+      </section>
+
+      <div className="py-2">
+        <Divider />
+      </div>
+
+      {/* Section: Courses */}
+      <section id="courses" className="relative scroll-mt-20 pt-28 sm:pt-40">
+        <div>
+          <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
+              <Kicker>{t.coursesPage.kicker}</Kicker>
+            </motion.div>
+            <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-jewel-purple sm:text-6xl md:text-7xl">
+              {t.coursesPage.heading}
+            </h2>
+          </div>
+          <div className="mx-auto max-w-6xl px-6">
+            <CoursesGridClient />
+          </div>
+        </div>
+      </section>
 
       {/* Section: Pidyon Kaparot (seasonal, ahead of Yom Kippur) */}
       <section id="kaparot" className="scroll-mt-20 px-6 py-16 sm:py-20">
@@ -283,7 +431,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
             <Kicker>{t.blessing.kicker}</Kicker>
           </motion.div>
-          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+          <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-jewel-purple sm:text-6xl md:text-7xl">
             {t.blessing.heading}
           </h2>
           <motion.p
@@ -369,108 +517,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Section B: The Old City */}
-      <section
-        id="heritage"
-        className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-green px-6 py-24 text-cream sm:py-32"
-      >
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-            <Kicker>{t.story.kicker}</Kicker>
-          </motion.div>
-          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-cream sm:text-5xl md:text-6xl">
-            {t.story.heading}
-          </h2>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ delay: 0.1 }}
-            className="text-lg leading-loose text-cream/80 sm:text-xl"
-          >
-            {t.story.paragraph1}
-            <br />
-            <br />
-            {t.story.paragraph2}
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Section: About the institution */}
-      <section id="about" className="relative scroll-mt-20 px-6 py-24 sm:py-28">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-            <Kicker>{t.about.kicker}</Kicker>
-          </motion.div>
-          <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
-            {t.about.heading}
-          </h2>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            className="text-lg leading-loose text-foreground-muted sm:text-xl"
-          >
-            {t.about.paragraph1}
-            <br />
-            <br />
-            {t.about.paragraph2}
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Section: Courses */}
-      <section id="courses" className="relative scroll-mt-20 pt-28 sm:pt-40">
-        <div>
-          <div className="mx-auto mb-16 flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
-              <Kicker>{t.coursesPage.kicker}</Kicker>
-            </motion.div>
-            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
-              {t.coursesPage.heading}
-            </h2>
-          </div>
-          <div className="mx-auto max-w-6xl px-6">
-            <CoursesGridClient />
-          </div>
-        </div>
-      </section>
-
-      {/* Section: Lessons teaser - the full feed lives on its own /lessons page */}
-      <section id="lessons" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-20 text-cream sm:py-24">
-        <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={fadeUp}
-            className="mb-12 flex flex-col items-center gap-6 text-center"
-          >
-            <Kicker>{t.lessonsPage.kicker}</Kicker>
-            <h2 className="font-display font-bold text-3xl leading-snug tracking-tight text-cream sm:text-4xl">
-              {t.lessonsPage.heading}
-            </h2>
-            <p className="max-w-2xl text-lg leading-loose text-cream/80">{t.lessonsPage.intro}</p>
-          </motion.div>
-
-          <YoutubeFeed />
-
-          <div className="mx-auto mt-16 flex max-w-4xl flex-col items-center gap-6 border-t border-white/10 pt-12 text-center">
-            <Kicker>{t.lessonsPage.followKicker}</Kicker>
-            <h3 className="font-display text-2xl font-bold text-cream">{t.lessonsPage.followHeading}</h3>
-            <SocialFollow />
-          </div>
-        </div>
-      </section>
-
-      <div className="py-2">
-        <Divider />
-      </div>
-
       {/* Section: Issachar-Zevulun partnership */}
-      <section id="partnership" className="ambient-surface relative scroll-mt-20 overflow-hidden bg-jewel-wine px-6 py-24 text-cream sm:py-28">
+      <section id="partnership" className="night ambient-surface relative scroll-mt-20 overflow-hidden px-6 py-24 text-cream sm:py-28">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -502,7 +550,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} variants={fadeUp}>
               <Kicker>{t.donateSection.kicker}</Kicker>
             </motion.div>
-            <h2 className="font-display font-bold text-4xl leading-snug tracking-tight text-jewel-purple sm:text-5xl md:text-6xl">
+            <h2 className="font-display font-bold text-5xl leading-[1.05] tracking-tight text-jewel-purple sm:text-6xl md:text-7xl">
               {t.donateSection.heading}
             </h2>
           </div>

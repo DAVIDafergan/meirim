@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Assistant, Alef } from "next/font/google";
+import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -12,10 +12,10 @@ const heebo = Assistant({
   display: "swap",
 });
 
-const frankRuhlLibre = Alef({
+const frankRuhlLibre = Frank_Ruhl_Libre({
   variable: "--font-serif-display",
   subsets: ["hebrew", "latin"],
-  weight: ["400", "700"],
+  weight: ["300", "500", "700", "900"],
   display: "swap",
 });
 

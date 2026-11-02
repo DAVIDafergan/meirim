@@ -77,7 +77,7 @@ export default function UpdatesList({ limit }: { limit?: number }) {
                 href={u.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto text-sm font-bold text-gold hover:underline"
+                className="mt-auto text-sm font-bold text-gold-deep hover:underline"
               >
                 {t.updatesPage.readMore}
               </a>

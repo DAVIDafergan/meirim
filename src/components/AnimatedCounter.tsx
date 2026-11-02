@@ -31,7 +31,7 @@ export default function AnimatedCounter({
   }, [isInView, to, duration]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} dir="ltr" className="inline-block">
       {prefix}
       {value}
       {suffix}
