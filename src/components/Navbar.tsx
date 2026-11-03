@@ -23,7 +23,7 @@ export default function Navbar() {
   if (pathname?.startsWith("/admin")) return null;
 
   const links = [
-    { href: "/#about", label: t.nav.about },
+    { href: "/about", label: t.nav.about },
     { href: "/departments", label: t.nav.activities },
     { href: "/lessons", label: t.nav.lessons },
     { href: "/courses", label: t.nav.courses },
