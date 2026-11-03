@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Kicker from "@/components/Kicker";
 import { useLanguage } from "@/components/LanguageProvider";
+import YoutubeFeed from "@/components/YoutubeFeed";
 import { fadeUp } from "@/lib/motionVariants";
 import { goldButton, outlineButton } from "@/lib/uiConstants";
 
@@ -39,6 +40,8 @@ const CONTENT = {
       'המוסדות פועלים כעמותה רשומה בשם ״מוסדות ברסלב נחלי התורה (ע״ר)״, מספר עמותה 580785392. מטרתה המרכזית: קירוב רחוקים, לצד הקמה והפעלה של מוסדות חינוך, כולל אברכים ומלגות.',
     followKicker: "בכל מקום",
     followHeading: "הצטרפו אלינו",
+    videoKicker: "שיעורים וסרטונים",
+    videoHeading: "מפי הרב – הסרטונים האחרונים",
     ctaDonate: "לשותפות ותרומה",
     ctaLessons: "לשיעורים",
   },
@@ -71,6 +74,8 @@ const CONTENT = {
       'The institutions operate as a registered nonprofit, "Mosdot Breslov Nachalei HaTorah (R.A.)", registration no. 580785392. Its central aim is outreach, alongside establishing and running educational institutions, a kollel and scholarships.',
     followKicker: "Everywhere",
     followHeading: "Join us",
+    videoKicker: "Lessons & videos",
+    videoHeading: "From the Rabbi – latest videos",
     ctaDonate: "Partner & donate",
     ctaLessons: "Watch lessons",
   },
@@ -136,6 +141,16 @@ export default function AboutContent() {
             <Kicker>{c.legalKicker}</Kicker>
             <p className="text-lg leading-relaxed text-foreground-muted">{c.legalText}</p>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="night relative overflow-hidden px-6 py-24 sm:py-32">
+        <div className="relative mx-auto max-w-5xl">
+          <motion.div {...reveal} className="mb-12 flex flex-col items-center gap-5 text-center">
+            <Kicker>{c.videoKicker}</Kicker>
+            <h2 className="font-display text-4xl font-bold leading-snug gold-text sm:text-5xl">{c.videoHeading}</h2>
+          </motion.div>
+          <YoutubeFeed />
         </div>
       </section>
 
