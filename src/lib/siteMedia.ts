@@ -30,7 +30,8 @@ export const DEPARTMENT_MEDIA: Record<string, StaticImage[]> = {
   "gan-banot": [img("gan-wall", "קירות הגן"), img("gan-table", "פינת הגן"), img("gan-paintings", "ציורי הילדים")],
   "talmud-torah": [img("tt-building", "בניין התלמוד תורה"), img("tt-yard", "החצר בהפסקה"), img("tt-classroom", "כיתה בתלמוד תורה"), img("campus-aerial", "מתחם המוסדות מהאוויר")],
   kollel: [img("kollel-chavrusa3", "לימוד בחברותא"), img("kollel-chavrusa2", "אברכי הכולל בלימוד"), img("kollel-sefer", "עיון בספר")],
-  "beit-chinuch-banot": [img("banot-classroom", "תלמידות בכיתה"), img("gan-paintings", "עבודות התלמידות על הקיר")],
+  // no photos of children here: the video has no clear footage of the girls' school, so only classroom wall art
+  "beit-chinuch-banot": [img("gan-paintings", "עבודות התלמידות על הקיר"), img("gan-wall", "קישוטי הכיתה")],
   "beit-hatavshil": [img("tavshil-kitchen", "מטבח בית התבשיל"), img("tavshil-pantry", "מזווה בית התבשיל"), img("tavshil-table", "שולחן ערוך")],
   "machon-sfarim": [img("sefarim-pages", "דפי גמרא"), img("sefarim-hands", "בין דפי הספרים"), img("sefarim-page", "עיון בספר")],
 };
