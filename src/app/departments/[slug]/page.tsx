@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import DepartmentDetailView from "@/components/DepartmentDetailView";
+import { DEPARTMENT_MEDIA } from "@/lib/siteMedia";
 
 export const dynamic = "force-dynamic";
 
@@ -43,11 +44,10 @@ export default async function DepartmentPage({
         body: department.body,
         icon: department.icon,
         analyticTag: department.analyticTag,
-        images: department.images.map((img) => ({
-          id: img.id,
-          caption: img.caption,
-          filename: img.filename,
-        })),
+        // nothing uploaded for this department yet → the default photos from the institutions' video
+        images: department.images.length
+          ? department.images.map((img) => ({ id: img.id, caption: img.caption, filename: img.filename }))
+          : (DEPARTMENT_MEDIA[slug] ?? []).map((m, i) => ({ id: -(i + 1), caption: m.caption, filename: m.src })),
       }}
     />
   );

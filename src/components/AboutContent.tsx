@@ -117,11 +117,17 @@ export default function AboutContent() {
               </motion.article>
             ))}
           </div>
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {[["/media/tt-building.jpg", "בניין התלמוד תורה"], ["/media/yeshiva-hall.jpg", "בית המדרש של הישיבה"], ["/media/kollel-chavrusa3.jpg", "לימוד בחברותא בכולל"]].map(([src, alt]) => (
+              <motion.img key={src} {...reveal} src={src} alt={alt} loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover shadow-sm ring-1 ring-black/5" />
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="night relative overflow-hidden px-6 py-24 sm:py-32">
         <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-7 text-center">
+          <motion.img {...reveal} src="/media/rav-portrait.jpg" alt={c.ravHeading} className="h-40 w-40 rounded-full object-cover object-top ring-2 ring-gold/60 shadow-2xl sm:h-48 sm:w-48" />
           <motion.div {...reveal}><Kicker>{c.ravKicker}</Kicker></motion.div>
           <h2 className="font-display text-4xl font-bold leading-tight gold-text sm:text-6xl">{c.ravHeading}</h2>
           {c.ravText.map((p) => (

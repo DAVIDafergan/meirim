@@ -1,5 +1,6 @@
 "use client";
 
+import { mediaUrl } from "@/lib/siteMedia";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Kicker from "@/components/Kicker";
@@ -72,7 +73,7 @@ export default function DepartmentDetailView({ department }: { department: Depar
               images={department.images.map((img) => ({
                 id: img.id,
                 caption: img.caption,
-                url: `/api/media/${img.filename}`,
+                url: mediaUrl(img.filename),
               }))}
             />
           </div>

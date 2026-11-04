@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import DepartmentsPageHeader from "@/components/DepartmentsPageHeader";
 import DepartmentsGrid from "@/components/DepartmentsGrid";
+import { DEPARTMENT_MEDIA } from "@/lib/siteMedia";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,7 @@ export default async function DepartmentsPage() {
       <DepartmentsGrid
         departments={departments.map(({ images, ...d }) => ({
           ...d,
-          cover: images[0] ? `/api/media/${encodeURIComponent(images[0].filename)}` : null,
+          cover: images[0] ? `/api/media/${encodeURIComponent(images[0].filename)}` : DEPARTMENT_MEDIA[d.slug]?.[0]?.src ?? null,
         }))}
       />
     </main>

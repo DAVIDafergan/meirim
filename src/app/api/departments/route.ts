@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { DEPARTMENT_MEDIA } from "@/lib/siteMedia";
 
 export async function GET() {
   const departments = await prisma.department.findMany({
@@ -12,7 +13,7 @@ export async function GET() {
   return NextResponse.json({
     departments: departments.map(({ images, ...d }) => ({
       ...d,
-      cover: images[0] ? `/api/media/${encodeURIComponent(images[0].filename)}` : null,
+      cover: images[0] ? `/api/media/${encodeURIComponent(images[0].filename)}` : DEPARTMENT_MEDIA[d.slug]?.[0]?.src ?? null,
     })),
   });
 }
