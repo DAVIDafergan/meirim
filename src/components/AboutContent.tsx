@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Kicker from "@/components/Kicker";
 import { useLanguage } from "@/components/LanguageProvider";
 import YoutubeFeed from "@/components/YoutubeFeed";
+import InstitutionsVideo from "@/components/InstitutionsVideo";
+import InstitutionsStory from "@/components/InstitutionsStory";
 import { fadeUp } from "@/lib/motionVariants";
 import { goldButton, outlineButton } from "@/lib/uiConstants";
 
@@ -102,6 +104,8 @@ export default function AboutContent() {
         </div>
       </section>
 
+      <InstitutionsVideo />
+
       <section className="px-6 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <motion.div {...reveal} className="mb-14 flex flex-col items-center gap-5 text-center">
@@ -124,6 +128,8 @@ export default function AboutContent() {
           </div>
         </div>
       </section>
+
+      <InstitutionsStory />
 
       <section className="night relative overflow-hidden px-6 py-24 sm:py-32">
         <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-7 text-center">

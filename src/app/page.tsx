@@ -1,5 +1,6 @@
 "use client";
 
+import InstitutionsVideo from "@/components/InstitutionsVideo";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -308,6 +309,8 @@ export default function Home() {
           </motion.p>
         </div>
       </section>
+
+      <InstitutionsVideo />
 
       {/* Section: Gallery */}
       <section id="gallery" className="surface-alt relative scroll-mt-20 pt-28 sm:pt-40 pb-0">

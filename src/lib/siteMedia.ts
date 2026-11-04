@@ -22,6 +22,15 @@ export const GALLERY_MEDIA: StaticImage[] = [
   img("tavshil-kitchen", "מטבח בית התבשיל"),
   img("sefarim-hands", "בין דפי הספרים"),
   img("tt-classroom", "כיתה בתלמוד תורה"),
+  img("yeshiva-beit-midrash2", "בבית המדרש"),
+  img("campus-aerial2", "מבט על המוסדות"),
+  img("tavshil-pantry", "מזווה בית התבשיל"),
+  img("tavshil-table", "שולחן ערוך בבית התבשיל"),
+  img("sefarim-pages", "דפי ספרים במכון"),
+  img("kollel-sefer", "ספר פתוח בכולל"),
+  img("gan-table", "שולחן הילדים בגן"),
+  img("gan-paintings", "עבודות הילדים בגן"),
+  img("yeshiva-hall2", "אולם הלימוד בישיבה"),
 ];
 
 /** Per department slug. The first image is the cover on the departments grid. */
