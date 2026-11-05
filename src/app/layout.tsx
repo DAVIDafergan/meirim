@@ -27,13 +27,14 @@ export const metadata: Metadata = {
   category: "religion",
   openGraph: {
     type: "website",
+    url: "/",
     locale: "he_IL",
     siteName: 'נחלי התורה צפת',
     title: 'מוסדות ברסלב "נחלי התורה" | העיר העתיקה, צפת',
     description: "גן, תלמוד תורה, ישיבה, כולל, הוצאת ספרים ובית התבשיל בלב העיר העתיקה בצפת.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: 'מוסדות ברסלב "נחלי התורה" צפת' }],
+    images: [{ url: "/og-share.jpg", width: 1200, height: 630, type: "image/jpeg", alt: 'מוסדות ברסלב "נחלי התורה" צפת' }],
   },
-  twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
+  twitter: { card: "summary_large_image", images: ["/og-share.jpg"] },
   title: 'מוסדות ברסלב "נחלי התורה" | העיר העתיקה, צפת',
   description:
     'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת — קהילה של כ-250 משפחות בראשות הגאון רבי נתן מרדכי ישראל שליט"א. חינוך, קהילה וחסד לאורך כל שלבי החיים.',
@@ -50,7 +51,7 @@ const jsonLd = {
       alternateName: ["נחלי התורה", "Nachalei HaTorah Tzfat", "Breslov Institutions Nachalei HaTorah, Safed"],
       url: SITE_URL,
       logo: `${SITE_URL}/logo2-nav.png`,
-      image: `${SITE_URL}/og-image.jpg`,
+      image: `${SITE_URL}/og-share.jpg`,
       description:
         'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת: גני ילדים, תלמוד תורה, ישיבה לבחורים צעירים, כולל אברכים, בית חינוך לבנות, מדרשיה, בית התבשיל ומכון להוצאת ספרים בכמה שפות, בראשות הגאון רבי נתן מרדכי ישראל שליט"א.',
       address: { "@type": "PostalAddress", addressLocality: "צפת", addressRegion: "הגליל העליון", addressCountry: "IL" },
