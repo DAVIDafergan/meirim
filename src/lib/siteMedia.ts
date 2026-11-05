@@ -31,6 +31,8 @@ export const GALLERY_MEDIA: StaticImage[] = [
   img("gan-table", "שולחן הילדים בגן"),
   img("gan-paintings", "עבודות הילדים בגן"),
   img("yeshiva-hall2", "אולם הלימוד בישיבה"),
+  img("event-gathering", "מפגש באולם"),
+  img("event-embrace", "שמחה במפגש"),
 ];
 
 /** Per department slug. The first image is the cover on the departments grid. */
