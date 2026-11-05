@@ -24,6 +24,8 @@ export async function generateMetadata({
   return {
     title: `${department.name} | נחלי התורה צפת`,
     description: department.summary,
+    alternates: { canonical: `/departments/${slug}` },
+    openGraph: { title: `${department.name} | נחלי התורה צפת`, description: department.summary, type: "article" },
   };
 }
 

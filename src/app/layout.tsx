@@ -22,6 +22,9 @@ const frankRuhlLibre = Frank_Ruhl_Libre({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nachalei-hatorah.org"),
   alternates: { canonical: "/" },
+  keywords: ["נחלי התורה", "נחלי התורה צפת", "ברסלב צפת", "מוסדות ברסלב", "תלמוד תורה צפת", "ישיבה בצפת", "כולל אברכים צפת", "תרומה לצפת", "הרב נתן מרדכי ישראל", "ספרי ברסלב", "אור המעשיות", "אור מוהר\"ן"],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  category: "religion",
   openGraph: {
     type: "website",
     locale: "he_IL",
@@ -36,6 +39,39 @@ export const metadata: Metadata = {
     'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת — קהילה של כ-250 משפחות בראשות הגאון רבי נתן מרדכי ישראל שליט"א. חינוך, קהילה וחסד לאורך כל שלבי החיים.',
 };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nachalei-hatorah.org";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["EducationalOrganization", "NGO"],
+      "@id": `${SITE_URL}/#organization`,
+      name: 'מוסדות ברסלב "נחלי התורה" צפת',
+      alternateName: ["נחלי התורה", "Nachalei HaTorah Tzfat", "Breslov Institutions Nachalei HaTorah, Safed"],
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo2-nav.png`,
+      image: `${SITE_URL}/og-image.jpg`,
+      description:
+        'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת: גני ילדים, תלמוד תורה, ישיבה לבחורים צעירים, כולל אברכים, בית חינוך לבנות, מדרשיה, בית התבשיל ומכון להוצאת ספרים בכמה שפות, בראשות הגאון רבי נתן מרדכי ישראל שליט"א.',
+      address: { "@type": "PostalAddress", addressLocality: "צפת", addressRegion: "הגליל העליון", addressCountry: "IL" },
+      areaServed: "IL",
+      inLanguage: ["he", "en"],
+      sameAs: [
+        "https://www.facebook.com/profile.php?id=61552477960447",
+        "https://www.tiktok.com/@haravnatan",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'נחלי התורה צפת',
+      inLanguage: "he",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -44,6 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${heebo.variable} ${frankRuhlLibre.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <LanguageProvider>
           <ScrollProgress />
           <Navbar />

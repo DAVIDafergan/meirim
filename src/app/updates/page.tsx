@@ -3,6 +3,7 @@ import UpdatesPageHeader from "@/components/UpdatesPageHeader";
 import UpdatesList from "@/components/UpdatesList";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/updates" },
   title: 'אירועים ועדכונים | מוסדות ברסלב "נחלי התורה" צפת',
   description: "חדשות, אירועים והודעות עדכניות ממוסדות נחלי התורה.",
 };

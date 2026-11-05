@@ -5,6 +5,16 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.nachalei-hatorah.org" }],
+        destination: "https://nachalei-hatorah.org/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

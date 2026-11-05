@@ -7,6 +7,7 @@ import { DEPARTMENT_MEDIA } from "@/lib/siteMedia";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/departments" },
   title: "הפעילות שלנו | נחלי התורה צפת",
   description: "סקירה של הפעילות במוסדות נחלי התורה צפת — חינוך, קהילה וחסד.",
 };

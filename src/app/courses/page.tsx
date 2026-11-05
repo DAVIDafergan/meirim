@@ -6,6 +6,7 @@ import CoursesGrid from "@/components/CoursesGrid";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/courses" },
   title: 'קורסים | מוסדות ברסלב "נחלי התורה" צפת',
   description: "קורסים תורניים מפי הגאון הרב נתן מרדכי ישראל שליט\"א.",
 };

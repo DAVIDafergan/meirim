@@ -11,9 +11,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly" as const,
     priority: p === "" ? 1 : 0.7,
   }));
-  let departments: { slug: string }[] = [];
+  let departments: { slug: string; updatedAt: Date }[] = [];
   try {
-    departments = await prisma.department.findMany({ select: { slug: true } });
+    departments = await prisma.department.findMany({ select: { slug: true, updatedAt: true } });
   } catch {}
-  return [...pages, ...departments.map((d) => ({ url: `${SITE}/departments/${d.slug}`, changeFrequency: "monthly" as const, priority: 0.6 }))];
+  return [...pages, ...departments.map((d) => ({ url: `${SITE}/departments/${d.slug}`, lastModified: d.updatedAt, changeFrequency: "monthly" as const, priority: 0.6 }))];
 }
