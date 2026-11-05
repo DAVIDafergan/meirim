@@ -20,6 +20,8 @@ const frankRuhlLibre = Frank_Ruhl_Libre({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nachalei-hatorah.org"),
+  alternates: { canonical: "/" },
   title: 'מוסדות ברסלב "נחלי התורה" | העיר העתיקה, צפת',
   description:
     'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת — קהילה של כ-250 משפחות בראשות הגאון רבי נתן מרדכי ישראל שליט"א. חינוך, קהילה וחסד לאורך כל שלבי החיים.',
