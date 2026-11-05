@@ -42,5 +42,14 @@ export const DEPARTMENT_MEDIA: Record<string, StaticImage[]> = {
   // no photos of children here: the video has no clear footage of the girls' school, so only classroom wall art
   "beit-chinuch-banot": [img("gan-paintings", "עבודות התלמידות על הקיר"), img("gan-wall", "קישוטי הכיתה")],
   "beit-hatavshil": [img("tavshil-kitchen", "מטבח בית התבשיל"), img("tavshil-pantry", "מזווה בית התבשיל"), img("tavshil-table", "שולחן ערוך")],
-  "machon-sfarim": [img("sefarim-pages", "דפי גמרא"), img("sefarim-hands", "בין דפי הספרים"), img("sefarim-page", "עיון בספר")],
+  "yeshiva-ketana": [img("yeshiva-hall2", "בית המדרש"), img("yeshiva-study", "לימוד בחברותא"), img("yeshiva-beit-midrash2", "שיעור בבית המדרש"), img("yeshiva-hall3", "אולם הלימוד")],
+  "machon-sfarim": [
+    img("books-hachinuch", "אור החינוך – בעברית ובאנגלית"),
+    img("books-haratzon", "אור הרצון – במהדורה בעברית ובאנגלית"),
+    img("books-hazemirot", "אור הזמירות – זמירות לשבת קודש"),
+    img("books-behirut", "אור בהירות הדרך – עצות וביאורים בעבודת ברסלב"),
+    img("books-catalog-sheet", "קטלוג הספרים"),
+    img("sefarim-pages", "דפי ספרים"),
+    img("sefarim-hands", "בין דפי הספרים"),
+  ],
 };

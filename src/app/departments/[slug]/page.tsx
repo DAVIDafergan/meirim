@@ -44,6 +44,7 @@ export default async function DepartmentPage({
         body: department.body,
         icon: department.icon,
         analyticTag: department.analyticTag,
+        catalogUrl: slug === "machon-sfarim" ? "/media/books-catalog.pdf" : undefined,
         // nothing uploaded for this department yet → the default photos from the institutions' video
         images: department.images.length
           ? department.images.map((img) => ({ id: img.id, caption: img.caption, filename: img.filename }))

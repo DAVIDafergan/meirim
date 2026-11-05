@@ -17,11 +17,12 @@ export type DepartmentDetail = {
   body: string | null;
   icon: string;
   analyticTag: string;
+  catalogUrl?: string;
   images: { id: number; caption: string | null; filename: string }[];
 };
 
 export default function DepartmentDetailView({ department }: { department: DepartmentDetail }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const Icon = DEPARTMENT_ICONS[department.icon as DepartmentIconKey];
   const bodyParagraphs = department.body?.split("\n").filter((p) => p.trim()) ?? [];
 
@@ -54,6 +55,17 @@ export default function DepartmentDetailView({ department }: { department: Depar
               {p}
             </p>
           ))}
+
+          {department.catalogUrl && (
+            <a
+              href={department.catalogUrl}
+              target="_blank"
+              rel="noopener"
+              className="mt-2 inline-block rounded-full border-2 border-gold/60 px-8 py-3 text-base font-semibold text-jewel-purple transition-colors hover:bg-gold/10"
+            >
+              {language === "he" ? "לקטלוג הספרים המלא (PDF)" : "Full book catalog (PDF)"}
+            </a>
+          )}
 
           <a
             href={nedarimPlusUrl({
