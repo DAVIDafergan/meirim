@@ -22,6 +22,15 @@ const frankRuhlLibre = Frank_Ruhl_Libre({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nachalei-hatorah.org"),
   alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "he_IL",
+    siteName: 'נחלי התורה צפת',
+    title: 'מוסדות ברסלב "נחלי התורה" | העיר העתיקה, צפת',
+    description: "גן, תלמוד תורה, ישיבה, כולל, הוצאת ספרים ובית התבשיל בלב העיר העתיקה בצפת.",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: 'מוסדות ברסלב "נחלי התורה" צפת' }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
   title: 'מוסדות ברסלב "נחלי התורה" | העיר העתיקה, צפת',
   description:
     'מוסדות ברסלב "נחלי התורה" בעיר העתיקה בצפת — קהילה של כ-250 משפחות בראשות הגאון רבי נתן מרדכי ישראל שליט"א. חינוך, קהילה וחסד לאורך כל שלבי החיים.',
